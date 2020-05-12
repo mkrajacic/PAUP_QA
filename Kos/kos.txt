@@ -1,0 +1,8 @@
+da se moze klik na kategoriju pa se vide pitanja i onda eventualno broj odgovora, 
+ako nije odgovoreno onda se nekako posebno oznaci npr da pise "unanswered" ili mozda
+da je boja pozadine drukcija a klikom na pitanje naslov je naravno pitanje, recimo h1
+ispod ime korisnika, slika (ako budemo stavilli za slike), pa onda broj odgovora, 
+odgovor koji je odabran za najbolji je prvi i oznaci se posebno, ostali su ispod, 
+ispod toga forma za odgovor ovisno koji je korisnik, ako nema odgovora onda pise 
+neka posebna poruka i ispod toga forma nsad imam nastavu pa ti napisem jos kasnije ako treba
+i da, posto smo radili bootstrap bilo bi dobro da ga koristis, ali ok je ako i nebi

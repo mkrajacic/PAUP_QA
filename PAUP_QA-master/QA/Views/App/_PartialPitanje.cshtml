@@ -1,0 +1,51 @@
+﻿@using QA.Models
+@model Pitanje
+
+
+<title>@Model.pitanjeTekst</title>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="bg show">
+                <div class="question-block show">
+                    <div class="header">
+                        @Html.ActionLink(".","Index","App",new {@class = "close"})
+                        <h1 class="modal-title">@Model.pitanjeTekst</h1>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="answers-main-section">
+                            <div class="answ-info">
+
+                                <h2>@Model.korisnicko_ime</h2>
+
+                                <img src="~/img/user.png" class="user">
+                            </div>
+                            <div class="answ-container">
+                                <p class="num-of-answ">Answers: <span>1</span></p>
+                                <div class="answers">
+                                    @if (String.IsNullOrWhiteSpace(Model.odgovor))
+                                    {
+                                        <p class="no-answers">No answers.</p>
+                                    }
+                                    else
+                                    {
+                                        <div class="answer odabran">
+                                            <p>@Model.odgovor</p>
+                                        </div>
+                                        <div class="answer">
+                                            <p>@Model.odgovor</p>
+                                        </div>
+                                    }
+                                    <div class="modal-footer">
+                                        <form class="answer-form">
+                                            <textarea placeholder="Type answer..."></textarea><br>
+                                            <input type="submit" value="Answer">
+                                        </form>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                @Styles.Render("/Content/style.css")
+

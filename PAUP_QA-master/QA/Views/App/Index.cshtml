@@ -1,0 +1,111 @@
+﻿@using QA.Models
+@using QA.Misc
+@model List<Pitanje>
+@{
+    ViewBag.Title = "QBox";
+    Layout = null;
+
+}
+<title>@ViewBag.Title</title>
+<header>
+    <nav>
+        <ul>
+            @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+            {
+                <li>@Html.ActionLink("Početak", "Index", "Home")</li>
+                <li>@Html.ActionLink("Korisnici", "Index", "Korisnik")</li>
+                <li>@Html.ActionLink("Odjava", "Odjava", "Korisnik")</li>
+                <li>@Html.ActionLink(((User as LogiraniKorisnik).KorisnickoIme), "DetaljiKorisnik","Korisnik", new { id = ((User as LogiraniKorisnik).KorisnickoIme) }, new { @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).KorisnickoIme) }) })</li>
+            }
+            else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+            {
+                <li>@Html.ActionLink("Početak", "Index", "Home")</li>
+                <li>@Html.ActionLink("Odjava", "Odjava", "Korisnik")</li>
+                <li>@Html.ActionLink(((User as LogiraniKorisnik).KorisnickoIme), "DetaljiKorisnik","Korisnik", new { id = ((User as LogiraniKorisnik).KorisnickoIme) }, new { @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).KorisnickoIme) }) })</li>
+            }
+            else
+            {
+                <li>@Html.ActionLink("Prijava", "Prijava", "Korisnik")</li>
+                <li>@Html.ActionLink("Registracija", "Registracija", "Korisnik")</li>
+            }
+        </ul>
+    </nav>
+</header>
+
+<div class="search-section">
+    <div class="search-box">
+        @using (Html.BeginForm("Index", "App", FormMethod.Get))
+        {
+            @Html.TextBox("pitanjeTekst", null, new { @class = "search-input", @placeholder = "Što želite saznati?" })
+            <button type="submit" class="search-btn">Search...</button>
+        }
+    </div>
+</div>
+
+<div class="question-container">
+    <div class="category-name">Najnovija pitanja</div>
+    <div class="questions">
+        @foreach (var pit in Model)
+        {
+            <div class="question-box">
+                <div class="question-text">
+                    @if (!String.IsNullOrEmpty(pit.pitanjeTekst))
+                    {
+                        @Html.ActionLink(pit.pitanjeTekst, "OtvoriPitanje", new { id = pit.id }, new { @id = "pitanjeDetalji", @data_url = Url.Action("OtvoriPitanje", "App", new { id = pit.id }) })
+
+                    }
+                </div>
+                <p class="answers-num">Answers: <div class="num">5</div></p>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="category-container">
+    <div class="row">
+        @foreach (var kat in ViewBag.Kategorije)
+        {
+            <div class="category">@kat.kategorija</div>
+        }
+    </div>
+    <!--<div class="row">
+        <div class="category">Category</div>
+        <div class="category">Category</div>
+        <div class="category">Category</div>
+    </div>
+    <div class="row">
+        <div class="category">Category</div>
+        <div class="category">Category</div>
+    </div>
+    <div class="row">
+        <div class="category">Category</div>
+        <div class="category">Category</div>
+        <div class="category">Category</div>
+    </div>
+    <div class="row">
+        <div class="category">Category</div>
+        <div class="category">Category</div>
+    </div>-->
+</div>
+<div class="modal" id="modalView" tabindex="-1" role="dialog" aria-labelledby="modalView" aria-hidden="true" data-backdrop="static">
+    <div id="viewContainer">
+
+    </div>
+</div>
+@Styles.Render("/Content/style.css")
+@section Scripts {
+    <script type="text/javascript">
+    $('#question-text').on("click", "#pitanjeDetalji", function (event) {
+    event.preventDefault();
+
+    var url = $(this).attr("data-url");
+    $.get(url, function (data) {
+    $('#viewContainer').html(data);
+    $('#modalView').modal('show');
+    });
+    });
+        
+    </script>
+}
+
+

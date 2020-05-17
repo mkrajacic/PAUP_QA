@@ -1,0 +1,196 @@
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\QA.dll.config
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\QA.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\QA.pdb
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\csc.exe
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\csc.exe.config
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\csc.rsp
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\csi.exe
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\csi.exe.config
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\csi.rsp
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\Microsoft.Managed.Core.targets
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\Microsoft.Win32.Primitives.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.AppContext.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Collections.Immutable.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Console.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Globalization.Calendars.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.IO.Compression.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.IO.Compression.ZipFile.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.IO.FileSystem.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Net.Http.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Net.Sockets.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Reflection.Metadata.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Threading.Tasks.Extensions.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.ValueTuple.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Xml.XmlDocument.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Xml.XPath.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\vbc.exe
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\vbc.exe.config
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\vbc.rsp
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\VBCSCompiler.exe
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\roslyn\VBCSCompiler.exe.config
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\Antlr3.Runtime.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\Microsoft.Web.Infrastructure.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\Newtonsoft.Json.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\System.Web.Helpers.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\System.Web.Mvc.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\System.Web.Optimization.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\System.Web.Razor.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\System.Web.WebPages.Deployment.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\System.Web.WebPages.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\System.Web.WebPages.Razor.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\WebGrease.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\System.Web.Helpers.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\System.Web.Mvc.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\System.Web.Optimization.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\System.Web.Razor.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\System.Web.WebPages.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\System.Web.WebPages.Deployment.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\System.Web.WebPages.Razor.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\Newtonsoft.Json.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\Antlr3.Runtime.pdb
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\obj\Debug\QA.csprojAssemblyReference.cache
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\obj\Debug\QA.csproj.CopyComplete
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\obj\Debug\QA.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\obj\Debug\QA.pdb
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\obj\Debug\QA.csproj.CoreCompileInputs.cache
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\BouncyCastle.Crypto.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\EntityFramework.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\EntityFramework.SqlServer.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\Google.Protobuf.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\MySql.Data.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\MySql.Data.EntityFramework.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\Renci.SshNet.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\Ubiety.Dns.Core.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\Ubiety.Logging.Core.dll
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\EntityFramework.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\EntityFramework.SqlServer.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\Google.Protobuf.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\MySql.Data.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\MySql.Data.EntityFramework.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\Renci.SshNet.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\Ubiety.Dns.Core.xml
+D:\Fakultet\Druga godina\PAUP\Q&A APP\QA\QA\bin\Ubiety.Logging.Core.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\QA.dll.config
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\QA.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\QA.pdb
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\csc.exe
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\csc.exe.config
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\csc.rsp
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\csi.exe
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\csi.exe.config
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\csi.rsp
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.AppContext.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Console.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Globalization.Calendars.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.IO.Compression.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Net.Http.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Net.Sockets.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.ValueTuple.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\vbc.exe
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\vbc.exe.config
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\vbc.rsp
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\VBCSCompiler.exe
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\Antlr3.Runtime.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\BouncyCastle.Crypto.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\EntityFramework.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\EntityFramework.SqlServer.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\Google.Protobuf.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\MySql.Data.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\MySql.Data.EntityFramework.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\Newtonsoft.Json.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\PagedList.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\PagedList.Mvc.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\Renci.SshNet.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\System.Web.Helpers.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\System.Web.Mvc.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\System.Web.Optimization.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\System.Web.Razor.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\System.Web.WebPages.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\System.Web.WebPages.Razor.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\Ubiety.Dns.Core.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\Ubiety.Logging.Core.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\WebGrease.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\EntityFramework.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\EntityFramework.SqlServer.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\Google.Protobuf.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\MySql.Data.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\MySql.Data.EntityFramework.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\PagedList.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\PagedList.Mvc.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\Renci.SshNet.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\System.Web.Helpers.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\System.Web.Mvc.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\System.Web.Optimization.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\System.Web.Razor.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\System.Web.WebPages.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\System.Web.WebPages.Razor.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\Newtonsoft.Json.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\Ubiety.Dns.Core.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\Ubiety.Logging.Core.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\Antlr3.Runtime.pdb
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\obj\Debug\QA.csproj.CoreCompileInputs.cache
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\obj\Debug\QA.csproj.CopyComplete
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\obj\Debug\QA.dll
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\obj\Debug\QA.pdb
+C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\obj\Debug\QA.csprojAssemblyReference.cache

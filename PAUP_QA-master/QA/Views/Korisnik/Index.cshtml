@@ -1,0 +1,63 @@
+﻿@using QA.Models
+@model List<Korisnik>
+@{
+    ViewBag.Title = "Popis korisnika";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>@Html.ActionLink("Natrag na pitanja", "Index", "App")</li>
+                <li>@Html.ActionLink("Dodaj korisnika", "Registracija", "Korisnik")</li>
+            </ul>
+        </nav>
+    </header>
+    <div class="question-container" style="margin-top:100px;">
+        <div class="category-name">Popis korisnika</div>
+        <div class="questions">
+            @foreach (var kor in Model)
+            {
+                <div class="question-box">
+                    <div class="question-text">
+                        @if (!String.IsNullOrEmpty(kor.korisnicko_ime))
+                        {
+                            @Html.ActionLink(kor.korisnicko_ime, "DetaljiKorisnik", new { id = kor.korisnicko_ime }, new { @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = kor.korisnicko_ime }) })
+
+                        }
+                    </div>
+                    <p class="answers-num">Ovlast: <div class="num">@kor.ovlast_sifra</div></p>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="modal" id="modalView" tabindex="-1" role="dialog" aria-labelledby="modalView" aria-hidden="true" data-backdrop="static">
+        <div id="viewContainer">
+
+        </div>
+    </div>
+</body>
+</html>
+@Styles.Render("/Content/style.css")
+@section Scripts {
+    <script type="text/javascript">
+    $('#question-text').on("click", "#korisnikDetalji", function (event) {
+    event.preventDefault();
+
+    var url = $(this).attr("data-url");
+    $.get(url, function (data) {
+    $('#viewContainer').html(data);
+    $('#modalView').modal('show');
+    });
+    });
+
+    </script>
+}

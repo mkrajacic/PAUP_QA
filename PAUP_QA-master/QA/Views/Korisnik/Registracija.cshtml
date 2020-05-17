@@ -1,0 +1,55 @@
+﻿@using QA.Models
+@model Korisnik
+@{
+    ViewBag.Title = "Registracija";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>@Html.ActionLink("Natrag na pitanja", "Index", "App")</li>
+                <li>@Html.ActionLink("Prijava", "Prijava", "Korisnik")</li>
+            </ul>
+        </nav>
+    </header>
+<section class="body">
+    <section class="form-section">
+        <h1>@ViewBag.Title</h1>
+        @using (Html.BeginForm("Registracija", "Korisnik", FormMethod.Post, new { @class = "login-form" } ))
+        {
+            @Html.AntiForgeryToken()
+            @Html.LabelFor(m => m.korisnicko_ime)
+            @Html.EditorFor(m => m.korisnicko_ime)
+            @Html.ValidationMessageFor(m => m.korisnicko_ime, "", new { @class = "text-danger" })
+            @Html.LabelFor(m => m.LozinkaUnos)
+            @Html.EditorFor(m => m.LozinkaUnos)
+            @Html.ValidationMessageFor(m => m.LozinkaUnos, "", new { @class = "text-danger" })
+            @Html.LabelFor(m => m.LozinkaUnos2)
+            @Html.EditorFor(m => m.LozinkaUnos2)
+            @Html.ValidationMessageFor(m => m.LozinkaUnos2, "", new { @class = "text-danger" })
+            @Html.LabelFor(m => m.ovlast_sifra)<br />
+            @Html.DropDownListFor(m => m.ovlast_sifra,
+                                                new SelectList(ViewBag.Ovlasti, "Sifra", "Naziv", ""))
+            <!---Html.LabelFor(m => m.image)
+        <input type="file" name="image" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />-->
+    <p>Već imate profil? @Html.ActionLink("Prijava", "Prijava", "Korisnik")</p>
+            <button name="login" type="submit">
+                Registracija
+            </button>
+        }
+        </section>
+</section>
+</body>
+</html>
+
+@Styles.Render("/Content/style.css")

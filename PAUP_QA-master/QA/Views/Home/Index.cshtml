@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "QBox";
+    Layout = null;
+}
+<title>@ViewBag.Title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap" rel="stylesheet" />
+<section class="main-section">
+    <h1>@ViewBag.Title</h1>
+    <p>
+        QBox je aplikacija koja odgovara na sva vaša pitanja. Upišite u tražilicu što vas zanima ili pregledajte najnovija pitanja iz naše baze. Pitanja možete pronaći i po kategorijama.
+        Da biste postavljali nova pitanja ili odgovarali na postojeća, morate se registrirati. Bez registracije možete samo pregledavati pitanja.<br /><br />
+
+        Članovi projektne skupine:<br />
+        Matija Krajačić<br />
+        Bruno Premužaj<br />
+        Karlo Kos<br />
+        Dario Kraljić<br />
+        Ana Sokolić<br />
+    </p>
+    <a href='/App/Index'>
+        <button>Započnimo</button>
+    </a>
+</section>
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("/Content/index.css")
+

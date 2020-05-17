@@ -1,0 +1,45 @@
+﻿@model QA.Models.Korisnik
+@{
+    Layout = null;
+    ViewBag.Title = "Brisanje korisnika";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>@Html.ActionLink("Natrag na korisnike", "Index", "Korisnik")</li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="body">
+        <section class="form-section">
+            @Html.DisplayNameFor(m => m.korisnicko_ime): @Model.korisnicko_ime<br />
+            @Html.DisplayNameFor(m => m.Ovlast):
+            @if (Model.Ovlast != null)
+            {
+                @Model.Ovlast.Naziv
+            }
+            @using (Html.BeginForm())
+            {
+
+            @Html.AntiForgeryToken()
+            <button name="login" type="submit">
+                Izbriši
+            </button>
+            }
+        </section>
+    </section>
+</body>
+</html>
+@Styles.Render("/Content/style.css")

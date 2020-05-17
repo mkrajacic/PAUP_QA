@@ -1,0 +1,49 @@
+﻿@model QA.Models.KorisnikAzuriranje
+@{
+    ViewBag.Title = "Ažuriranje profila";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>@Html.ActionLink("Natrag na korisnike", "Index", "Korisnik")</li>
+            </ul>
+        </nav>
+    </header>
+    <section class="body">
+        <section class="form-section">
+            <h1>@ViewBag.Title</h1>
+            @Html.ValidationMessageFor(m => m.KorisnickoIme, "", new { @class = "text-danger" })
+
+            @using (Html.BeginForm("Azuriraj", "Korisnik", FormMethod.Post, new { @class = "login-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.LabelFor(m => m.KorisnickoIme, "Novo korisničko ime")
+                @Html.EditorFor(m => m.KorisnickoIme)
+                @Html.LabelFor(m => m.Ovlast)<br />
+                @Html.DropDownListFor(m => m.Ovlast,
+                                                    new SelectList(ViewBag.Ovlasti, "Sifra", "Naziv", ""))
+                <!---Html.LabelFor(m => m.image)
+        <input type="file" name="image" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />-->
+                <p> @Html.ActionLink("Promjena lozinke", "ResetLozinke", new { id = Model.KorisnickoIme }, null)</p>
+                @Html.HiddenFor(model => model.KorisnickoIme)
+                <button name="login" type="submit">
+                    Ažuriraj
+                </button>
+            }
+        </section>
+    </section>
+</body>
+</html>
+@Styles.Render("/Content/style.css")
+

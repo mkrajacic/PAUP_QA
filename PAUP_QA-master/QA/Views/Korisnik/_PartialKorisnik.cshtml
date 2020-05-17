@@ -1,0 +1,37 @@
+﻿@using QA.Models
+@model Korisnik
+
+
+<title>@Model.korisnicko_ime</title>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="bg show">
+                <div class="question-block show">
+                    <div class="header">
+                        @Html.ActionLink(".", "Index", "Korisnik", new { @class = "close" })
+                        <!--<a href="#" class="close"></a>-->
+                        <h1 class="modal-title">@Model.korisnicko_ime</h1>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="answers-main-section">
+                            <div class="answ-info">
+
+                                <h2>@Model.korisnicko_ime</h2>
+
+                                <img src="~/img/user.png" class="user">
+                            </div>
+                            <div class="answ-container">
+                                <p class="num-of-answ">Ovlast: <span>@Model.ovlast_sifra</span></p>
+                                <div class="modal-footer">
+                                    <div class="answer-form">
+                                        @Html.ActionLink("Ažuriraj", "Azuriraj", new { id = Model.korisnicko_ime })
+                                        @Html.ActionLink("Izbriši", "Brisi", new { id = Model.korisnicko_ime })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Styles.Render("/Content/style.css")

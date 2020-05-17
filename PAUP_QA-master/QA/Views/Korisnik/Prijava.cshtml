@@ -1,0 +1,41 @@
+﻿@model QA.Models.KorisnikPrijava
+@{
+    ViewBag.Title = "Prijava";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>@Html.ActionLink("Natrag na pitanja", "Index", "App")</li>
+                <li>@Html.ActionLink("Registracija", "Registracija", "Korisnik")</li>
+            </ul>
+        </nav>
+    </header>
+    @using (Html.BeginForm("Prijava", "Korisnik", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form" }))
+    {
+        @Html.AntiForgeryToken()
+        <section class="body">
+            <section class="form-section">
+                <h1>@ViewBag.Title</h1>
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(m => m.KorisnickoIme, new { @placeholder = "Korisnicko ime..." })
+                @Html.PasswordFor(m => m.Lozinka, new { @placeholder = "Lozinka..." })
+            <p>Nemate profil? @Html.ActionLink("Registracija", "Registracija", "Korisnik")</p>
+    <button type="submit" name="login">Prijava</button>
+            </section>
+        </section>
+    }
+    </body>
+</html>
+           
+@Styles.Render("/Content/style.css")

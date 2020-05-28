@@ -99,6 +99,63 @@ namespace QA.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+        public ActionResult DodajKorisnika()
+        {
+            Korisnik model = new Korisnik();
+
+            var ovlasti = bazaPodataka.PopisOvlasti.OrderBy(x => x.Naziv).ToList();
+            ViewBag.Ovlasti = ovlasti;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult DodajKorisnika(Korisnik model)
+        {
+            if (!String.IsNullOrWhiteSpace(model.korisnicko_ime))
+            {
+                var korImeZauzeto = bazaPodataka.PopisKorisnika.Any(x => x.korisnicko_ime == model.korisnicko_ime);
+                if (korImeZauzeto)
+                {
+                    ModelState.AddModelError("korisnicko_ime", "Korisničko ime je vec zauzeto");
+                }
+            }
+
+            if (ModelState.IsValid)
+            {
+                var hashLozinke = Misc.PasswordHelper.HashPassword(model.LozinkaUnos);
+                model.salt = hashLozinke.Item1;
+                model.lozinka = hashLozinke.Item2;
+
+                bazaPodataka.PopisKorisnika.Add(model);
+                bazaPodataka.SaveChanges();
+
+                /* byte[] imageData = null;
+                 if (Request.Files.Count > 0)
+                 {
+                     HttpPostedFileBase poImgFile = Request.Files["UserPhoto"];
+
+                     using (var binary = new BinaryReader(poImgFile.InputStream))
+                     {
+                         imageData = binary.ReadBytes(poImgFile.ContentLength);
+                     }
+                 }
+
+                 model.image = imageData;*/
+
+                return RedirectToAction("Index", "Korisnik");
+            }
+
+            var ovlasti = bazaPodataka.PopisOvlasti.OrderBy(x => x.Naziv).ToList();
+            ViewBag.Ovlasti = ovlasti;
+
+            return View(model);
+        }
+
+        [HttpGet]
         public ActionResult Azuriraj(string id)
         {
             if (id == null)

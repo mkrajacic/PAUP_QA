@@ -235,6 +235,7 @@
     <Content Include="Views\Korisnik\_PartialKorisnik.cshtml" />
     <Content Include="Views\Korisnik\ResetLozinke.cshtml" />
     <Content Include="Views\Korisnik\Brisi.cshtml" />
+    <Content Include="Views\Korisnik\DodajKorisnika.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

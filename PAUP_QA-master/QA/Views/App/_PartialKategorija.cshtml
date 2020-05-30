@@ -1,0 +1,51 @@
+﻿@using QA.Models
+@using QA.Misc
+@model Tuple<List<Pitanje>, Kategorija>
+    @*@{ 
+        AjaxOptions ajaxSearch = new AjaxOptions()
+        {
+            UpdateTargetId = "pretrazivanje",
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "GET",
+        };
+    }*@
+
+@*<div class="search-section">
+    <div class="search-box">
+        @using (Ajax.BeginForm("OtvoriKategoriju","App", new {id=Model.Item2.id }, ajaxSearch))
+        {
+            @Html.TextBox("pitanjeTekst", null, new { @class = "search-input", @placeholder = "Što želite saznati?" })
+            <button type="submit" class="search-btn">Traži...</button>
+        }
+    </div>
+</div>*@
+
+<div class="category-name">@Model.Item2.kategorija</div>
+<div class="questions">
+    @foreach (var pit in Model.Item1)
+    {
+        <div class="question-box">
+            <div class="question-text">
+                @if (!String.IsNullOrEmpty(pit.pitanjeTekst))
+                {
+                    @Html.ActionLink(pit.pitanjeTekst, "OtvoriPitanje", new { id = pit.id }, new { @id = "pitanjeDetalji", @data_url = Url.Action("OtvoriPitanje", "App", new { id = pit.id }) })
+
+                }
+            </div>
+            @*<p class="answers-num">
+                    Odgovora:
+                    @if (Model.Odgovori.Where(x => x.pitanje_id == pit.id).Count() != 0)
+                    {
+                        <div class="num">@Model.Odgovori.Where(x => x.pitanje_id == pit.id).Count()</div>
+                    }
+                    else
+                    {
+                        <div class="num" style="background-color:#c0392b;">0</div>
+                    }
+                </p>*@
+        </div>
+    }
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@Styles.Render("/Content/style.css")

@@ -8,6 +8,6 @@ namespace QA.Misc
         public class OvlastiKorisnik
         {
             public const string Administrator = "AD";
-            public const string Moderator = "MR";
+            public const string Moderator = "RK";
         }
     }

@@ -14,7 +14,7 @@ namespace QA.Models
         public DbSet<Kategorija> PopisKategorija { get; set; }
         public DbSet<Korisnik> PopisKorisnika { get; set; }
         public DbSet<Ovlast> PopisOvlasti { get; set; }
-       // public DbSet<Odgovor> PopisOdgovora { get; set; }
+        public DbSet<Odgovor> PopisOdgovora { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

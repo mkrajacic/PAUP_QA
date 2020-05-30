@@ -4,11 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace QA.Models
 {
 
-        [Table("ovlasti")]
+        [Table("user_level")]
         public class Ovlast
         {
             [Key]
+            [Column("code")]
             public string Sifra { get; set; }
-            public string Naziv { get; set; }
+
+         [Column("name")]
+        public string Naziv { get; set; }
         }
  }

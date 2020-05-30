@@ -4,13 +4,7 @@
 @{
     ViewBag.Title = "QBox";
     Layout = null;
-    AjaxOptions ajaxOpt = new AjaxOptions()
-    {
-        UpdateTargetId = "questionList",
-        InsertionMode = InsertionMode.Replace,
-        HttpMethod = "GET",
-        OnBegin = "LoadingRow"
-    };
+
 }
 <title>@ViewBag.Title</title>
 <header>
@@ -38,7 +32,7 @@
     </nav>
 </header>
 
-<div class="search-section" id="pretrazivanje">
+<div class="search-section">
     <div class="search-box">
         @using (Html.BeginForm("Index", "App", FormMethod.Get))
         {
@@ -48,7 +42,7 @@
     </div>
 </div>
 
-<div class="question-container" id="questionList">
+<div class="question-container">
     <div class="category-name">Najnovija pitanja</div>
     <div class="questions">
         @foreach (var pit in Model.Pitanja.Take(10))
@@ -81,7 +75,7 @@
     <div class="row">
         @foreach (var kat in Model.Kategorije)
         {
-        <div class="category"><p>@Ajax.ActionLink(kat.kategorija, "OtvoriKategoriju", new { id = kat.id },ajaxOpt, new { @id = "kategorijaPrikaz", @data_url = Url.Action("OtvoriKategoriju", "App", new { id = kat.id }) })</p></div>
+            <div class="category">@kat.kategorija</div>
         }
     </div>
 </div>
@@ -90,18 +84,10 @@
 
     </div>
 </div>
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 @Styles.Render("/Content/style.css")
-    <script type="text/javascript">
-        function LoadingRow() {
-            $("#questionList").empty();
-
-            $("#questionList").append('<div class="question-box"><div class="question-text">Pretraga u tijeku...</div></div>');
-
-            // $("#pager").empty();
-        }
-    </script>
+@section Scripts {
     <script type="text/javascript">
         $('#question-text').on("click", "#pitanjeDetalji", function (event) {
             event.preventDefault();
@@ -112,6 +98,8 @@
                 $('#modalView').modal('show');
             });
         });
+
     </script>
+}
 
 

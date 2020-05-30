@@ -178,6 +178,7 @@
     <Compile Include="Models\KorisnikResetLozinke.cs" />
     <Compile Include="Models\Odgovor.cs" />
     <Compile Include="Models\Ovlast.cs" />
+    <Compile Include="Models\MixModel.cs" />
     <Compile Include="Models\Pitanje.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -236,6 +237,8 @@
     <Content Include="Views\Korisnik\ResetLozinke.cshtml" />
     <Content Include="Views\Korisnik\Brisi.cshtml" />
     <Content Include="Views\Korisnik\DodajKorisnika.cshtml" />
+    <Content Include="Views\App\_PartialKategorija.cshtml" />
+    <Content Include="Views\App\Indexbackup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

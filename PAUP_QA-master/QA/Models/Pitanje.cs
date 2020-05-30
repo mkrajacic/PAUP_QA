@@ -7,7 +7,7 @@ using System.Web;
 
 namespace QA.Models
 {
-    [Table("pitanje")]
+    [Table("questions")]
     public class Pitanje
     {
         [Key]
@@ -16,33 +16,32 @@ namespace QA.Models
         [StringLength(100, MinimumLength = 10, ErrorMessage = "{0} mora biti duljine minimalno {2} a maksimalno {1} znakova")]
         [Required(ErrorMessage = "{0} je obavezno polje!")]
         [Display(Name = "Pitanje")]
-        [Column("pitanje_tekst")]
+        [Column("question")]
         public string pitanjeTekst { get; set; }
-        [StringLength(100, MinimumLength = 10, ErrorMessage = "{0} mora biti duljine minimalno {2} a maksimalno {1} znakova")]
+       /* [StringLength(100, MinimumLength = 10, ErrorMessage = "{0} mora biti duljine minimalno {2} a maksimalno {1} znakova")]
         [Required(ErrorMessage = "{0} je obavezno polje!")]
         [Display(Name = "Odgovor")]
         [Column("odgovor")]
-        public string odgovor { get; set; }
-        [Column("korisnik")]
+        public string odgovor { get; set; }*/
+        [Column("user_id")]
         [Required(ErrorMessage = "{0} je obavezno polje!")]
         [Display(Name = "Korisničko ime")]
-      //  [ForeignKey("korisnicko_ime")]
-        public string korisnicko_ime { get; set; }
-       /* [Display(Name = "Korisničko ime")]
-        public virtual Korisnik korisnicko_ime { get; set; }*/
-        [Column("datum_objave")]
+        [ForeignKey("korisnickoIme")]
+        public int korisnicko_ime { get; set; }
+        [Display(Name = "Korisničko ime")]
+        public virtual Korisnik korisnickoIme { get; set; }
+        [Column("datetime_created")]
         [Display(Name = "Datum objave")]
-        [Required(ErrorMessage = "{0} je obavezan")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime datumObjave { get; set; }
 
-       /* [Required(ErrorMessage = "{0} nije odabrana!")]
-        [Column("kategorija_id")]
+        [Required(ErrorMessage = "{0} nije odabrana!")]
+        [Column("category_id")]
         [Display(Name = "Kategorija")]
-        [ForeignKey("kategorija_id")]
+        [ForeignKey("kategorijaId")]
         public int id_kategorija { get; set; }
         [Display(Name = "Kategorija")]
-        public virtual Kategorija kategorija_id { get; set; }*/
+        public virtual Kategorija kategorijaId { get; set; }
     }
 }

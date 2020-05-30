@@ -15,5 +15,6 @@ namespace QA.Models
         [Display(Name = "Ovlast")]
         [Required]
         public string Ovlast { get; set; }
+
     }
 }

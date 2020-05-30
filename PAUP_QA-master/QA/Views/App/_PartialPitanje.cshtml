@@ -16,34 +16,57 @@
                     <div class="modal-body">
                         <div class="answers-main-section">
                             <div class="answ-info">
-
-                                <h2>@Model.korisnicko_ime</h2>
-
+                                @foreach (var kor in ViewBag.SviKorisnici)
+                                {
+                                    if (kor.id == Model.korisnicko_ime)
+                                    {
+                                <h2>@kor.korisnicko_ime</h2>
+                                    }
+                                }
                                 <img src="~/img/user.png" class="user">
                             </div>
                             <div class="answ-container">
-                                <p class="num-of-answ">Answers: <span>1</span></p>
+                                <p class="num-of-answ">Broj odgovora: 
+                                @if (ViewBag.Broj > 0)
+                                {
+                                <span>@ViewBag.Broj</span>
+                                }
+                                else
+                                {
+                                    <span>0</span>
+                                }
+                                </p>
                                 <div class="answers">
-                                    @if (String.IsNullOrWhiteSpace(Model.odgovor))
+                                    @if (ViewBag.Broj == 0)
                                     {
-                                        <p class="no-answers">No answers.</p>
+                                        <p class="no-answers">Nema odgovora.</p>
                                     }
                                     else
                                     {
-                                        <div class="answer odabran">
-                                            <p>@Model.odgovor</p>
+                                        foreach (var odg in ViewBag.SviOdgovori)
+                                        {
+                                            if (odg.pitanje_id == Model.id && odg.najdraze == true)
+                                            {
+                                                <div class="answer odabran">
+                                                    <p>@odg.odgovor</p>
+                                                </div>
+                                            }
+                                            else if (odg.pitanje_id == Model.id)
+                                            {
+
+                                                <div class="answer">
+                                                    <p>@odg.odgovor</p>
+                                                </div>
+                                                }
+                                            }
+                                        }
+                                        <div class="modal-footer">
+                                            <form class="answer-form">
+                                                <textarea placeholder="Upiši odgovor..."></textarea><br>
+                                                <input type="submit" value="Odgovori">
+                                            </form>
                                         </div>
-                                        <div class="answer">
-                                            <p>@Model.odgovor</p>
-                                        </div>
-                                    }
-                                    <div class="modal-footer">
-                                        <form class="answer-form">
-                                            <textarea placeholder="Type answer..."></textarea><br>
-                                            <input type="submit" value="Answer">
-                                        </form>
                                     </div>
-                                </div>
                         </div>
                     </div>
                 </div>

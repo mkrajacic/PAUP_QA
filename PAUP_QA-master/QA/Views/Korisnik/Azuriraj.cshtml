@@ -25,18 +25,17 @@
             <h1>@ViewBag.Title</h1>
             @Html.ValidationMessageFor(m => m.KorisnickoIme, "", new { @class = "text-danger" })
 
-            @using (Html.BeginForm("Azuriraj", "Korisnik", FormMethod.Post, new { @class = "login-form" }))
+            @using (Html.BeginForm("Azuriraj", "Korisnik", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.LabelFor(m => m.KorisnickoIme, "Novo korisničko ime")
                 @Html.EditorFor(m => m.KorisnickoIme)
                 @Html.LabelFor(m => m.Ovlast)<br />
                 @Html.DropDownListFor(m => m.Ovlast,
-                                                    new SelectList(ViewBag.Ovlasti, "Sifra", "Naziv", ""))
+                                                    new SelectList(ViewBag.Ovlasti, "Sifra", "Naziv", "Odaberite ovlast"))
                 <!---Html.LabelFor(m => m.image)
         <input type="file" name="image" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />-->
-                <p> @Html.ActionLink("Promjena lozinke", "ResetLozinke", new { id = Model.KorisnickoIme }, null)</p>
-                @Html.HiddenFor(model => model.KorisnickoIme)
+                <p> @Html.ActionLink("Promjena lozinke", "ResetLozinke", new { id = Model.Id }, null)</p>
                 <button name="login" type="submit">
                     Ažuriraj
                 </button>

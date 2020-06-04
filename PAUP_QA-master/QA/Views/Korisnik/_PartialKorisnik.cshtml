@@ -1,4 +1,5 @@
 ﻿@using QA.Models
+@using QA.Misc
 @model Korisnik
 
 
@@ -24,14 +25,55 @@
                             </div>
                             <div class="answ-container">
                                 <p class="num-of-answ">Ovlast: <span>@Model.ovlast_sifra</span></p>
+                                <p class="num-of-answ">
+                                    Broj pitanja:
+                                    @if (ViewBag.Broj > 0)
+                                    {
+                                        <span>@ViewBag.Broj</span>
+                                    }
+                                    else
+                                    {
+                                        <span>0</span>
+                                    }
+                                </p>
                                 <div class="modal-footer">
                                     <div class="answer-form">
-                                        @Html.ActionLink("Ažuriraj", "Azuriraj", new { id = Model.korisnicko_ime })
-                                        @Html.ActionLink("Izbriši", "Brisi", new { id = Model.korisnicko_ime })
+                                        @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+                                        {
+                                            @Html.ActionLink("Ažuriraj", "Azuriraj", new { id = Model.id })
+                                            @Html.ActionLink("Izbriši", "Brisi", new { id = Model.id })
+                                        }
+                                        else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).Id == Model.id)
+                                        {
+                                            @Html.ActionLink("Ažuriraj", "Azuriraj", new { id = Model.id })
+                                            @Html.ActionLink("Izbriši", "Brisi", new { id = Model.id })
+                                        }
+                                        else
+                                        {
+                                            
+                                        }
                                     </div>
+                                </div>
+                                <div class="answers">
+                                    @if (ViewBag.Broj == 0)
+                                    {
+                                        <div class="answer">
+                                            <p class="no-answers">Korisnik nema postavljenih pitanja.</p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        foreach (var pit in ViewBag.Pitanja)
+                                        {
+                                            <div class="answer">
+                                                <p>@Html.ActionLink((string)pit.pitanjeTekst, "OtvoriPitanje", "App", new { id = pit.id }, new { @id = "pitanjeDetalji", @data_url = Url.Action("OtvoriPitanje", "App", new { id = pit.id }) })</p>
+                                            </div>
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                @Styles.Render("/Content/style.css")
+            </div>
+            @Styles.Render("/Content/style.css")

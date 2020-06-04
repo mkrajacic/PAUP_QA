@@ -1,8 +1,11 @@
-﻿using QA.Misc;
+﻿using Microsoft.Ajax.Utilities;
+using MySql.Data.MySqlClient;
+using QA.Misc;
 using QA.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -14,22 +17,20 @@ using System.Web.Security;
 
 namespace QA.Controllers
 {
-    [Authorize(Roles = OvlastiKorisnik.Administrator)]
+    [Authorize(Roles = OvlastiKorisnik.Administrator + "," + OvlastiKorisnik.Registriran)]
     public class KorisnikController : Controller
     {
         BazaDbContext bazaPodataka = new BazaDbContext();
-        [AllowAnonymous]
+        [Authorize(Roles = OvlastiKorisnik.Administrator)]
         public ActionResult Index()
         {
 
             var listaKorisnika = bazaPodataka.PopisKorisnika.OrderBy(x => x.ovlast_sifra).ThenBy(x => x.korisnicko_ime).ToList();
             return View(listaKorisnika);
         }
-
-
-        public ActionResult DetaljiKorisnik(string id)
+        public ActionResult DetaljiKorisnik(int id)
         {
-            if (id == null)
+            if (id==0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -38,6 +39,9 @@ namespace QA.Controllers
             {
                 return HttpNotFound();
             }
+            var pitanja = bazaPodataka.PopisPitanja.Where(x => x.korisnicko_ime == id).ToList();
+            ViewBag.Pitanja = pitanja;
+            ViewBag.Broj = pitanja.Count();
             return PartialView("_PartialKorisnik",user);
         }
 
@@ -99,7 +103,7 @@ namespace QA.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(Roles = OvlastiKorisnik.Administrator)]
         public ActionResult DodajKorisnika()
         {
             Korisnik model = new Korisnik();
@@ -111,7 +115,7 @@ namespace QA.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = OvlastiKorisnik.Administrator)]
         [ValidateAntiForgeryToken]
         public ActionResult DodajKorisnika(Korisnik model)
         {
@@ -156,21 +160,23 @@ namespace QA.Controllers
         }
 
         [HttpGet]
-        public ActionResult Azuriraj(string id)
+        public ActionResult Azuriraj(int id,string returnUrl)
         {
-            if (id == null)
+            if (id ==0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var korisnik = bazaPodataka.PopisKorisnika.FirstOrDefault(x => x.korisnicko_ime == id);
+            var korisnik = bazaPodataka.PopisKorisnika.Find(id);
             if (korisnik == null)
             {
                 return HttpNotFound();
             }
 
             KorisnikAzuriranje model = new KorisnikAzuriranje();
+            ViewBag.ReturnUrl = returnUrl;
             model.KorisnickoIme = korisnik.korisnicko_ime;
             model.Ovlast = korisnik.ovlast_sifra;
+            model.Id = korisnik.id;
 
             var ovlasti = bazaPodataka.PopisOvlasti.OrderBy(x => x.Naziv).ToList();
             ViewBag.Ovlasti = ovlasti;
@@ -179,9 +185,9 @@ namespace QA.Controllers
         }
 
         [HttpPost]
-        public ActionResult Azuriraj(KorisnikAzuriranje model)
+        public ActionResult Azuriraj(KorisnikAzuriranje model,string returnUrl)
         {
-            var korisnik = bazaPodataka.PopisKorisnika.FirstOrDefault(x => x.korisnicko_ime == model.KorisnickoIme);
+            var korisnik = bazaPodataka.PopisKorisnika.FirstOrDefault(x => x.id == model.Id);
             if (!String.IsNullOrWhiteSpace(model.KorisnickoIme))
             {
                 var usernameZauzet = bazaPodataka.PopisKorisnika.Any(j => j.korisnicko_ime == model.KorisnickoIme);
@@ -193,14 +199,16 @@ namespace QA.Controllers
 
             if (ModelState.IsValid)
             {
-                korisnik.korisnicko_ime = model.KorisnickoIme;
-                korisnik.ovlast_sifra = model.Ovlast;
+                    korisnik.korisnicko_ime = model.KorisnickoIme;
+                    korisnik.ovlast_sifra = model.Ovlast;
+                    bazaPodataka.Entry(korisnik).State = EntityState.Modified;
+                    bazaPodataka.Configuration.ValidateOnSaveEnabled = false;
+                    bazaPodataka.SaveChanges();
 
-                bazaPodataka.Entry(korisnik).State = EntityState.Modified;
-                bazaPodataka.Configuration.ValidateOnSaveEnabled = false;
-                bazaPodataka.SaveChanges();
-
-                return RedirectToAction("Index");
+                if ((!String.IsNullOrEmpty(returnUrl)) && Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
             }
 
             var ovlasti = bazaPodataka.PopisOvlasti.OrderBy(x => x.Naziv).ToList();
@@ -210,13 +218,13 @@ namespace QA.Controllers
         }
 
         [HttpGet]
-        public ActionResult ResetLozinke(string id)
+        public ActionResult ResetLozinke(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var korisnik = bazaPodataka.PopisKorisnika.FirstOrDefault(x => x.korisnicko_ime == id);
+            var korisnik = bazaPodataka.PopisKorisnika.Find(id);
             if (korisnik == null)
             {
                 return HttpNotFound();
@@ -249,13 +257,13 @@ namespace QA.Controllers
         }
 
         [HttpGet]
-        public ActionResult Brisi(string id)
+        public ActionResult Brisi(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var korisnik = bazaPodataka.PopisKorisnika.FirstOrDefault(x => x.korisnicko_ime == id);
+            var korisnik = bazaPodataka.PopisKorisnika.Find(id);
             if (korisnik == null)
             {
                 return HttpNotFound();
@@ -266,16 +274,39 @@ namespace QA.Controllers
 
         [HttpPost, ActionName("Brisi")]
         [ValidateAntiForgeryToken]
-        public ActionResult BrisiPotvrda(string id)
+        public ActionResult BrisiPotvrda(int id)
         {
-            var korisnik = bazaPodataka.PopisKorisnika.FirstOrDefault(x => x.korisnicko_ime == id);
-            if (korisnik == null)
+            try
             {
-                return HttpNotFound();
-            }
+                var korisnik = bazaPodataka.PopisKorisnika.Find(id);
+                if (korisnik == null)
+                {
+                    return HttpNotFound();
+                }
 
-            bazaPodataka.PopisKorisnika.Remove(korisnik);
-            bazaPodataka.SaveChanges();
+                bazaPodataka.PopisKorisnika.Remove(korisnik);
+                bazaPodataka.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                var sqlex = ex.InnerException.InnerException as MySqlException;
+                string error = "";
+
+                if (sqlex.Number == 1451)
+                {
+                    error = "Sifra korisnika " + " je vanjski kljuc u nekoj od tablica, obrišite prvo sva pitanja ili odgovore koje je korisnik postavio!";
+                }
+                else
+                {
+                    error = sqlex.Message;
+                }
+
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "MySQL greska broj: " + sqlex.Number + " - " + error);
+            }
+            catch (Exception es)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "Greska " + es.Message);
+            }
 
             return RedirectToAction("Index","Korisnik");
         }

@@ -8,6 +8,8 @@ namespace QA.Models
 {
     public class KorisnikAzuriranje
     {
+        [Required]
+        public int Id { get; set; }
         [Display(Name = "Korisničko ime")]
         [Required]
         public string KorisnickoIme { get; set; }

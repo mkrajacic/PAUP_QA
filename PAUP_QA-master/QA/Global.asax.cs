@@ -32,6 +32,7 @@ namespace QA
                 LogiraniKorisnik korisnik = new LogiraniKorisnik(authTicket.Name);
                 korisnik.KorisnickoIme = serializeModel.KorisnickoIme;
                 korisnik.Ovlast = serializeModel.Ovlast;
+                korisnik.Id = serializeModel.Id;
 
                 HttpContext.Current.User = korisnik;
             }

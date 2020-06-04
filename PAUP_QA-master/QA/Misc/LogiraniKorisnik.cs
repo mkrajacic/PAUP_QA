@@ -9,6 +9,7 @@ namespace QA.Misc
 {
         public class LogiraniKorisnik : ILogiraniKorisnik
         {
+            public int Id { get; set; }
             public string KorisnickoIme { get; set; }
             public string Ovlast { get; set; }
             public IIdentity Identity { get; private set; }
@@ -26,12 +27,15 @@ namespace QA.Misc
                 this.Identity = new GenericIdentity(kor.korisnicko_ime);
                 this.KorisnickoIme = kor.korisnicko_ime;
                 this.Ovlast = kor.ovlast_sifra;
+                this.Id = kor.id;
 
             }
             public LogiraniKorisnik(string korisnickoIme)
             {
                 this.Identity = new GenericIdentity(korisnickoIme);
                 this.KorisnickoIme = korisnickoIme;
+                this.Ovlast = Ovlast;
+                this.Id = Id;
             }
         }
     }

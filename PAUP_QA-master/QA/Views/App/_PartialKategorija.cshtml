@@ -1,7 +1,7 @@
 ﻿@using QA.Models
 @using QA.Misc
-@model Tuple<List<Pitanje>, Kategorija>
-    @*@{ 
+@model MixModel
+@*@{
         AjaxOptions ajaxSearch = new AjaxOptions()
         {
             UpdateTargetId = "pretrazivanje",
@@ -11,18 +11,25 @@
     }*@
 
 @*<div class="search-section">
-    <div class="search-box">
-        @using (Ajax.BeginForm("OtvoriKategoriju","App", new {id=Model.Item2.id }, ajaxSearch))
-        {
-            @Html.TextBox("pitanjeTekst", null, new { @class = "search-input", @placeholder = "Što želite saznati?" })
-            <button type="submit" class="search-btn">Traži...</button>
-        }
-    </div>
-</div>*@
+        <div class="search-box">
+            @using (Ajax.BeginForm("OtvoriKategoriju","App", new {id=Model.Item2.id }, ajaxSearch))
+            {
+                @Html.TextBox("pitanjeTekst", null, new { @class = "search-input", @placeholder = "Što želite saznati?" })
+                <button type="submit" class="search-btn">Traži...</button>
+            }
+        </div>
+    </div>*@
 
-<div class="category-name">@Model.Item2.kategorija</div>
+@if(ViewBag.Kategorija == null)
+{
+    <div class="category-name">Rezultati pretrage</div>
+}
+else
+{
+<div class="category-name">@ViewBag.Kategorija</div>
+}
 <div class="questions">
-    @foreach (var pit in Model.Item1)
+    @foreach (var pit in Model.Pitanja)
     {
         <div class="question-box">
             <div class="question-text">
@@ -32,7 +39,7 @@
 
                 }
             </div>
-            @*<p class="answers-num">
+            <p class="answers-num">
                     Odgovora:
                     @if (Model.Odgovori.Where(x => x.pitanje_id == pit.id).Count() != 0)
                     {
@@ -42,7 +49,7 @@
                     {
                         <div class="num" style="background-color:#c0392b;">0</div>
                     }
-                </p>*@
+                </p>
         </div>
     }
 </div>

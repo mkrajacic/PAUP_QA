@@ -1,0 +1,50 @@
+﻿@using QA.Models
+@using QA.Misc
+@model Pitanje
+@{
+    ViewBag.Title = "Dodaj pitanje";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>@Html.ActionLink("Natrag na pitanja", "Index", "App")</li>
+            </ul>
+        </nav>
+    </header>
+    <section class="body">
+        <section class="form-section">
+            <h1>@ViewBag.Title</h1>
+            @using (Html.BeginForm("DodajPitanje", "App", FormMethod.Post, new { @class = "login-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.LabelFor(m => m.pitanjeTekst)
+                @Html.EditorFor(m => m.pitanjeTekst,"", new { @placeholder = "Pitanje..." })
+                @Html.ValidationMessageFor(m => m.pitanjeTekst, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.kategorija)<br />
+                @Html.DropDownListFor(m => m.kategorija, new SelectList(ViewBag.Kategorije, "Odaberite kategoriju"))
+                @Html.HiddenFor(m => m.datumObjave, new { Value = DateTime.Now.ToString("dd'/'MM'/'yyyy HH: mm:ss") })
+                @Html.HiddenFor(m => m.korisnicko_ime, new { Value = ((User as LogiraniKorisnik).Id) })
+                <!---Html.LabelFor(m => m.image)
+        <input type="file" name="image" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />-->
+                <p>Ne možete pronaći kategoriju? @Html.ActionLink("Dodajte novu kategoriju", "DodajKategoriju", "App")</p>
+                <button name="pitanje" type="submit">
+                    Dodaj
+                </button>
+            }
+        </section>
+    </section>
+</body>
+</html>
+
+@Styles.Render("/Content/style.css")

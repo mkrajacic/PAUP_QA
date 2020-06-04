@@ -3,7 +3,7 @@
 @model MixModel
 @{
     ViewBag.Title = "QBox";
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
     AjaxOptions ajaxOpt = new AjaxOptions()
     {
         UpdateTargetId = "questionList",
@@ -12,37 +12,12 @@
         OnBegin = "LoadingRow"
     };
 }
-<title>@ViewBag.Title</title>
-<header>
-    <nav>
-        <ul>
-            @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
-            {
-                <li>@Html.ActionLink("Početak", "Index", "Home")</li>
-                <li>@Html.ActionLink("Korisnici", "Index", "Korisnik")</li>
-                <li>@Html.ActionLink("Odjava", "Odjava", "Korisnik", null, new { @style = "float:right; margin-right:15%" })</li>
-                <li>@Html.ActionLink(((User as LogiraniKorisnik).KorisnickoIme), "DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).KorisnickoIme) }, new { @style = "float:right; margin-right:1%", @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).KorisnickoIme) }) })</li>
-            }
-            else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
-            {
-                <li>@Html.ActionLink("Početak", "Index", "Home")</li>
-                <li>@Html.ActionLink("Odjava", "Odjava", "Korisnik", null, new { @style = "float:right; margin-right:15%" })</li>
-                <li>@Html.ActionLink(((User as LogiraniKorisnik).KorisnickoIme), "DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).KorisnickoIme) }, new { @style = "float:right; margin-right:1%", @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).KorisnickoIme) }) })</li>
-            }
-            else
-            {
-                <li>@Html.ActionLink("Prijava", "Prijava", "Korisnik")</li>
-                <li>@Html.ActionLink("Registracija", "Registracija", "Korisnik")</li>
-            }
-        </ul>
-    </nav>
-</header>
-
 <div class="search-section" id="pretrazivanje">
     <div class="search-box">
-        @using (Html.BeginForm("Index", "App", FormMethod.Get))
+        @using (Ajax.BeginForm("Pretrazivanje", "App", ajaxOpt))
         {
             @Html.TextBox("pitanjeTekst", null, new { @class = "search-input", @placeholder = "Što želite saznati?" })
+            @Html.DropDownList("kategorija", new SelectList(Model.Kategorije.Select(x => x.kategorija)), "Odaberi kategoriju")
             <button type="submit" class="search-btn">Traži...</button>
         }
     </div>
@@ -81,37 +56,37 @@
     <div class="row">
         @foreach (var kat in Model.Kategorije)
         {
-        <div class="category"><p>@Ajax.ActionLink(kat.kategorija, "OtvoriKategoriju", new { id = kat.id },ajaxOpt, new { @id = "kategorijaPrikaz", @data_url = Url.Action("OtvoriKategoriju", "App", new { id = kat.id }) })</p></div>
+            <div class="category"><p>@Ajax.ActionLink(kat.kategorija, "OtvoriKategoriju", new { id = kat.id }, ajaxOpt, new { @id = "kategorijaPrikaz", @data_url = Url.Action("OtvoriKategoriju", "App", new { id = kat.id }) })</p></div>
         }
     </div>
 </div>
-<div class="modal" id="modalView" tabindex="-1" role="dialog" aria-labelledby="modalView" aria-hidden="true" data-backdrop="static">
+@*<div class="modal" id="modalView" tabindex="-1" role="dialog" aria-labelledby="modalView" aria-hidden="true" data-backdrop="static">
     <div id="viewContainer">
 
     </div>
-</div>
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-@Styles.Render("/Content/style.css")
-    <script type="text/javascript">
-        function LoadingRow() {
-            $("#questionList").empty();
+</div>*@
+@*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @Styles.Render("/Content/style.css")*@
+<script type="text/javascript">
+    function LoadingRow() {
+        $("#questionList").empty();
 
-            $("#questionList").append('<div class="question-box"><div class="question-text">Pretraga u tijeku...</div></div>');
+        $("#questionList").append('<div class="question-box"><div class="question-text">Pretraga u tijeku...</div></div>');
 
-            // $("#pager").empty();
-        }
-    </script>
-    <script type="text/javascript">
-        $('#question-text').on("click", "#pitanjeDetalji", function (event) {
-            event.preventDefault();
+        // $("#pager").empty();
+    }
+</script>
+@*<script type="text/javascript">
+    $('.question-text').on("click", "#pitanjeDetalji", function (event) {
+        event.preventDefault();
 
-            var url = $(this).attr("data-url");
-            $.get(url, function (data) {
-                $('#viewContainer').html(data);
-                $('#modalView').modal('show');
-            });
+        var url = $(this).attr("data-url");
+        $.get(url, function (data) {
+            $('#viewContainer').html(data);
+            $('#modalView').modal('show');
         });
-    </script>
+    });
+</script>*@
 
 

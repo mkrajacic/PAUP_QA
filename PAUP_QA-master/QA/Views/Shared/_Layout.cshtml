@@ -1,17 +1,47 @@
-﻿<!DOCTYPE html>
+﻿@using QA.Models
+@using QA.Misc
+@model MixModel
+<!DOCTYPE html>
 <html>
 <head>
-    <title>QBox</title>
+    <title>@ViewBag.Title</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+                {
+                    <li>@Html.ActionLink("Početak", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Korisnici", "Index", "Korisnik")</li>
+                    <li>@Html.ActionLink("Dodaj pitanje", "DodajPitanje", "App", new { @data_url = Url.Action("DodajPitanje", "App") }) </li>
+                    <li>@Html.ActionLink("Dodaj kategoriju", "DodajKategoriju", "App")</li>
+                    <li>@Html.ActionLink("Odjava", "Odjava", "Korisnik", null, new { @style = "float:right; margin-right:15%" })</li>
+                    <li>@Html.ActionLink(((User as LogiraniKorisnik).KorisnickoIme), "DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).Id) }, new { @style = "float:right; margin-right:1%", @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).Id) }) })</li>
+                }
+                else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Registriran))
+                {
+                    <li>@Html.ActionLink("Početak", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Dodaj pitanje", "DodajPitanje", "App", new { @data_url = Url.Action("DodajPitanje", "App") }) </li>
+                    <li>@Html.ActionLink("Odjava", "Odjava", "Korisnik", null, new { @style = "float:right; margin-right:15%" })</li>
+                    <li>@Html.ActionLink(((User as LogiraniKorisnik).KorisnickoIme), "DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).Id) }, new { @style = "float:right; margin-right:1%", @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).Id) }) })</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Prijava", "Prijava", "Korisnik")</li>
+                    <li>@Html.ActionLink("Registracija", "Registracija", "Korisnik")</li>
+                }
+            </ul>
+        </nav>
+    </header>
     @RenderBody()
-    <hr style="color:black" />
+    @Styles.Render("/Content/style.css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Styles.Render("~/Content/css")
+    @*@Styles.Render("~/Content/css")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

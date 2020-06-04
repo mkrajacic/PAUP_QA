@@ -7,6 +7,7 @@ namespace QA.Misc
 {
     public class LogiraniKorisnikSerializeModel
     {
+        public int Id { get; set; }
         public string KorisnickoIme { get; set; }
 
         public string Ovlast { get; set; }
@@ -14,7 +15,7 @@ namespace QA.Misc
         {
             this.KorisnickoIme = user.KorisnickoIme;
             this.Ovlast = user.Ovlast;
-
+            this.Id = user.Id;
 
         }
 

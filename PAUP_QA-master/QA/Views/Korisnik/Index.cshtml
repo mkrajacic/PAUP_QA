@@ -30,7 +30,7 @@
                     <div class="question-text">
                         @if (!String.IsNullOrEmpty(kor.korisnicko_ime))
                         {
-                            @Html.ActionLink(kor.korisnicko_ime, "DetaljiKorisnik", new { id = kor.korisnicko_ime }, new { @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = kor.korisnicko_ime }) })
+                            @Html.ActionLink(kor.korisnicko_ime, "DetaljiKorisnik", new { id = kor.id }, new { @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = kor.id }) })
 
                         }
                     </div>

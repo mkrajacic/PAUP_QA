@@ -1,0 +1,43 @@
+﻿@using QA.Models
+@using QA.Misc
+@model Kategorija
+@{
+    ViewBag.Title = "Dodaj kategoriju";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>@Html.ActionLink("Natrag na pitanja", "Index", "App")</li>
+            </ul>
+        </nav>
+    </header>
+    <section class="body">
+        <section class="form-section">
+            <h1>@ViewBag.Title</h1>
+            @using (Html.BeginForm("DodajKategoriju", "App", FormMethod.Post, new { @class = "login-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.LabelFor(m=>m.kategorija)
+                @Html.EditorFor(m => m.kategorija, new { @placeholder = "Kategorija..." })
+                @Html.ValidationMessageFor(m => m.kategorija, "", new { @class = "text-danger" })
+                <button name="kategorija" type="submit">
+                    Dodaj
+                </button>
+            }
+        </section>
+    </section>
+</body>
+</html>
+
+@Styles.Render("/Content/style.css")

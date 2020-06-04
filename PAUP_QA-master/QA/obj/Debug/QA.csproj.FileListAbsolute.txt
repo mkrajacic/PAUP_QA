@@ -289,8 +289,8 @@ C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Ubiety.Dns.Core.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Ubiety.Logging.Core.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Antlr3.Runtime.pdb
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.csprojAssemblyReference.cache
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.csproj.CoreCompileInputs.cache
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.csproj.CopyComplete
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.dll
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.pdb
-C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.csprojAssemblyReference.cache

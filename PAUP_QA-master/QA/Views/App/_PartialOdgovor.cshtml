@@ -1,0 +1,15 @@
+﻿@using QA.Models
+@using QA.Misc
+@model Odgovor
+
+@using (Html.BeginForm("DodajOdgovor", "App", FormMethod.Post, new { @class = "answer-form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.TextAreaFor(m => m.odgovor, new { @placeholder = "Upiši odgovor..." })
+    @Html.HiddenFor(m => m.datumObjave, new { Value = DateTime.Now.ToString("dd'/'MM'/'yyyy HH: mm:ss") })
+    @Html.HiddenFor(m => m.najdraze, new { Value = false })
+    @Html.HiddenFor(m => m.korisnicko_ime, new { Value = ViewBag.Korisnik })
+    @Html.HiddenFor(m => m.pitanje_id, new { Value = ViewBag.Id })
+    <input type="submit" value="Odgovori">
+}
+

@@ -32,7 +32,7 @@ namespace QA.Models
         public virtual Korisnik korisnickoIme { get; set; }
         [Column("datetime_created")]
         [Display(Name = "Datum objave")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime datumObjave { get; set; }
 
@@ -43,5 +43,10 @@ namespace QA.Models
         public int id_kategorija { get; set; }
         [Display(Name = "Kategorija")]
         public virtual Kategorija kategorijaId { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "{0} nije odabrana!")]
+        [Display(Name = "Kategorija")]
+        public string kategorija { get; set; }
+
     }
 }

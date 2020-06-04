@@ -200,7 +200,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\index.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -224,8 +223,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\App\Index.cshtml" />
     <Content Include="Views\App\_PartialPitanje.cshtml" />
@@ -238,7 +235,9 @@
     <Content Include="Views\Korisnik\Brisi.cshtml" />
     <Content Include="Views\Korisnik\DodajKorisnika.cshtml" />
     <Content Include="Views\App\_PartialKategorija.cshtml" />
-    <Content Include="Views\App\Indexbackup.cshtml" />
+    <Content Include="Views\App\DodajPitanje.cshtml" />
+    <Content Include="Views\App\DodajKategoriju.cshtml" />
+    <Content Include="Views\App\_PartialOdgovor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

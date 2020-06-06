@@ -17,7 +17,7 @@
         @using (Ajax.BeginForm("Pretrazivanje", "App", ajaxOpt))
         {
             @Html.TextBox("pitanjeTekst", null, new { @class = "search-input", @placeholder = "Što želite saznati?" })
-            @Html.DropDownList("kategorija", new SelectList(Model.Kategorije.Select(x => x.kategorija)), "Odaberi kategoriju")
+            @Html.DropDownList("kategorija", new SelectList(Model.Kategorije.Select(x => x.kategorija)), "Sve kategorije")
             <button type="submit" class="search-btn">Traži...</button>
         }
     </div>
@@ -60,14 +60,9 @@
         }
     </div>
 </div>
-@*<div class="modal" id="modalView" tabindex="-1" role="dialog" aria-labelledby="modalView" aria-hidden="true" data-backdrop="static">
-    <div id="viewContainer">
 
-    </div>
-</div>*@
-@*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    @Styles.Render("/Content/style.css")*@
+
+    @Styles.Render("/Content/style.css")
 <script type="text/javascript">
     function LoadingRow() {
         $("#questionList").empty();
@@ -77,16 +72,6 @@
         // $("#pager").empty();
     }
 </script>
-@*<script type="text/javascript">
-    $('.question-text').on("click", "#pitanjeDetalji", function (event) {
-        event.preventDefault();
 
-        var url = $(this).attr("data-url");
-        $.get(url, function (data) {
-            $('#viewContainer').html(data);
-            $('#modalView').modal('show');
-        });
-    });
-</script>*@
 
 

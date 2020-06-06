@@ -9,11 +9,11 @@ namespace QA.Models
         public class KorisnikPrijava
         {
             [Display(Name = "Korisničko ime")]
-            [Required]
+            [Required(ErrorMessage = "{0} je obavezno polje!")]
             public string KorisnickoIme { get; set; }
             [Display(Name = "Lozinka")]
             [DataType(DataType.Password)]
-            [Required]
+            [Required(ErrorMessage = "{0} je obavezno polje!")]
             public string Lozinka { get; set; }
         }
     }

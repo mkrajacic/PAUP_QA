@@ -28,17 +28,16 @@
             @using (Html.BeginForm("DodajPitanje", "App", FormMethod.Post, new { @class = "login-form" }))
             {
                 @Html.AntiForgeryToken()
+                @Html.ValidationMessageFor(m => m.pitanjeTekst, "", new { @style = "color:red;" })
                 @Html.LabelFor(m => m.pitanjeTekst)
-                @Html.EditorFor(m => m.pitanjeTekst,"", new { @placeholder = "Pitanje..." })
-                @Html.ValidationMessageFor(m => m.pitanjeTekst, "", new { @class = "text-danger" })
+                @Html.EditorFor(m => m.pitanjeTekst, new { htmlAttributes = new { @placeholder = "Pitanje..." } })
+                @Html.ValidationMessageFor(m => m.kategorija, "", new { @style = "color:red;" })
                 @Html.LabelFor(m => m.kategorija)<br />
-                @Html.DropDownListFor(m => m.kategorija, new SelectList(ViewBag.Kategorije, "Odaberite kategoriju"))
+                @Html.DropDownListFor(m => m.kategorija, new SelectList(ViewBag.Kategorije), "Odaberite kategoriju")
                 @Html.HiddenFor(m => m.datumObjave, new { Value = DateTime.Now.ToString("dd'/'MM'/'yyyy HH: mm:ss") })
                 @Html.HiddenFor(m => m.korisnicko_ime, new { Value = ((User as LogiraniKorisnik).Id) })
-                <!---Html.LabelFor(m => m.image)
-        <input type="file" name="image" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />-->
                 <p>Ne možete pronaći kategoriju? @Html.ActionLink("Dodajte novu kategoriju", "DodajKategoriju", "App")</p>
-                <button name="pitanje" type="submit">
+                <button name="dodajPit" type="submit">
                     Dodaj
                 </button>
             }
@@ -48,3 +47,5 @@
 </html>
 
 @Styles.Render("/Content/style.css")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")

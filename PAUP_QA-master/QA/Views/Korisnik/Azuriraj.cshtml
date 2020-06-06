@@ -1,4 +1,5 @@
-﻿@model QA.Models.KorisnikAzuriranje
+﻿@using QA.Misc
+@model QA.Models.KorisnikAzuriranje
 @{
     ViewBag.Title = "Ažuriranje profila";
     Layout = null;
@@ -23,20 +24,28 @@
     <section class="body">
         <section class="form-section">
             <h1>@ViewBag.Title</h1>
-            @Html.ValidationMessageFor(m => m.KorisnickoIme, "", new { @class = "text-danger" })
 
-            @using (Html.BeginForm("Azuriraj", "Korisnik", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form" }))
+            @using (Html.BeginForm("Azuriraj", "Korisnik",FormMethod.Post, new { @class = "login-form" }))
             {
                 @Html.AntiForgeryToken()
+                @Html.ValidationMessageFor(m => m.KorisnickoIme, "", new { @style = "color:red;" })
                 @Html.LabelFor(m => m.KorisnickoIme, "Novo korisničko ime")
-                @Html.EditorFor(m => m.KorisnickoIme)
-                @Html.LabelFor(m => m.Ovlast)<br />
-                @Html.DropDownListFor(m => m.Ovlast,
-                                                    new SelectList(ViewBag.Ovlasti, "Sifra", "Naziv", "Odaberite ovlast"))
+                @Html.EditorFor(m => m.KorisnickoIme, new { htmlAttributes = new { @placeholder = "Korisničko ime..." } })
+                @Html.HiddenFor(m => m.KorisnickoImeStaro)
+                if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+                {
+                    @Html.ValidationMessageFor(m => m.Ovlast, "", new { @style = "color:red;" })
+                    @Html.LabelFor(m => m.Ovlast)<br />
+                    @Html.DropDownListFor(model => model.Ovlast, new SelectList(ViewBag.Ovlasti, "Sifra", "Naziv", ""), "Odaberite ovlast")
+                }
+                else
+                {
+                    @Html.HiddenFor(m => m.Ovlast, new { Value = OvlastiKorisnik.Registriran })
+                }
                 <!---Html.LabelFor(m => m.image)
         <input type="file" name="image" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />-->
                 <p> @Html.ActionLink("Promjena lozinke", "ResetLozinke", new { id = Model.Id }, null)</p>
-                <button name="login" type="submit">
+                <button name="azurirajKor" type="submit">
                     Ažuriraj
                 </button>
             }
@@ -45,4 +54,5 @@
 </body>
 </html>
 @Styles.Render("/Content/style.css")
-
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")

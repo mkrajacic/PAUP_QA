@@ -28,15 +28,13 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(m => m.KorisnickoIme)
+                @Html.ValidationMessageFor(m => m.Lozinka, "", new { @style = "color:red;" })
                 @Html.LabelFor(m => m.Lozinka)
-                <!---Html.LabelFor(m => m.image)
-        <input type="file" name="image" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />-->
-                @Html.PasswordFor(model => model.Lozinka)
-                @Html.ValidationMessageFor(model => model.Lozinka)
+                @Html.PasswordFor(model => model.Lozinka, new { @placeholder = "Nova lozinka..." })
+                @Html.ValidationMessageFor(m => m.Lozinka2, "", new {  @style = "color:red;" })
                 @Html.LabelFor(m => m.Lozinka2)
-                @Html.PasswordFor(model => model.Lozinka2)
-                @Html.ValidationMessageFor(model => model.Lozinka2)
-                <button name="login" type="submit">
+                @Html.PasswordFor(model => model.Lozinka2, new { @placeholder = "Ponovite lozinku..." })
+                <button name="resetLoz" type="submit">
                     Reset
                 </button>
             }
@@ -45,4 +43,5 @@
 </body>
 </html>
 @Styles.Render("/Content/style.css")
-
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")

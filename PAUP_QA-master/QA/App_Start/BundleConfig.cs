@@ -9,10 +9,10 @@ namespace QA
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                "~/Scripts/jquery.unobtrusive-ajax.min.js",
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/index.js",
-                        "~/Scripts/bootbox.js",
-                        "~/Scripts/jquery.unobtrusive-ajax.min.js"));
+                        "~/Scripts/bootbox.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -23,11 +23,12 @@ namespace QA
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                    "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/style.css"));
+                "~/Content/style.css",
+                      "~/Content/bootstrap.css"
+                      ));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿@using QA.Models
+@using QA.Misc
 @model Korisnik
 @{
     ViewBag.Title = "Registracija";
@@ -22,34 +23,34 @@
             </ul>
         </nav>
     </header>
-<section class="body">
-    <section class="form-section">
-        <h1>@ViewBag.Title</h1>
-        @using (Html.BeginForm("Registracija", "Korisnik", FormMethod.Post, new { @class = "login-form" } ))
-        {
-            @Html.AntiForgeryToken()
-            @Html.LabelFor(m => m.korisnicko_ime)
-            @Html.EditorFor(m => m.korisnicko_ime)
-            @Html.ValidationMessageFor(m => m.korisnicko_ime, "", new { @class = "text-danger" })
-            @Html.LabelFor(m => m.LozinkaUnos)
-            @Html.EditorFor(m => m.LozinkaUnos)
-            @Html.ValidationMessageFor(m => m.LozinkaUnos, "", new { @class = "text-danger" })
-            @Html.LabelFor(m => m.LozinkaUnos2)
-            @Html.EditorFor(m => m.LozinkaUnos2)
-            @Html.ValidationMessageFor(m => m.LozinkaUnos2, "", new { @class = "text-danger" })
-            @Html.LabelFor(m => m.ovlast_sifra)<br />
-            @Html.DropDownListFor(m => m.ovlast_sifra,
-                                                new SelectList(ViewBag.Ovlasti, "Sifra", "Naziv", ""))
-            <!---Html.LabelFor(m => m.image)
+    <section class="body">
+        <section class="form-section">
+            <h1>@ViewBag.Title</h1>
+            @using (Html.BeginForm("Registracija", "Korisnik", FormMethod.Post, new { @class = "login-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationMessageFor(m => m.korisnicko_ime, "", new { @style = "color:red;" })
+                @Html.LabelFor(m => m.korisnicko_ime)
+                @Html.EditorFor(m => m.korisnicko_ime, new { htmlAttributes = new { @placeholder = "Korisničko ime..." } })
+                @Html.ValidationMessageFor(m => m.LozinkaUnos, "", new { @style = "color:red;" })
+                @Html.LabelFor(m => m.LozinkaUnos)
+                @Html.EditorFor(m => m.LozinkaUnos, new { htmlAttributes = new { @placeholder = "Lozinka..." } })
+                @Html.ValidationMessageFor(m => m.LozinkaUnos2, "", new { @style = "color:red;" })
+                @Html.LabelFor(m => m.LozinkaUnos2)
+                @Html.EditorFor(m => m.LozinkaUnos2, new { htmlAttributes = new { @placeholder = "Ponovite lozinku..." } })
+                @Html.HiddenFor(m => m.ovlast_sifra, new { Value = OvlastiKorisnik.Registriran })
+                <!---Html.LabelFor(m => m.image)
         <input type="file" name="image" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />-->
-    <p>Već imate profil? @Html.ActionLink("Prijava", "Prijava", "Korisnik")</p>
-            <button name="registracija" type="submit">
-                Registracija
-            </button>
-        }
+                <p>Već imate profil? @Html.ActionLink("Prijava", "Prijava", "Korisnik")</p>
+                <button name="registracija" type="submit">
+                    Registracija
+                </button>
+            }
         </section>
-</section>
+    </section>
 </body>
 </html>
 
 @Styles.Render("/Content/style.css")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")

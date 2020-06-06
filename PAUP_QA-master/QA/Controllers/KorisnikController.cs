@@ -17,7 +17,7 @@ using System.Web.Security;
 
 namespace QA.Controllers
 {
-    [Authorize(Roles = OvlastiKorisnik.Administrator + "," + OvlastiKorisnik.Registriran)]
+    [Authorize]
     public class KorisnikController : Controller
     {
         BazaDbContext bazaPodataka = new BazaDbContext();
@@ -28,6 +28,7 @@ namespace QA.Controllers
             var listaKorisnika = bazaPodataka.PopisKorisnika.OrderBy(x => x.ovlast_sifra).ThenBy(x => x.korisnicko_ime).ToList();
             return View(listaKorisnika);
         }
+        [Authorize]
         public ActionResult DetaljiKorisnik(int id)
         {
             if (id==0)
@@ -96,8 +97,6 @@ namespace QA.Controllers
                 return RedirectToAction("Index","App");
             }
 
-            var ovlasti = bazaPodataka.PopisOvlasti.OrderBy(x => x.Naziv).ToList();
-            ViewBag.Ovlasti = ovlasti;
 
             return View(model);
         }
@@ -160,6 +159,7 @@ namespace QA.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Azuriraj(int id,string returnUrl)
         {
             if (id ==0)
@@ -174,6 +174,7 @@ namespace QA.Controllers
 
             KorisnikAzuriranje model = new KorisnikAzuriranje();
             ViewBag.ReturnUrl = returnUrl;
+            model.KorisnickoImeStaro = korisnik.korisnicko_ime;
             model.KorisnickoIme = korisnik.korisnicko_ime;
             model.Ovlast = korisnik.ovlast_sifra;
             model.Id = korisnik.id;
@@ -185,15 +186,20 @@ namespace QA.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Azuriraj(KorisnikAzuriranje model,string returnUrl)
         {
             var korisnik = bazaPodataka.PopisKorisnika.FirstOrDefault(x => x.id == model.Id);
             if (!String.IsNullOrWhiteSpace(model.KorisnickoIme))
             {
-                var usernameZauzet = bazaPodataka.PopisKorisnika.Any(j => j.korisnicko_ime == model.KorisnickoIme);
-                if (usernameZauzet)
+                if (!(model.KorisnickoIme==model.KorisnickoImeStaro))
                 {
-                    ModelState.AddModelError("KorisnickoIme", "Korisničko ime je već zauzeto!");
+                    var usernameZauzet = bazaPodataka.PopisKorisnika.Any(j => j.korisnicko_ime == model.KorisnickoIme);
+                    if (usernameZauzet)
+                    {
+                        ModelState.AddModelError("KorisnickoIme", "Korisničko ime je već zauzeto!");
+                    }
+
                 }
             }
 
@@ -209,8 +215,11 @@ namespace QA.Controllers
                 {
                     return Redirect(returnUrl);
                 }
+                else
+                {
+                    return RedirectToAction("Index", "App");
+                }
             }
-
             var ovlasti = bazaPodataka.PopisOvlasti.OrderBy(x => x.Naziv).ToList();
             ViewBag.Ovlasti = ovlasti;
 
@@ -218,6 +227,7 @@ namespace QA.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult ResetLozinke(int id)
         {
             if (id == 0)
@@ -237,6 +247,7 @@ namespace QA.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult ResetLozinke(KorisnikResetLozinke model)
         {
             var korisnik = bazaPodataka.PopisKorisnika.FirstOrDefault(x => x.korisnicko_ime == model.KorisnickoIme);
@@ -257,6 +268,7 @@ namespace QA.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Brisi(int id)
         {
             if (id == 0)
@@ -272,6 +284,7 @@ namespace QA.Controllers
             return View(korisnik);
         }
 
+        [Authorize]
         [HttpPost, ActionName("Brisi")]
         [ValidateAntiForgeryToken]
         public ActionResult BrisiPotvrda(int id)
@@ -294,7 +307,7 @@ namespace QA.Controllers
 
                 if (sqlex.Number == 1451)
                 {
-                    error = "Sifra korisnika " + " je vanjski kljuc u nekoj od tablica, obrišite prvo sva pitanja ili odgovore koje je korisnik postavio!";
+                    error = "Sifra korisnika " + " je vanjski kljuc u nekoj od tablica!";
                 }
                 else
                 {

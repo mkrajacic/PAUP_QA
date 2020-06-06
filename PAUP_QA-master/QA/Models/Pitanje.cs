@@ -18,11 +18,6 @@ namespace QA.Models
         [Display(Name = "Pitanje")]
         [Column("question")]
         public string pitanjeTekst { get; set; }
-       /* [StringLength(100, MinimumLength = 10, ErrorMessage = "{0} mora biti duljine minimalno {2} a maksimalno {1} znakova")]
-        [Required(ErrorMessage = "{0} je obavezno polje!")]
-        [Display(Name = "Odgovor")]
-        [Column("odgovor")]
-        public string odgovor { get; set; }*/
         [Column("user_id")]
         [Required(ErrorMessage = "{0} je obavezno polje!")]
         [Display(Name = "Korisničko ime")]

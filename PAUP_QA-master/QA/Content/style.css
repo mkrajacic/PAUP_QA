@@ -414,3 +414,6 @@ textarea:focus {
 /*.validation-summary-errors*/ .text-danger li {
     color:red;
 }
+.text-danger {
+    color: red;
+}

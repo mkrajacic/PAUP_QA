@@ -1,9 +1,7 @@
-﻿@using QA.Models
-@using QA.Misc
-@model Kategorija
+﻿@model QA.Models.Pitanje
 @{
-    ViewBag.Title = "Dodaj kategoriju";
     Layout = null;
+    ViewBag.Title = "Brisanje pitanja";
 }
 
 <!DOCTYPE html>
@@ -12,6 +10,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
     <title>@ViewBag.Title</title>
 </head>
 <body>
@@ -22,24 +21,22 @@
             </ul>
         </nav>
     </header>
+
     <section class="body">
         <section class="form-section">
-            <h1>@ViewBag.Title</h1>
-            @using (Html.BeginForm("DodajKategoriju", "App", FormMethod.Post, new { @class = "login-form" }))
+            <p>Jeste li sigurni da želite obrisati @Model.pitanjeTekst?</p>
+            @using (Html.BeginForm())
             {
+
                 @Html.AntiForgeryToken()
-                @Html.ValidationMessageFor(m => m.kategorija, "", new { @style = "color:red;" })
-                @Html.LabelFor(m => m.kategorija)
-                @Html.EditorFor(m => m.kategorija, new { htmlAttributes = new { @placeholder = "Kategorija..." } })
-                <button name="dodajKat" type="submit">
-                    Dodaj
+                <button name="obrisiPit" type="submit">
+                    Izbriši
                 </button>
             }
         </section>
     </section>
 </body>
 </html>
-
 @Styles.Render("/Content/style.css")
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")

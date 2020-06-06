@@ -27,20 +27,22 @@ namespace QA.Models
         public byte[] image { get; set; }*/
         [Column("user_code")]
         [Display(Name = "Ovlast")]
-        [Required]
+        [Required(ErrorMessage = "{0} je obavezno polje!")]
         [ForeignKey("Ovlast")]
         public string ovlast_sifra { get; set; }
         [Display(Name = "Ovlast")]
         public virtual Ovlast Ovlast { get; set; }
+        [StringLength(15, MinimumLength = 5, ErrorMessage = "{0} mora biti duljine minimalno {2} a maksimalno {1} znakova")]
         [Display(Name = "Lozinka")]
         [DataType(DataType.Password)]
-        [Required]
+        [Required(ErrorMessage = "{0} je obavezno polje!")]
         [NotMapped]
         public string LozinkaUnos { get; set; }
 
+        [StringLength(15, MinimumLength = 5, ErrorMessage = "{0} mora biti duljine minimalno {2} a maksimalno {1} znakova")]
         [Display(Name = "Lozinka ponovljena")]
         [DataType(DataType.Password)]
-        [Required]
+        [Required(ErrorMessage = "Morate ponoviti lozinku!")]
         [NotMapped]
         [Compare("LozinkaUnos", ErrorMessage = "Lozinke moraju biti jednake")]
         public string LozinkaUnos2 { get; set; }

@@ -21,21 +21,23 @@
             </ul>
         </nav>
     </header>
-    @using (Html.BeginForm("Prijava", "Korisnik", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form" }))
-    {
-        @Html.AntiForgeryToken()
         <section class="body">
             <section class="form-section">
                 <h1>@ViewBag.Title</h1>
-                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                @Html.TextBoxFor(m => m.KorisnickoIme, new { @placeholder = "Korisnicko ime..." })
-                @Html.PasswordFor(m => m.Lozinka, new { @placeholder = "Lozinka..." })
-            <p>Nemate profil? @Html.ActionLink("Registracija", "Registracija", "Korisnik")</p>
-    <button type="submit" name="login">Prijava</button>
+                @using (Html.BeginForm("Prijava", "Korisnik", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(false, "", new { @style = "color:red;", @class = "text-danger" })
+                    @Html.TextBoxFor(m => m.KorisnickoIme, new { @placeholder = "Korisničko ime..." })
+                    @Html.PasswordFor(m => m.Lozinka, new { @placeholder = "Lozinka..." })
+                    <p>Nemate profil? @Html.ActionLink("Registracija", "Registracija", "Korisnik")</p>
+                    <button type="submit" name="prijava">Prijava</button>
+                }
             </section>
         </section>
-    }
-    </body>
+</body>
 </html>
-           
+
 @Styles.Render("/Content/style.css")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")

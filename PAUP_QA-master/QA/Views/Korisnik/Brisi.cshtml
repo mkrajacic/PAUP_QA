@@ -24,22 +24,19 @@
 
     <section class="body">
         <section class="form-section">
-            @Html.DisplayNameFor(m => m.korisnicko_ime): @Model.korisnicko_ime<br />
-            @Html.DisplayNameFor(m => m.Ovlast):
-            @if (Model.Ovlast != null)
-            {
-                @Model.Ovlast.Naziv
-            }
+            <p>Jeste li sigurni da želite obrisati @Model.korisnicko_ime? Ovime ćete obrisati sva pitanja i odgovore korisnika @Model.korisnicko_ime!</p>
             @using (Html.BeginForm())
             {
 
-            @Html.AntiForgeryToken()
-            <button name="login" type="submit">
-                Izbriši
-            </button>
+                @Html.AntiForgeryToken()
+                <button name="obrisiKor" type="submit">
+                    Izbriši
+                </button>
             }
         </section>
     </section>
 </body>
 </html>
 @Styles.Render("/Content/style.css")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")

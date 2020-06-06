@@ -172,14 +172,18 @@
     <Compile Include="Misc\PasswordHelper.cs" />
     <Compile Include="Models\BazaDBContext.cs" />
     <Compile Include="Models\Kategorija.cs" />
+    <Compile Include="Models\KategorijaAzuriranje.cs" />
     <Compile Include="Models\Korisnik.cs" />
     <Compile Include="Models\KorisnikAzuriranje.cs" />
     <Compile Include="Models\KorisnikPrijava.cs" />
     <Compile Include="Models\KorisnikResetLozinke.cs" />
+    <Compile Include="Models\ModelStateErrorHandler.cs" />
     <Compile Include="Models\Odgovor.cs" />
+    <Compile Include="Models\OdgovorAzuriranje.cs" />
     <Compile Include="Models\Ovlast.cs" />
     <Compile Include="Models\MixModel.cs" />
     <Compile Include="Models\Pitanje.cs" />
+    <Compile Include="Models\PitanjeAzuriranje.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +242,12 @@
     <Content Include="Views\App\DodajPitanje.cshtml" />
     <Content Include="Views\App\DodajKategoriju.cshtml" />
     <Content Include="Views\App\_PartialOdgovor.cshtml" />
+    <Content Include="Views\App\AzurirajPitanje.cshtml" />
+    <Content Include="Views\App\BrisiPitanje.cshtml" />
+    <Content Include="Views\App\BrisiOdgovor.cshtml" />
+    <Content Include="Views\App\AzurirajOdgovor.cshtml" />
+    <Content Include="Views\App\AzurirajKategoriju.cshtml" />
+    <Content Include="Views\App\BrisiKategoriju.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

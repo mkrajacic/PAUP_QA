@@ -1,45 +1,48 @@
 ﻿@using QA.Models
 @using QA.Misc
 @model MixModel
-@*@{
-        AjaxOptions ajaxSearch = new AjaxOptions()
-        {
-            UpdateTargetId = "pretrazivanje",
-            InsertionMode = InsertionMode.Replace,
-            HttpMethod = "GET",
-        };
-    }*@
 
-@*<div class="search-section">
-        <div class="search-box">
-            @using (Ajax.BeginForm("OtvoriKategoriju","App", new {id=Model.Item2.id }, ajaxSearch))
-            {
-                @Html.TextBox("pitanjeTekst", null, new { @class = "search-input", @placeholder = "Što želite saznati?" })
-                <button type="submit" class="search-btn">Traži...</button>
-            }
-        </div>
-    </div>*@
 
-@if(ViewBag.Kategorija == null)
+@if ((ViewBag.Kategorija == null) && (ViewBag.Pojam != null))
 {
-    <div class="category-name">Rezultati pretrage</div>
+    <div class="category-name">Rezultati pretrage za: @ViewBag.Pojam</div>
 }
-else
+else if ((ViewBag.Kategorija != null) && (ViewBag.Pojam != null))
 {
-<div class="category-name">@ViewBag.Kategorija</div>
+    <div class="category-name">Rezultati pretrage za: @ViewBag.Pojam unutar @ViewBag.Kategorija</div>
 }
-<div class="questions">
-    @foreach (var pit in Model.Pitanja)
+else if ((ViewBag.Kategorija != null) && (ViewBag.Pojam == null))
+{
+    if ((User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
     {
-        <div class="question-box">
-            <div class="question-text">
-                @if (!String.IsNullOrEmpty(pit.pitanjeTekst))
-                {
-                    @Html.ActionLink(pit.pitanjeTekst, "OtvoriPitanje", new { id = pit.id }, new { @id = "pitanjeDetalji", @data_url = Url.Action("OtvoriPitanje", "App", new { id = pit.id }) })
+        <div class="category-name">@ViewBag.Kategorija</div>
+        <p>@Html.ActionLink("Ažuriraj", "AzurirajKategoriju", new { kat_id = ViewBag.Id })</p>
+        <p>@Html.ActionLink("Izbriši", "BrisiKategoriju", new { kat_id = ViewBag.Id })</p>
+    }
+    else
+    {
+        <div class="category-name">@ViewBag.Kategorija</div>
+    }
+}
+else if ((ViewBag.Kategorija == null) && (ViewBag.Pojam == null))
+{
+    <div class="category-name">Najnovija pitanja</div>
+}
 
-                }
-            </div>
-            <p class="answers-num">
+<div class="questions">
+    @if ((ViewBag.Kategorija == null) && (ViewBag.Pojam == null))
+    {
+        foreach (var pit in Model.Pitanja.Take(10))
+        {
+            <div class="question-box">
+                <div class="question-text">
+                    @if (!String.IsNullOrEmpty(pit.pitanjeTekst))
+                    {
+                        @Html.ActionLink(pit.pitanjeTekst, "OtvoriPitanje", new { id = pit.id }, new { @id = "pitanjeDetalji", @data_url = Url.Action("OtvoriPitanje", "App", new { id = pit.id }) })
+
+                    }
+                </div>
+                <p class="answers-num">
                     Odgovora:
                     @if (Model.Odgovori.Where(x => x.pitanje_id == pit.id).Count() != 0)
                     {
@@ -50,6 +53,39 @@ else
                         <div class="num" style="background-color:#c0392b;">0</div>
                     }
                 </p>
+            </div>
+        }
+    }
+    else
+    {
+        foreach (var pit in Model.Pitanja)
+        {
+            <div class="question-box">
+                <div class="question-text">
+                    @if (!String.IsNullOrEmpty(pit.pitanjeTekst))
+                    {
+                        @Html.ActionLink(pit.pitanjeTekst, "OtvoriPitanje", new { id = pit.id }, new { @id = "pitanjeDetalji", @data_url = Url.Action("OtvoriPitanje", "App", new { id = pit.id }) })
+
+                    }
+                </div>
+                <p class="answers-num">
+                    Odgovora:
+                    @if (Model.Odgovori.Where(x => x.pitanje_id == pit.id).Count() != 0)
+                    {
+                        <div class="num">@Model.Odgovori.Where(x => x.pitanje_id == pit.id).Count()</div>
+                    }
+                    else
+                    {
+                        <div class="num" style="background-color:#c0392b;">0</div>
+                    }
+                </p>
+            </div>
+        }
+    }
+    @if (Model.Pitanja.Count() == 0)
+    {
+        <div class="question-text">
+            Nema rezultata pretrage.
         </div>
     }
 </div>

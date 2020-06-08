@@ -28,9 +28,9 @@
             @using (Html.BeginForm("AzurirajKategoriju", "App", FormMethod.Post, new { @class = "login-form" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationMessageFor(m => m.Kategorija, "", new { @style = "color:red;" })
                 @Html.LabelFor(model => model.Kategorija)
                 @Html.EditorFor(model => model.Kategorija, new { htmlAttributes = new { @placeholder = "Naziv kategorije..." } })
+                @Html.ValidationMessageFor(m => m.Kategorija, "", new { @class = "validacija" })
                 @Html.HiddenFor(model => model.Id, new { Value = ViewBag.Id })
                 <button name="azurirajKat" type="submit">
                     Ažuriraj

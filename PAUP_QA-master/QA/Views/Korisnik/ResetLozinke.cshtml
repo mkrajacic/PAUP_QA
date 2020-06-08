@@ -28,12 +28,12 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(m => m.KorisnickoIme)
-                @Html.ValidationMessageFor(m => m.Lozinka, "", new { @style = "color:red;" })
                 @Html.LabelFor(m => m.Lozinka)
                 @Html.PasswordFor(model => model.Lozinka, new { @placeholder = "Nova lozinka..." })
-                @Html.ValidationMessageFor(m => m.Lozinka2, "", new {  @style = "color:red;" })
+                @Html.ValidationMessageFor(m => m.Lozinka, "", new { @class = "validacija" })<br />
                 @Html.LabelFor(m => m.Lozinka2)
                 @Html.PasswordFor(model => model.Lozinka2, new { @placeholder = "Ponovite lozinku..." })
+                @Html.ValidationMessageFor(m => m.Lozinka2, "", new { @class = "validacija" })
                 <button name="resetLoz" type="submit">
                     Reset
                 </button>

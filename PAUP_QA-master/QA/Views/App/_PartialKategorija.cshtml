@@ -15,9 +15,10 @@ else if ((ViewBag.Kategorija != null) && (ViewBag.Pojam == null))
 {
     if ((User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
     {
-        <div class="category-name">@ViewBag.Kategorija</div>
-        <p>@Html.ActionLink("Ažuriraj", "AzurirajKategoriju", new { kat_id = ViewBag.Id })</p>
-        <p>@Html.ActionLink("Izbriši", "BrisiKategoriju", new { kat_id = ViewBag.Id })</p>
+        <div class="category-name">@ViewBag.Kategorija
+        <p style="display:inline-block">@Html.ActionLink("Ažuriraj", "AzurirajKategoriju", new { kat_id = ViewBag.Id },new {@style="color:#fff;margin-left:20%;" })</p>
+        <p style="display:inline-block">@Html.ActionLink("Izbriši", "BrisiKategoriju", new { kat_id = ViewBag.Id }, new { @style = "color:#fff;margin-left:20%;margin-left:40%;" })</p>
+    </div>
     }
     else
     {
@@ -88,6 +89,8 @@ else if ((ViewBag.Kategorija == null) && (ViewBag.Pojam == null))
             Nema rezultata pretrage.
         </div>
     }
+
+
 </div>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>

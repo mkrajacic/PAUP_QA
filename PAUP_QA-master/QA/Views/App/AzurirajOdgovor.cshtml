@@ -2,7 +2,7 @@
 @using QA.Misc
 @model OdgovorAzuriranje
 @{
-    ViewBag.Title = "Ažuriraj pitanje";
+    ViewBag.Title = "Ažuriraj odgovor";
     Layout = null;
 }
 
@@ -28,9 +28,9 @@
             @using (Html.BeginForm("AzurirajOdgovor", "App", FormMethod.Post, new { @class = "login-form" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationMessageFor(m => m.Odgovor, "", new { @style = "color:red;" })
                 @Html.LabelFor(model => model.Odgovor)<br />
-                @Html.TextAreaFor(model => model.Odgovor, new { htmlAttributes = new { @placeholder = "Upišite odgovor..." } })
+                @Html.TextAreaFor(model => model.Odgovor, new { htmlAttributes = new { @placeholder = "Upišite odgovor..." } })<br />
+                @Html.ValidationMessageFor(m => m.Odgovor, "", new { @class="validacija" })
                 @Html.HiddenFor(model => model.Id, new { Value = ViewBag.Id })
                 <button name="azurirajOdg" type="submit">
                     Ažuriraj

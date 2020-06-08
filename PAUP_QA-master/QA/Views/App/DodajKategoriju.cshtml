@@ -28,9 +28,9 @@
             @using (Html.BeginForm("DodajKategoriju", "App", FormMethod.Post, new { @class = "login-form" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationMessageFor(m => m.kategorija, "", new { @style = "color:red;" })
                 @Html.LabelFor(m => m.kategorija)
                 @Html.EditorFor(m => m.kategorija, new { htmlAttributes = new { @placeholder = "Kategorija..." } })
+                @Html.ValidationMessageFor(m => m.kategorija, "", new { @class = "validacija" })
                 <button name="dodajKat" type="submit">
                     Dodaj
                 </button>

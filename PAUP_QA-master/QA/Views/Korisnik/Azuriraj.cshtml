@@ -25,18 +25,18 @@
         <section class="form-section">
             <h1>@ViewBag.Title</h1>
 
-            @using (Html.BeginForm("Azuriraj", "Korisnik",FormMethod.Post, new { @class = "login-form" }))
+            @using (Html.BeginForm("Azuriraj", "Korisnik", FormMethod.Post, new { @class = "login-form" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationMessageFor(m => m.KorisnickoIme, "", new { @style = "color:red;" })
                 @Html.LabelFor(m => m.KorisnickoIme, "Novo korisničko ime")
                 @Html.EditorFor(m => m.KorisnickoIme, new { htmlAttributes = new { @placeholder = "Korisničko ime..." } })
+                @Html.ValidationMessageFor(m => m.KorisnickoIme, "", new { @class = "validacija" })<br />
                 @Html.HiddenFor(m => m.KorisnickoImeStaro)
                 if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
                 {
-                    @Html.ValidationMessageFor(m => m.Ovlast, "", new { @style = "color:red;" })
                     @Html.LabelFor(m => m.Ovlast)<br />
                     @Html.DropDownListFor(model => model.Ovlast, new SelectList(ViewBag.Ovlasti, "Sifra", "Naziv", ""), "Odaberite ovlast")
+                    @Html.ValidationMessageFor(m => m.Ovlast, "", new { @class = "validacija" })<br />
                 }
                 else
                 {

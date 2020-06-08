@@ -27,19 +27,19 @@
             @using (Html.BeginForm("DodajKorisnika", "Korisnik", FormMethod.Post, new { @class = "login-form" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationMessageFor(m => m.korisnicko_ime, "", new { @style = "color:red;" })
                 @Html.LabelFor(m => m.korisnicko_ime)
                 @Html.EditorFor(m => m.korisnicko_ime, new { htmlAttributes = new { @placeholder = "Korisničko ime..." } })
-                @Html.ValidationMessageFor(m => m.LozinkaUnos, "", new {  @style = "color:red;" })
+                @Html.ValidationMessageFor(m => m.korisnicko_ime, "", new { @class = "validacija" })<br />
                 @Html.LabelFor(m => m.LozinkaUnos)
                 @Html.EditorFor(m => m.LozinkaUnos, new { htmlAttributes = new { @placeholder = "Lozinka..." } })
-                @Html.ValidationMessageFor(m => m.LozinkaUnos2, "", new {  @style = "color:red;" })
+                @Html.ValidationMessageFor(m => m.LozinkaUnos, "", new { @class = "validacija" })<br />
                 @Html.LabelFor(m => m.LozinkaUnos2)
                 @Html.EditorFor(m => m.LozinkaUnos2, new { htmlAttributes = new { @placeholder = "Ponovite lozinku..." } })
-                @Html.ValidationMessageFor(m => m.ovlast_sifra, "", new {  @style = "color:red;" })
+                @Html.ValidationMessageFor(m => m.LozinkaUnos2, "", new { @class = "validacija" })<br />
                 @Html.LabelFor(m => m.ovlast_sifra)<br />
                 @Html.DropDownListFor(m => m.ovlast_sifra,
                                                     new SelectList(ViewBag.Ovlasti, "Sifra", "Naziv", ""), "Odaberite ovlast")
+                @Html.ValidationMessageFor(m => m.ovlast_sifra, "", new { @class = "validacija" })
                 <!---Html.LabelFor(m => m.image)
         <input type="file" name="image" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />-->
                 <button name="dodajKor" type="submit">

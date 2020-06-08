@@ -57,3 +57,42 @@ a {
     transition: 0.3s;
 }
 
+/* Responsive mobile */
+@media (min-width: 300px) and (max-width: 750px) {
+    body, html {
+        font-size: 15px;
+    }
+
+    .main-section {
+        width: 80%;
+    }
+
+        .main-section h1 {
+            font-size: 40px;
+        }
+
+        .main-section button {
+            width: 50%;
+            margin: 10px 25%;
+        }
+}
+
+/* Responsive tablet/mini-laptop */
+@media (min-width: 750px) and (max-width: 1024px) {
+    body, html {
+        font-size: 16px;
+    }
+
+    .main-section {
+        width: 80%;
+    }
+
+        .main-section h1 {
+            font-size: 50px;
+        }
+
+        .main-section button {
+            width: 30%;
+            margin: 10px 35%;
+        }
+}

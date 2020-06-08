@@ -17,7 +17,7 @@
         @using (Ajax.BeginForm("Pretrazivanje", "App", ajaxOpt))
         {
             @Html.TextBox("pitanjeTekst", null, new { @class = "search-input", @placeholder = "Što želite saznati?" })
-            @Html.DropDownList("kategorija", new SelectList(Model.Kategorije.Select(x => x.kategorija)), "Sve kategorije")
+            @Html.DropDownList("kategorija", new SelectList(Model.Kategorije.Select(x => x.kategorija)), "Sve kategorije",new {@class="category-select" })
             <button type="submit" class="search-btn">Traži...</button>
         }
     </div>
@@ -51,16 +51,6 @@
         }
     </div>
 </div>
-
-<div class="category-container">
-    <div class="row">
-        @foreach (var kat in Model.Kategorije)
-        {
-            <div class="category"><p>@Ajax.ActionLink(kat.kategorija, "OtvoriKategoriju", new { id = kat.id }, ajaxOpt, new { @id = "kategorijaPrikaz", @data_url = Url.Action("OtvoriKategoriju", "App", new { id = kat.id }) })</p></div>
-        }
-    </div>
-</div>
-
 
     @Styles.Render("/Content/style.css")
 <script type="text/javascript">

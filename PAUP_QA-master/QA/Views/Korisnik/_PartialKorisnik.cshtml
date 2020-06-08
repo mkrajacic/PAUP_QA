@@ -5,13 +5,10 @@
 
 
 <title>@Model.korisnicko_ime</title>
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
             <div class="bg show">
                 <div class="question-block show">
                     <div class="header">
-                        @if (ViewBag.Ref != null)
+                        @if (ViewBag.Ref != null && (!ViewBag.Ref.Contains("OtvoriPitanje")))
                         {
                             <a class="close" href="@ViewBag.Ref">.</a>
                         }
@@ -20,17 +17,57 @@
                         @Html.ActionLink(".", "Index", "Korisnik", new { @class = "close" })
                         }
                         <!--<a href="#" class="close"></a>-->
-                        <h1 class="modal-title">@Model.korisnicko_ime</h1>
+                        <h1>@Model.korisnicko_ime</h1>
 
                     </div>
-                    <div class="modal-body">
                         <div class="answers-main-section">
                             <div class="answ-info">
 
                                 <h2>@Model.korisnicko_ime</h2>
 
                                 <img src="~/img/user.png" class="user">
+                                @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+                                {
+                            <div class="buttons-box">
+                                <button class="update">@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = Model.id })</button>
+                                <button class="delete">@Html.ActionLink("Izbriši", "Brisi", new { id = Model.id })</button><br />
+                                </div>
+                                <div class="buttons-box" style="margin-top:10px;">
+                                <button class="best" style="width:110px;">
+                                    @Html.ActionLink("PDF pitanja", "KorisnikIspisPit", "App", new { id = Model.id },null)
+                                </button><br />
+                                <button class="best" style="width:110px;">
+                                    @Html.ActionLink("PDF odgovora", "KorisnikIspisOdg", "App", new { id = Model.id },null)
+                                </button>
                             </div>
+                                }
+                                else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).Id == Model.id)
+                                {
+                            <div class="buttons-box">
+                                <button class="update">@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = Model.id })</button>
+                                <button class="delete">@Html.ActionLink("Izbriši", "Brisi", new { id = Model.id })</button><br />
+                                </div>
+                                <div class="buttons-box" style="margin-top:10px;">
+                                <button class="best" style="width:110px;">
+                                    @Html.ActionLink("PDF pitanja", "KorisnikIspisPit","App", new { id = Model.id },null)
+                            </button><br />
+                            <button class="best" style="width:110px;">
+                                @Html.ActionLink("PDF odgovora", "KorisnikIspisOdg","App", new { id = Model.id },null)
+                            </button>
+                            </div>
+                                }
+                                else if (User.Identity.IsAuthenticated)
+                                {
+                            <div class="buttons-box">
+                                <button class="best" style="width:110px;">
+                                    @Html.ActionLink("PDF pitanja", "KorisnikIspisPit", "App", new { id = Model.id }, null)
+                                </button><br />
+                                         <button class="best" style="width:110px;">
+                                             @Html.ActionLink("PDF odgovora", "KorisnikIspisOdg", "App", new { id = Model.id }, null)
+                                         </button>
+                            </div>
+                                }
+</div>
                             <div class="answ-container">
                                 <p class="num-of-answ">Ovlast: <span>@Model.ovlast_sifra</span></p>
                                 <p class="num-of-answ">
@@ -44,41 +81,6 @@
                                         <span>0</span>
                                     }
                                 </p>
-                                <div class="modal-footer">
-                                    <div class="answer-form">
-                                        @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
-                                        {
-                                            @Html.ActionLink("Ažuriraj", "Azuriraj", new { id = Model.id })
-                                            @Html.ActionLink("Izbriši", "Brisi", new { id = Model.id })
-                                            <a href="@Url.Action("KorisnikIspisPit","App",new { id = Model.id })">
-                                                PDF svih pitanja
-                                            </a>
-                                            <a href="@Url.Action("KorisnikIspisOdg","App",new { id = Model.id })">
-                                                PDF svih odgovora
-                                            </a>
-                                        }
-                                        else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).Id == Model.id)
-                                        {
-                                            @Html.ActionLink("Ažuriraj", "Azuriraj", new { id = Model.id })
-                                            @Html.ActionLink("Izbriši", "Brisi", new { id = Model.id })
-                                            <a href="@Url.Action("KorisnikIspisPit","App",new { id = Model.id })">
-                                                PDF svih pitanja
-                                            </a>
-                                            <a href="@Url.Action("KorisnikIspisOdg","App",new { id = Model.id })">
-                                                PDF svih odgovora
-                                            </a>
-                                        }
-                                        else if (User.Identity.IsAuthenticated)
-                                        {
-                                            <a href="@Url.Action("KorisnikIspisPit","App",new { id = Model.id })">
-                                                PDF svih pitanja
-                                            </a>
-                                            <a href="@Url.Action("KorisnikIspisOdg","App",new { id = Model.id })">
-                                                PDF svih odgovora
-                                            </a>
-                                        }
-                                    </div>
-                                </div>
                                 <div class="answers">
                                     @if (ViewBag.Broj == 0)
                                     {

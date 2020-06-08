@@ -28,12 +28,12 @@
             @using (Html.BeginForm("AzurirajPitanje", "App", FormMethod.Post, new { @class = "login-form" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationMessageFor(m => m.PitanjeTekst, "", new {@style = "color:red;" })
                 @Html.LabelFor(model => model.PitanjeTekst)
                 @Html.EditorFor(model => model.PitanjeTekst)
-                @Html.ValidationMessageFor(m => m.Kategorija, "", new { @style = "color:red;" })
+                @Html.ValidationMessageFor(m => m.PitanjeTekst, "", new { @class = "validacija" })<br />
                 @Html.LabelFor(model => model.Kategorija)<br />
                 @Html.DropDownListFor(model => model.Kategorija, new SelectList(ViewBag.Kategorije), "Odaberite kategoriju")
+                @Html.ValidationMessageFor(m => m.Kategorija, "", new { @class = "validacija" })
                 @Html.HiddenFor(model => model.Id, new { Value = ViewBag.Id })
                 <p>Ne možete pronaći kategoriju? @Html.ActionLink("Dodajte novu kategoriju", "DodajKategoriju", "App")</p>
                 <button name="azurirajPit" type="submit">

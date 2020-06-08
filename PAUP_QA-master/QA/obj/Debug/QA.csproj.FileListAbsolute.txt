@@ -251,6 +251,7 @@ C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\BouncyCastle.Crypto.dll
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\EntityFramework.dll
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\EntityFramework.SqlServer.dll
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Google.Protobuf.dll
+C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\itextsharp.dll
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\MySql.Data.dll
@@ -272,6 +273,7 @@ C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\WebGrease.dll
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\EntityFramework.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\EntityFramework.SqlServer.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Google.Protobuf.xml
+C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\itextsharp.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\MySql.Data.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\MySql.Data.EntityFramework.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\PagedList.xml
@@ -294,5 +296,3 @@ C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.csproj.CopyCompl
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.dll
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.pdb
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.csprojAssemblyReference.cache
-C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\itextsharp.dll
-C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\itextsharp.xml

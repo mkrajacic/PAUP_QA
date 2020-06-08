@@ -28,12 +28,12 @@
             @using (Html.BeginForm("DodajPitanje", "App", FormMethod.Post, new { @class = "login-form" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationMessageFor(m => m.pitanjeTekst, "", new { @style = "color:red;" })
                 @Html.LabelFor(m => m.pitanjeTekst)
                 @Html.EditorFor(m => m.pitanjeTekst, new { htmlAttributes = new { @placeholder = "Pitanje..." } })
-                @Html.ValidationMessageFor(m => m.kategorija, "", new { @style = "color:red;" })
+                @Html.ValidationMessageFor(m => m.pitanjeTekst, "", new { @class = "validacija" })<br />
                 @Html.LabelFor(m => m.kategorija)<br />
                 @Html.DropDownListFor(m => m.kategorija, new SelectList(ViewBag.Kategorije), "Odaberite kategoriju")
+                @Html.ValidationMessageFor(m => m.kategorija, "", new { @class = "validacija" })<br />
                 @Html.HiddenFor(m => m.datumObjave, new { Value = DateTime.Now.ToString("dd'/'MM'/'yyyy HH: mm:ss") })
                 @Html.HiddenFor(m => m.korisnicko_ime, new { Value = ((User as LogiraniKorisnik).Id) })
                 <p>Ne možete pronaći kategoriju? @Html.ActionLink("Dodajte novu kategoriju", "DodajKategoriju", "App")</p>

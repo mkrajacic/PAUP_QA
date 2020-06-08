@@ -294,3 +294,5 @@ C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.csproj.CopyCompl
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.dll
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.pdb
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.csprojAssemblyReference.cache
+C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\itextsharp.dll
+C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\itextsharp.xml

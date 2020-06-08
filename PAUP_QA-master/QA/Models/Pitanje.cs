@@ -19,6 +19,7 @@ namespace QA.Models
         [Column("question")]
         public string pitanjeTekst { get; set; }
         [Column("user_id")]
+        [Range(1, 9999, ErrorMessage = "Korisnik ne postoji!")]
         [Required(ErrorMessage = "{0} je obavezno polje!")]
         [Display(Name = "Korisničko ime")]
         [ForeignKey("korisnickoIme")]
@@ -34,6 +35,7 @@ namespace QA.Models
         [Required(ErrorMessage = "{0} nije odabrana!")]
         [Column("category_id")]
         [Display(Name = "Kategorija")]
+        [Range(1, 9999, ErrorMessage = "Kategorija ne postoji!")]
         [ForeignKey("kategorijaId")]
         public int id_kategorija { get; set; }
         [Display(Name = "Kategorija")]

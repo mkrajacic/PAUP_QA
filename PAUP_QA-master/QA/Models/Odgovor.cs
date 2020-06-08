@@ -13,12 +13,13 @@ namespace QA.Models
         [Key]
         [Column("id")]
         public int id { get; set; }
-        [StringLength(255, MinimumLength = 10, ErrorMessage = "{0} mora biti duljine minimalno {2} a maksimalno {1} znakova")]
+        [StringLength(255, MinimumLength = 5, ErrorMessage = "{0} mora biti duljine minimalno {2} a maksimalno {1} znakova")]
         [Required(ErrorMessage = "{0} je obavezno polje!")]
         [Display(Name = "Odgovor")]
         [Column("answer")]
         public string odgovor { get; set; }
         [Column("user_id")]
+        [Range(1, 9999, ErrorMessage = "Korisnik ne postoji!")]
         [Required(ErrorMessage = "{0} je obavezno polje!")]
         [Display(Name = "Korisničko ime")]
         [ForeignKey("korisnickoIme")]
@@ -31,6 +32,7 @@ namespace QA.Models
         [DataType(DataType.Date)]
         public DateTime datumObjave { get; set; }
         [Column("question_id")]
+        [Range(1, 9999, ErrorMessage = "Pitanje ne postoji!")]
         [Required(ErrorMessage = "{0} je obavezno polje!")]
         [Display(Name = "Pitanje")]
         [ForeignKey("Pit")]

@@ -1,4 +1,5 @@
 ﻿@using QA.Models
+@using QA.Misc
 @model List<Korisnik>
 @{
     ViewBag.Title = "Popis korisnika";
@@ -16,8 +17,18 @@
     <header>
         <nav>
             <ul>
-                <li>@Html.ActionLink("Natrag na pitanja", "Index", "App")</li>
-                <li>@Html.ActionLink("Dodaj korisnika", "DodajKorisnika", "Korisnik")</li>
+                @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+                {
+                    <li>@Html.ActionLink("Natrag na pitanja", "Index", "App")</li>
+                    <li>@Html.ActionLink("Dodaj korisnika", "DodajKorisnika", "Korisnik")</li>
+                    <li>
+                        <a href="@Url.Action("IspisKorisnika", "App")">
+                            Kreiraj PDF
+                        </a>
+                    </li>
+                    <li>@Html.ActionLink("Odjava", "Odjava", "Korisnik", null, new { @style = "float:right; margin-right:15%" })</li>
+                    <li>@Html.ActionLink(((User as LogiraniKorisnik).KorisnickoIme), "DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).Id) }, new { @style = "float:right; margin-right:1%", @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).Id) }) })</li>
+                }
             </ul>
         </nav>
     </header>

@@ -20,8 +20,14 @@
 <div class="bg show">
     <div class="question-block show">
         <div class="header">
-            @*@Html.ActionLink(" ", "Index", "App", new { @class = "close" })*@
-            <button class="close" onclick="document.querySelector('.bg').classList.remove('show');"></button>
+            @if (ViewBag.Ref != null)
+            {
+                <a class="close" href="@ViewBag.Ref">.</a>
+            }
+            else
+            {
+                @Html.ActionLink(".", "Index", "App", new { @class = "close" })
+            }
             @foreach (var pit in Model.Pitanja)
             {
                 <h1>
@@ -57,9 +63,9 @@
             <div class="answ-container">
                 @foreach (var pit in Model.Pitanja)
                 {
-                    <p class="num-of-answ">
-                        Postavljeno: @pit.datumObjave.Day.@pit.datumObjave.Month.@pit.datumObjave.Year u @pit.datumObjave.Hour:@pit.datumObjave.Minute
-                    </p>
+                <p class="num-of-answ">
+                    Postavljeno: @pit.datumObjave.Day.@pit.datumObjave.Month.@pit.datumObjave.Year u @pit.datumObjave.Hour.ToString("00.##"):@pit.datumObjave.Minute.ToString("00.##")
+                </p>
                     <p class="num-of-answ">
                         Broj odgovora:
                         @if (ViewBag.Broj > 0)

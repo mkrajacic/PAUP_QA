@@ -9,6 +9,7 @@ namespace QA.Models
     public class KorisnikAzuriranje
     {
         [Required]
+        [Range(1, 9999, ErrorMessage = "Korisnik ne postoji!")]
         public int Id { get; set; }
         [Display(Name = "Korisničko ime")]
         [StringLength(15, MinimumLength = 3, ErrorMessage = "{0} mora biti duljine minimalno {2} a maksimalno {1} znakova")]

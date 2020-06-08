@@ -3,6 +3,7 @@
 @model Korisnik
 
 
+
 <title>@Model.korisnicko_ime</title>
 <div class="modal-dialog">
     <div class="modal-content">
@@ -10,7 +11,14 @@
             <div class="bg show">
                 <div class="question-block show">
                     <div class="header">
+                        @if (ViewBag.Ref != null)
+                        {
+                            <a class="close" href="@ViewBag.Ref">.</a>
+                        }
+                        else
+                        {
                         @Html.ActionLink(".", "Index", "Korisnik", new { @class = "close" })
+                        }
                         <!--<a href="#" class="close"></a>-->
                         <h1 class="modal-title">@Model.korisnicko_ime</h1>
 
@@ -42,24 +50,52 @@
                                         {
                                             @Html.ActionLink("Ažuriraj", "Azuriraj", new { id = Model.id })
                                             @Html.ActionLink("Izbriši", "Brisi", new { id = Model.id })
+                                            <a href="@Url.Action("KorisnikIspisPit","App",new { id = Model.id })">
+                                                PDF svih pitanja
+                                            </a>
+                                            <a href="@Url.Action("KorisnikIspisOdg","App",new { id = Model.id })">
+                                                PDF svih odgovora
+                                            </a>
                                         }
                                         else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).Id == Model.id)
                                         {
                                             @Html.ActionLink("Ažuriraj", "Azuriraj", new { id = Model.id })
                                             @Html.ActionLink("Izbriši", "Brisi", new { id = Model.id })
+                                            <a href="@Url.Action("KorisnikIspisPit","App",new { id = Model.id })">
+                                                PDF svih pitanja
+                                            </a>
+                                            <a href="@Url.Action("KorisnikIspisOdg","App",new { id = Model.id })">
+                                                PDF svih odgovora
+                                            </a>
                                         }
-                                        else
+                                        else if (User.Identity.IsAuthenticated)
                                         {
-
+                                            <a href="@Url.Action("KorisnikIspisPit","App",new { id = Model.id })">
+                                                PDF svih pitanja
+                                            </a>
+                                            <a href="@Url.Action("KorisnikIspisOdg","App",new { id = Model.id })">
+                                                PDF svih odgovora
+                                            </a>
                                         }
                                     </div>
                                 </div>
                                 <div class="answers">
                                     @if (ViewBag.Broj == 0)
                                     {
-                                        <div class="answer">
-                                            <p class="no-answers">Korisnik nema postavljenih pitanja.</p>
-                                        </div>
+                                        if (Model.id == ((User as LogiraniKorisnik).Id))
+                                        {
+                                    <div class="answer">
+                                        <p class="no-answers">Nemate postavljenih pitanja.</p><br />
+                                        <li>@Html.ActionLink("Dodajte ih!", "DodajPitanje", "App",null, new { @data_url = Url.Action("DodajPitanje", "App"), @style="color:black;" }) </li>
+                                    </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="answer">
+                                                <p class="no-answers">Korisnik nema postavljenih pitanja.</p>
+                                            </div>
+                                        }
+
                                     }
                                     else
                                     {

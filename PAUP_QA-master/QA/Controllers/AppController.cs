@@ -1,7 +1,9 @@
-﻿using Microsoft.Ajax.Utilities;
+﻿using Antlr.Runtime.Tree;
+using Microsoft.Ajax.Utilities;
 using MySql.Data.MySqlClient;
 using QA.Misc;
 using QA.Models;
+using QA.Reports;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,6 +12,7 @@ using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -30,12 +33,6 @@ namespace QA.Controllers
             model.Kategorije = bazaPodataka.PopisKategorija.ToList();
             model.Pitanja = bazaPodataka.PopisPitanja.ToList().OrderByDescending(x=>x.datumObjave);
             model.Odgovori = bazaPodataka.PopisOdgovora.ToList();
-           
-           /* if (!String.IsNullOrWhiteSpace(pitanjeTekst))
-            {
-                model.Pitanja = model.Pitanja.Where(x => x.pitanjeTekst.ToUpper().Contains(pitanjeTekst.ToUpper())).ToList();
-            }*/
-
 
             return View(model);
         }
@@ -80,10 +77,12 @@ namespace QA.Controllers
         [AllowAnonymous]
         public ActionResult OtvoriPitanje(int? id)
         {
-            if (id == null)
+            if (id == null || id==0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            var dosaoSa = HttpContext.Request.UrlReferrer.ToString();
+            ViewBag.Ref = dosaoSa;
             var model = new MixModel();
             model.Pitanja = bazaPodataka.PopisPitanja.ToList().Where(x => x.id == id);
             model.Odgovori = bazaPodataka.PopisOdgovora.ToList().OrderByDescending(x=>x.najdraze).ThenByDescending(x=>x.datumObjave);
@@ -117,6 +116,8 @@ namespace QA.Controllers
         [HttpGet]
         public ActionResult DodajPitanje()
         {
+            var dosaoSa = HttpContext.Request.UrlReferrer;
+            TempData["dosaoSa"] = dosaoSa;
             Pitanje model = new Pitanje();
             var kategorije = bazaPodataka.PopisKategorija.OrderBy(x => x.kategorija).ToList();
             ViewBag.Kategorije = kategorije.Select(x=>x.kategorija);
@@ -152,13 +153,16 @@ namespace QA.Controllers
             {
                 bazaPodataka.PopisPitanja.Add(model);
                 bazaPodataka.SaveChanges();
-                return RedirectToAction("Index", "App");
+                if (TempData["dosaoSa"] != null)
+                {
+                    return Redirect(TempData["dosaoSa"].ToString());
+                }
+                else
+                {
+                    return RedirectToAction("Index", "App");
+                }
             }
-            //if (!ModelState.IsValid)
-            //{
-            //    var errors = ModelState.GetModelErrors();
-            //    return Json(new { errors });
-            //}
+
             return View(model);
         }
         [Authorize]
@@ -166,7 +170,8 @@ namespace QA.Controllers
         public ActionResult DodajKategoriju()
         {
             Kategorija model = new Kategorija();
-
+            var dosaoSa = HttpContext.Request.UrlReferrer;
+            TempData["dosaoSa"] = dosaoSa;
 
 
             return View(model);
@@ -184,7 +189,7 @@ namespace QA.Controllers
                     ModelState.AddModelError("id", "Kategorija već postoji!");
                 }
                 var kategorijaPostoji = bazaPodataka.PopisKategorija.Any(x => x.kategorija.ToUpper() == model.kategorija.ToUpper());
-                if (kategorijaIdPostoji)
+                if (kategorijaPostoji)
                 {
                     ModelState.AddModelError("kategorija", "Kategorija sa istim nazivom već postoji!");
                 }
@@ -194,7 +199,14 @@ namespace QA.Controllers
             {
                 bazaPodataka.PopisKategorija.Add(model);
                 bazaPodataka.SaveChanges();
-                return RedirectToAction("Index", "App");
+                if (TempData["dosaoSa"] != null)
+                {
+                    return Redirect(TempData["dosaoSa"].ToString());
+                }
+                else
+                {
+                    return RedirectToAction("Index", "App");
+                }
             }
 
             return View(model);
@@ -205,14 +217,6 @@ namespace QA.Controllers
         {
             Odgovor model = new Odgovor();
 
-            if (ViewBag.Korisnik == 0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            if(ViewBag.Id==0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             var pitanje = bazaPodataka.PopisPitanja.Find(ViewBag.Id);
             var korisnik = bazaPodataka.PopisKorisnika.Find(ViewBag.Korisnik);
             if (korisnik == null)
@@ -310,6 +314,8 @@ namespace QA.Controllers
         [HttpGet]
         public ActionResult AzurirajPitanje(int pit_id)
         {
+            var dosaoSa = HttpContext.Request.UrlReferrer;
+            TempData["dosaoSa"] = dosaoSa;
             Pitanje pitanje = bazaPodataka.PopisPitanja.Find(pit_id);
             var kategorije = bazaPodataka.PopisKategorija.OrderBy(x => x.kategorija).ToList();
 
@@ -345,22 +351,23 @@ namespace QA.Controllers
                 bazaPodataka.Entry(pitanje).State = EntityState.Modified;
                 bazaPodataka.Configuration.ValidateOnSaveEnabled = false;
                 bazaPodataka.SaveChanges();
-
-                return RedirectToAction("Index", "App");
+                if (TempData["dosaoSa"] != null)
+                {
+                    return Redirect(TempData["dosaoSa"].ToString());
+                }
+                else
+                {
+                    return RedirectToAction("Index", "App");
+                }
             }
-
             return RedirectToAction("Index", "App");
         }
         [Authorize]
         [HttpGet]
         public ActionResult BrisiPitanje(int pit_id)
         {
-            if (pit_id == 0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             var pitanje = bazaPodataka.PopisPitanja.Find(pit_id);
-            if (pitanje == null)
+            if (pitanje == null || pit_id==0)
             {
                 return HttpNotFound();
             }
@@ -382,6 +389,7 @@ namespace QA.Controllers
 
                 bazaPodataka.PopisPitanja.Remove(pitanje);
                 bazaPodataka.SaveChanges();
+
             }
             catch (DbUpdateException ex)
             {
@@ -441,12 +449,8 @@ namespace QA.Controllers
         [HttpGet]
         public ActionResult BrisiOdgovor(int odg_id)
         {
-            if (odg_id == 0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             var odgovor = bazaPodataka.PopisOdgovora.Find(odg_id);
-            if (odgovor == null)
+            if (odgovor == null || odg_id==0)
             {
                 return HttpNotFound();
             }
@@ -527,12 +531,8 @@ namespace QA.Controllers
         [HttpGet]
         public ActionResult BrisiKategoriju(int kat_id)
         {
-            if (kat_id == 0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             var kategorija = bazaPodataka.PopisKategorija.Find(kat_id);
-            if (kategorija == null)
+            if (kategorija == null || kat_id ==0)
             {
                 return HttpNotFound();
             }
@@ -577,6 +577,58 @@ namespace QA.Controllers
             }
 
             return RedirectToAction("Index", "App");
+        }
+
+        [AllowAnonymous]
+        public ActionResult IspisPitanja()
+        {
+            MixModel model = new MixModel();
+            model.Pitanja = bazaPodataka.PopisPitanja.ToList().OrderByDescending(x=>x.datumObjave).ThenByDescending(x=>x.kategorijaId.kategorija);
+            model.Odgovori = bazaPodataka.PopisOdgovora.ToList().OrderByDescending(x => x.datumObjave).ThenByDescending(x => x.Pit.pitanjeTekst);
+
+            System.Threading.Thread.Sleep(1000);
+
+            AppReport appReport = new AppReport();
+            appReport.pdfSvaPitanja(model);
+
+            return File(appReport.Podatci, System.Net.Mime.MediaTypeNames.Application.Pdf, "PopisSvihPitanja.pdf");
+
+        }
+
+        public ActionResult IspisKorisnika()
+        {
+            var listaKorisnika = bazaPodataka.PopisKorisnika.OrderBy(x => x.ovlast_sifra).ThenBy(x => x.korisnicko_ime).ToList();
+
+            System.Threading.Thread.Sleep(1000);
+
+            AppReport appReport = new AppReport();
+            appReport.pdfSviKorisnici(listaKorisnika);
+
+            return File(appReport.Podatci, System.Net.Mime.MediaTypeNames.Application.Pdf, "PopisSvihKorisnika.pdf");
+        }
+
+        public ActionResult KorisnikIspisPit(int id)
+        {
+            Korisnik korisnik = bazaPodataka.PopisKorisnika.Find(id);
+
+            System.Threading.Thread.Sleep(1000);
+
+            AppReport appReport = new AppReport();
+            appReport.pdfKorisnikPitanja(korisnik);
+
+            return File(appReport.Podatci, System.Net.Mime.MediaTypeNames.Application.Pdf, "KorisnikPitanja.pdf");
+        }
+
+        public ActionResult KorisnikIspisOdg(int id)
+        {
+            Korisnik korisnik = bazaPodataka.PopisKorisnika.Find(id);
+
+            System.Threading.Thread.Sleep(1000);
+
+            AppReport appReport = new AppReport();
+            appReport.pdfKorisnikOdgovori(korisnik);
+
+            return File(appReport.Podatci, System.Net.Mime.MediaTypeNames.Application.Pdf, "KorisnikOdgovori.pdf");
         }
     }
 }

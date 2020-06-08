@@ -9,6 +9,7 @@ namespace QA.Models
     public class OdgovorAzuriranje
     {
         [Required]
+        [Range(1, 9999, ErrorMessage = "Odgovor ne postoji!")]
         public int Id { get; set; }
         [StringLength(255, MinimumLength = 10, ErrorMessage = "{0} mora biti duljine minimalno {2} a maksimalno {1} znakova")]
         [Required(ErrorMessage = "{0} je obavezno polje!")]

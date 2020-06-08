@@ -10,6 +10,7 @@ namespace QA.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Title = "QBox";
             return View();
         }
 

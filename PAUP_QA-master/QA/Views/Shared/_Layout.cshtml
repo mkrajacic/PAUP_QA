@@ -19,6 +19,11 @@
                     <li>@Html.ActionLink("Korisnici", "Index", "Korisnik")</li>
                     <li>@Html.ActionLink("Dodaj pitanje", "DodajPitanje", "App", new { @data_url = Url.Action("DodajPitanje", "App") }) </li>
                     <li>@Html.ActionLink("Dodaj kategoriju", "DodajKategoriju", "App")</li>
+                    <li>
+                        <a href="@Url.Action("IspisPitanja","App")">
+                            Kreiraj PDF
+                        </a>
+                    </li>
                     <li>@Html.ActionLink("Odjava", "Odjava", "Korisnik", null, new { @style = "float:right; margin-right:15%" })</li>
                     <li>@Html.ActionLink(((User as LogiraniKorisnik).KorisnickoIme), "DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).Id) }, new { @style = "float:right; margin-right:1%", @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).Id) }) })</li>
                 }
@@ -26,6 +31,11 @@
                 {
                     <li>@Html.ActionLink("Početak", "Index", "Home")</li>
                     <li>@Html.ActionLink("Dodaj pitanje", "DodajPitanje", "App", new { @data_url = Url.Action("DodajPitanje", "App") }) </li>
+                    <li>
+                        <a href="@Url.Action("IspisPitanja","App")">
+                            Kreiraj PDF
+                        </a>
+                    </li>
                     <li>@Html.ActionLink("Odjava", "Odjava", "Korisnik", null, new { @style = "float:right; margin-right:15%" })</li>
                     <li>@Html.ActionLink(((User as LogiraniKorisnik).KorisnickoIme), "DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).Id) }, new { @style = "float:right; margin-right:1%", @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = ((User as LogiraniKorisnik).Id) }) })</li>
                 }
@@ -33,6 +43,11 @@
                 {
                     <li>@Html.ActionLink("Prijava", "Prijava", "Korisnik")</li>
                     <li>@Html.ActionLink("Registracija", "Registracija", "Korisnik")</li>
+                    <li>
+                        <a href="@Url.Action("IspisPitanja","App")">
+                            Kreiraj PDF
+                        </a>
+                    </li>
                 }
             </ul>
         </nav>

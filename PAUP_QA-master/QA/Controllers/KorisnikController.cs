@@ -31,15 +31,13 @@ namespace QA.Controllers
         [Authorize]
         public ActionResult DetaljiKorisnik(int id)
         {
-            if (id==0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Korisnik user = bazaPodataka.PopisKorisnika.Find(id);
-            if (user == null)
+            if (user == null || id==0)
             {
                 return HttpNotFound();
             }
+            var dosaoSa = HttpContext.Request.UrlReferrer.ToString();
+            ViewBag.Ref = dosaoSa;
             var pitanja = bazaPodataka.PopisPitanja.Where(x => x.korisnicko_ime == id).ToList();
             ViewBag.Pitanja = pitanja;
             ViewBag.Broj = pitanja.Count();
@@ -162,10 +160,6 @@ namespace QA.Controllers
         [Authorize]
         public ActionResult Azuriraj(int id,string returnUrl)
         {
-            if (id ==0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             var korisnik = bazaPodataka.PopisKorisnika.Find(id);
             if (korisnik == null)
             {
@@ -187,7 +181,7 @@ namespace QA.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Azuriraj(KorisnikAzuriranje model,string returnUrl)
+        public ActionResult Azuriraj(KorisnikAzuriranje model)
         {
             var korisnik = bazaPodataka.PopisKorisnika.FirstOrDefault(x => x.id == model.Id);
             if (!String.IsNullOrWhiteSpace(model.KorisnickoIme))
@@ -211,14 +205,7 @@ namespace QA.Controllers
                     bazaPodataka.Configuration.ValidateOnSaveEnabled = false;
                     bazaPodataka.SaveChanges();
 
-                if ((!String.IsNullOrEmpty(returnUrl)) && Url.IsLocalUrl(returnUrl))
-                {
-                    return Redirect(returnUrl);
-                }
-                else
-                {
-                    return RedirectToAction("Index", "App");
-                }
+                
             }
             var ovlasti = bazaPodataka.PopisOvlasti.OrderBy(x => x.Naziv).ToList();
             ViewBag.Ovlasti = ovlasti;
@@ -230,12 +217,8 @@ namespace QA.Controllers
         [Authorize]
         public ActionResult ResetLozinke(int id)
         {
-            if (id == 0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             var korisnik = bazaPodataka.PopisKorisnika.Find(id);
-            if (korisnik == null)
+            if (korisnik == null || id==0)
             {
                 return HttpNotFound();
             }
@@ -271,12 +254,8 @@ namespace QA.Controllers
         [Authorize]
         public ActionResult Brisi(int id)
         {
-            if (id == 0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             var korisnik = bazaPodataka.PopisKorisnika.Find(id);
-            if (korisnik == null)
+            if (korisnik == null || id==0)
             {
                 return HttpNotFound();
             }

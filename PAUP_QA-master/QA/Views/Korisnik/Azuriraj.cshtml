@@ -44,7 +44,7 @@
                 }
                 <!---Html.LabelFor(m => m.image)
         <input type="file" name="image" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />-->
-                <p> @Html.ActionLink("Promjena lozinke", "ResetLozinke", new { id = Model.Id }, null)</p>
+                <p> @Html.ActionLink("Promjena lozinke", "ResetLozinke", new { id = Model.Id, user_id = (User as LogiraniKorisnik).Id }, null)</p>
                 <button name="azurirajKor" type="submit">
                     Ažuriraj
                 </button>

@@ -13,7 +13,7 @@ namespace QATest
     public class AppControllerTest
     {
         [TestMethod]
-        public void PitanjeKategorijaValidationRequired()
+        public void PitanjeKorisnikValidationRequired()
         {
             Pitanje pitanje = new Pitanje();
             pitanje.korisnicko_ime = 0;

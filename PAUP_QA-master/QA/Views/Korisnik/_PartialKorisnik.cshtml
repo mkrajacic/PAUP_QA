@@ -8,29 +8,66 @@
             <div class="bg show">
                 <div class="question-block show">
                     <div class="header">
-                        @if (ViewBag.Ref != null && (!ViewBag.Ref.Contains("OtvoriPitanje")))
+                        @*@if (ViewBag.Ref != null && (!ViewBag.Ref.Contains("OtvoriPitanje")))
+        {*@
+                        @*@if ((TempData["dosaoSa"] != null) && (TempData["natrag"] == null) && (TempData["natrag2"] == null))
+        {
+            //<a class="close" href="@ViewBag.Ref">.</a>
+            <a class="close" href='@TempData["dosaoSa"]'>.</a>
+        }
+        else if ((TempData["dosaoSa"] != null) && (TempData["natrag"] != null) && (TempData["natrag2"] == null))
+        {
+            <a class="close" href='@TempData["natrag"]'>.</a>
+        }
+        else if ((TempData["dosaoSa"] != null) && (TempData["natrag"] != null) && (TempData["natrag2"] != null))
+        {
+            <a class="close" href='@TempData["natrag2"]'>.</a>
+        }
+        else if ((TempData["dosaoSa"] == null) && (TempData["natrag"] != null) && (TempData["natrag2"] != null))
+        {
+            <a class="close" href='@TempData["natrag2"]'>.</a>
+        }
+        else
+        {
+            @Html.ActionLink(".", "Index", "Korisnik", new { @class = "close" })
+        }*@
+                        @if ((TempData["dosaoSaKor"] != null) && (TempData["pit"] == null))
                         {
-                            <a class="close" href="@ViewBag.Ref">.</a>
+                            <a class="close" href='@TempData["dosaoSaKor"]'>.</a>
+                        }
+                        else if ((TempData["pit"] != null))
+                        {
+                            <a class="close" href='@TempData["pit"]'>.</a>
+                        }
+                        else if ((TempData["dosaoSaKor"] != null) && (TempData["pit"] != null) && (TempData["triKor"] != null))
+                        {
+                            <a class="close" href='@TempData["triKor"]'>.</a>
                         }
                         else
                         {
-                        @Html.ActionLink(".", "Index", "Korisnik", new { @class = "close" })
+                            @Html.ActionLink(".", "Index", "Korisnik", new { @class = "close" })
                         }
                         <!--<a href="#" class="close"></a>-->
-                        <h1>@Model.korisnicko_ime</h1>
+                        @if (Model.ovlast_sifra == "AD")
+                        {
+                            <h1 style="color:#e74c3c">@Model.korisnicko_ime</h1>
+                        }
+                        else
+                        {
+                            <h1 style="color:#5151bf;">@Model.korisnicko_ime</h1>
+                        }
 
                     </div>
                         <div class="answers-main-section">
                             <div class="answ-info">
 
-                                <h2>@Model.korisnicko_ime</h2>
 
                                 <img src="~/img/user.png" class="user">
                                 @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
                                 {
                             <div class="buttons-box">
-                                <button class="update">@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = Model.id })</button>
-                                <button class="delete">@Html.ActionLink("Izbriši", "Brisi", new { id = Model.id })</button><br />
+                                <button class="update">@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = Model.id, user_id = (User as LogiraniKorisnik).Id })</button>
+                                <button class="delete">@Html.ActionLink("Izbriši", "Brisi", new { id = Model.id, user_id = (User as LogiraniKorisnik).Id })</button><br />
                                 </div>
                                 <div class="buttons-box" style="margin-top:10px;">
                                 <button class="best" style="width:110px;">
@@ -44,8 +81,8 @@
                                 else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).Id == Model.id)
                                 {
                             <div class="buttons-box">
-                                <button class="update">@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = Model.id })</button>
-                                <button class="delete">@Html.ActionLink("Izbriši", "Brisi", new { id = Model.id })</button><br />
+                                <button class="update">@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = Model.id, user_id = (User as LogiraniKorisnik).Id })</button>
+                                <button class="delete">@Html.ActionLink("Izbriši", "Brisi", new { id = Model.id, user_id = (User as LogiraniKorisnik).Id })</button><br />
                                 </div>
                                 <div class="buttons-box" style="margin-top:10px;">
                                 <button class="best" style="width:110px;">
@@ -87,8 +124,10 @@
                                         if (Model.id == ((User as LogiraniKorisnik).Id))
                                         {
                                     <div class="answer">
-                                        <p class="no-answers">Nemate postavljenih pitanja.</p><br />
-                                        <li>@Html.ActionLink("Dodajte ih!", "DodajPitanje", "App",null, new { @data_url = Url.Action("DodajPitanje", "App"), @style="color:black;" }) </li>
+                                        <p class="no-answers">
+                                            Nemate postavljenih pitanja.<br />
+                                            @Html.ActionLink("Dodajte ih!", "DodajPitanje", "App",null, new { @data_url = Url.Action("DodajPitanje", "App"), @style= "color:#5151bf;" })
+                                        </p>
                                     </div>
                                         }
                                         else
@@ -113,5 +152,4 @@
                         </div>
                     </div>
                 </div>
-            </div>
             @Styles.Render("/Content/style.css")

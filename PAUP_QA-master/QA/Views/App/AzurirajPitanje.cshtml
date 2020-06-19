@@ -4,6 +4,11 @@
 @{
     ViewBag.Title = "Ažuriraj pitanje";
     Layout = null;
+    AjaxOptions ajaxOpt = new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        OnBegin = "prozor"
+    };
 }
 
 <!DOCTYPE html>
@@ -15,17 +20,43 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
+    <div id="sakrij">
+    </div>
     <header>
         <nav>
             <ul>
-                <li>@Html.ActionLink("Natrag na pitanja", "Index", "App")</li>
+                @if (TempData["dosaoSa"] != null)
+                {
+                    <li><a href='@TempData["dosaoSa"]'>Povratak</a></li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Natrag na pitanja", "Index", "App")</li>
+                }
             </ul>
         </nav>
     </header>
     <section class="body">
         <section class="form-section">
+            <div id="poruka">
+                <div id="poruka_zaglavlje">
+                    @if (TempData["dosaoSa"] == null)
+                    {
+                        <a href='@Url.Action("Index", "App")'>
+                            <span id="zatvori">&times;</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href='@TempData["dosaoSa"]'>
+                            <span id="zatvori">&times;</span>
+                        </a>
+                    }
+                </div>
+                <div id="poruka_tekst"></div>
+            </div>
             <h1>@ViewBag.Title</h1>
-            @using (Html.BeginForm("AzurirajPitanje", "App", FormMethod.Post, new { @class = "login-form" }))
+            @using (Ajax.BeginForm("AzurirajPitanje", "App", ajaxOpt, new { @class = "login-form" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.LabelFor(model => model.PitanjeTekst)
@@ -36,7 +67,7 @@
                 @Html.ValidationMessageFor(m => m.Kategorija, "", new { @class = "validacija" })
                 @Html.HiddenFor(model => model.Id, new { Value = ViewBag.Id })
                 <p>Ne možete pronaći kategoriju? @Html.ActionLink("Dodajte novu kategoriju", "DodajKategoriju", "App")</p>
-                <button name="azurirajPit" type="submit">
+                <button id="azurirajPit" name="azurirajPit" type="submit">
                     Ažuriraj
                 </button>
             }
@@ -44,6 +75,19 @@
     </section>
 </body>
 </html>
+<script type="text/javascript">
+    function prozor() {
+            var poruka = document.getElementById("poruka");
+        document.getElementById("poruka_tekst").innerHTML = "<span id='kvacica-azuriraj'>&#x2714;</span> <br> Pitanje uspješno ažurirano!";
+        poruka.classList.add("fadein");
+        poruka.style.zIndex = 3;
+        var sakrij = document.getElementById("sakrij");
+        sakrij.setAttribute("class", "sakrij");
+        var tipka = document.getElementById("azurirajPit");
+        tipka.disabled = "disabled";
+    }
+
+</script>
 
 @Styles.Render("/Content/style.css")
 @Scripts.Render("~/bundles/jquery")

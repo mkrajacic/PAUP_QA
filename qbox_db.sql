@@ -1,7 +1,7 @@
 CREATE DATABASE qbox_db
-	CHARACTER SET cp1250
-	COLLATE cp1250_croatian_ci;
-
+	CHARACTER SET utf8mb4
+	COLLATE utf8mb4_general_ci;
+	
 CREATE TABLE user_level(
   code VARCHAR(5) NOT NULL,
   name VARCHAR(255) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE question_answers(
 	question_id INT,
 	answer TEXT,
 	datetime_created DATETIME,
-	is_favorite BIT,
+	is_favorite BIT NOT NULL DEFAULT 0,
   	foreign key (question_id) references questions(id) on update cascade on delete cascade,
 	foreign key (user_id) references users(id) on update cascade on delete cascade
 );
@@ -133,22 +133,22 @@ insert into question_categories (category_name) values ("Sport");
   insert into questions (question,datetime_created,user_id,category_id) values ("Postoji li natjecanje na kojem se igraju samo sportovi s reketom?","2019-11-12",2,6);
   insert into questions (question,datetime_created,user_id,category_id) values ("Tko je najplaæeniji sportaš u 2020?","2020-05-07",3,6);
   insert into questions (question,datetime_created,user_id,category_id) values ("Što rade profesionalni sportaši nakon što se umirove?","2019-05-13",4,6);
-  insert into questions (question,datetime_created,user_id,category_id) values ("Koji sport je najopasniji za život?","2020-10-12",5,6);
+  insert into questions (question,datetime_created,user_id,category_id) values ("Koji sport je najopasniji za život?","2019-10-12",5,6);
   insert into questions (question,datetime_created,user_id,category_id) values ("Zašto je nogomet najgledaniji sport?","2019-09-13",6,6);
 
 
   insert into questions (question,datetime_created,user_id,category_id) values ("Koji film ima najveæu zaradu u povijesti?", "2020-01-03",7,7);
   insert into questions (question,datetime_created,user_id,category_id) values ("Koji je najbolje ocijenjeni film?","2019-11-02",8,7);
   insert into questions (question,datetime_created,user_id,category_id) values ("Kolko se filmova snimi godišnje u Hollywoodu?","2019-05-10",9,7);
-  insert into questions (question,datetime_created,user_id,category_id) values ("Koliko ljudi treba da se snimi film?","2020-07-03",1,7);
+  insert into questions (question,datetime_created,user_id,category_id) values ("Koliko ljudi treba da se snimi film?","2019-07-03",1,7);
   insert into questions (question,datetime_created,user_id,category_id) values ("koji režiser je najbolji?","2019-11-01",2,7);
   insert into questions (question,datetime_created,user_id,category_id) values ("Ko je najbolji glumac?", "2020-02-12",3,7);
  
 
-  insert into questions (question,datetime_created,user_id,category_id) values ("Kada æe video igre i e-sport biti na olimpijadi?", "2020-10-04",4,8);
+  insert into questions (question,datetime_created,user_id,category_id) values ("Kada æe video igre i e-sport biti na olimpijadi?", "2019-10-04",4,8);
   insert into questions (question,datetime_created,user_id,category_id) values ("koja je prva vieo igra?","2019-08-24",5,8);
   insert into questions (question,datetime_created,user_id,category_id) values ("Koja video igra je najprodavanija?","2019-08-10",6,8);
-  insert into questions (question,datetime_created,user_id,category_id) values ("Koja video igra je trenutnu najpopularnija?","2020-07-03",7,8);
+  insert into questions (question,datetime_created,user_id,category_id) values ("Koja video igra je trenutnu najpopularnija?","2019-07-03",7,8);
   insert into questions (question,datetime_created,user_id,category_id) values ("Koliko zaraðuju profesionalci?","2019-02-01",8,8);
   insert into questions (question,datetime_created,user_id,category_id) values ("Koja tvrtka radi najbolje video igre?", "2020-04-12",9,8);
 
@@ -161,12 +161,12 @@ insert into question_categories (category_name) values ("Sport");
   insert into questions (question,datetime_created,user_id,category_id) values ("Koliki je vijek trajanja reketa?", "2019-09-12",6,9);
 
 
-  insert into questions (question,datetime_created,user_id,category_id) values ("Zašto je zdrava hrana toliko bitna za kondicijsku pripremu?", "2020-10-22",7,10);
+  insert into questions (question,datetime_created,user_id,category_id) values ("Zašto je zdrava hrana toliko bitna za kondicijsku pripremu?", "2019-10-22",7,10);
   insert into questions (question,datetime_created,user_id,category_id) values ("Koliko je zdrava keto-prehrana?","2019-12-23",8,10);
   insert into questions (question,datetime_created,user_id,category_id) values ("Zašto su ribe i morski proizvodi zdravi?","2019-02-10",9,10);
   insert into questions (question,datetime_created,user_id,category_id) values ("Koliko je opasno jesti puno šeæera?","2020-02-09",1,10);
   insert into questions (question,datetime_created,user_id,category_id) values ("Što jede profesionalni strongmen?","2019-06-01",2,10);
-  insert into questions (question,datetime_created,user_id,category_id) values ("Koje jelo je najbolje?", "2020-09-15",3,10);
+  insert into questions (question,datetime_created,user_id,category_id) values ("Koje jelo je najbolje?", "2019-09-15",3,10);
 
 
 
@@ -234,7 +234,7 @@ insert into questions (question,datetime_created,user_id,category_id) values ("K
 insert into questions (question,datetime_created,user_id,category_id) values ("Što odjenuti na prvi dan fakulteta?","2019-12-12",2,11);
 insert into questions (question,datetime_created,user_id,category_id) values ("Koje boje haljine ide uz crvene štikle?","2020-05-01",2,11);
 insert into questions (question,datetime_created,user_id,category_id) values ("Koja boje kose mi najbolje pristaje uz smeðe oèi?","2019-02-13",10,11);
-insert into questions (question,datetime_created,user_id,category_id) values ("Što odjenuti na zakazani termin za posao?","2020-11-12",3,11);
+insert into questions (question,datetime_created,user_id,category_id) values ("Što odjenuti na zakazani termin za posao?","2019-11-12",3,11);
 insert into questions (question,datetime_created,user_id,category_id) values ("Kako hodati u štiklama?","2019-10-13",3,11);
 
 insert into questions (question,datetime_created,user_id,category_id) values ("Kada je zabilježena prva automobilska nesreæa?","2020-03-04",10,12);
@@ -271,7 +271,7 @@ insert into question_answers (user_id,question_id,answer,datetime_created) value
 insert into question_answers (user_id,question_id,answer,datetime_created) values (1,62,"Odjeni ono u èemu se najbolje osjeæaš.","2019-12-13");
 insert into question_answers (user_id,question_id,answer,datetime_created) values (3,63,"Najbolje crna haljina.","2020-05-03");
 insert into question_answers (user_id,question_id,answer,datetime_created) values (1,64,"Uz smeðe oèi pristaju sve boje oèiju","2019-02-14");
-insert into question_answers (user_id,question_id,answer,datetime_created) values (1,65,"Najbolje neke sveèanije hlaèe i košulju.","2020-11-13");
+insert into question_answers (user_id,question_id,answer,datetime_created) values (1,65,"Najbolje neke sveèanije hlaèe i košulju.","2020-01-13");
 insert into question_answers (user_id,question_id,answer,datetime_created) values (1,66,"Ako ne znas hodati u njima bolje ih ne nositi.","2019-10-14");
 
 insert into question_answers (user_id,question_id,answer,datetime_created) values (2,67,"Prva automobilska nesreæa zabilježena je 1769.godine.","2020-03-05");

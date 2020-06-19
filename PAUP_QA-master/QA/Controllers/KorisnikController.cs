@@ -36,9 +36,36 @@ namespace QA.Controllers
             {
                 return HttpNotFound();
             }
-            var dosaoSa = HttpContext.Request.UrlReferrer.ToString();
-            ViewBag.Ref = dosaoSa;
-            var pitanja = bazaPodataka.PopisPitanja.Where(x => x.korisnicko_ime == id).ToList();
+
+            if (HttpContext.Request.UrlReferrer != null)
+            {
+                var dosaoSa = HttpContext.Request.UrlReferrer.ToString();
+
+                //ViewBag.Ref = dosaoSa;
+
+                if (dosaoSa.Contains("OtvoriPitanje"))
+                {
+                    //if(TempData["natrag"]!=null)
+                    //{
+                    //    TempData["natrag3"] = TempData["natrag"];
+                    //    TempData["natrag"] = dosaoSa;
+                    //}
+                    //else
+                    //{
+                    //    TempData["natrag"] = dosaoSa;
+                    //}
+                    if ((TempData["pit"] != null) && (TempData["dosaoSaKor"] != null))
+                    {
+                        TempData["triKor"] = TempData["dosaoSa"];
+                    }
+                    TempData["pit"] = dosaoSa;
+                }
+                else
+                {
+                    TempData["dosaoSaKor"] = dosaoSa;
+                }
+            }
+            var pitanja = bazaPodataka.PopisPitanja.Where(x => x.korisnicko_ime == id).ToList().OrderByDescending(x=>x.datumObjave);
             ViewBag.Pitanja = pitanja;
             ViewBag.Broj = pitanja.Count();
             return PartialView("_PartialKorisnik",user);
@@ -158,25 +185,34 @@ namespace QA.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult Azuriraj(int id,string returnUrl)
+        public ActionResult Azuriraj(int id,string returnUrl,int user_id)
         {
-            var korisnik = bazaPodataka.PopisKorisnika.Find(id);
-            if (korisnik == null)
+            var admin = bazaPodataka.PopisKorisnika.Find(user_id);
+
+            if (admin.ovlast_sifra == "AD" || user_id == id)
             {
-                return HttpNotFound();
+                var korisnik = bazaPodataka.PopisKorisnika.Find(id);
+                if (korisnik == null)
+                {
+                    return HttpNotFound();
+                }
+
+                KorisnikAzuriranje model = new KorisnikAzuriranje();
+                ViewBag.ReturnUrl = returnUrl;
+                model.KorisnickoImeStaro = korisnik.korisnicko_ime;
+                model.KorisnickoIme = korisnik.korisnicko_ime;
+                model.Ovlast = korisnik.ovlast_sifra;
+                model.Id = korisnik.id;
+
+                var ovlasti = bazaPodataka.PopisOvlasti.OrderBy(x => x.Naziv).ToList();
+                ViewBag.Ovlasti = ovlasti;
+
+                return View(model);
             }
-
-            KorisnikAzuriranje model = new KorisnikAzuriranje();
-            ViewBag.ReturnUrl = returnUrl;
-            model.KorisnickoImeStaro = korisnik.korisnicko_ime;
-            model.KorisnickoIme = korisnik.korisnicko_ime;
-            model.Ovlast = korisnik.ovlast_sifra;
-            model.Id = korisnik.id;
-
-            var ovlasti = bazaPodataka.PopisOvlasti.OrderBy(x => x.Naziv).ToList();
-            ViewBag.Ovlasti = ovlasti;
-
-            return View(model);
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
 
         [HttpPost]
@@ -215,18 +251,27 @@ namespace QA.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult ResetLozinke(int id)
+        public ActionResult ResetLozinke(int id, int user_id)
         {
-            var korisnik = bazaPodataka.PopisKorisnika.Find(id);
-            if (korisnik == null || id==0)
+           var admin = bazaPodataka.PopisKorisnika.Find(user_id);
+
+            if (admin.ovlast_sifra == "AD" || user_id == id)
             {
-                return HttpNotFound();
+                var korisnik = bazaPodataka.PopisKorisnika.Find(id);
+                if (korisnik == null || id == 0)
+                {
+                    return HttpNotFound();
+                }
+
+                KorisnikResetLozinke model = new KorisnikResetLozinke();
+                model.KorisnickoIme = korisnik.korisnicko_ime;
+
+                return View(model);
             }
-
-            KorisnikResetLozinke model = new KorisnikResetLozinke();
-            model.KorisnickoIme = korisnik.korisnicko_ime;
-
-            return View(model);
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
 
         [HttpPost]
@@ -252,15 +297,24 @@ namespace QA.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult Brisi(int id)
+        public ActionResult Brisi(int id,int user_id)
         {
-            var korisnik = bazaPodataka.PopisKorisnika.Find(id);
-            if (korisnik == null || id==0)
-            {
-                return HttpNotFound();
-            }
+            var admin = bazaPodataka.PopisKorisnika.Find(user_id);
 
-            return View(korisnik);
+            if (admin.ovlast_sifra == "AD" || user_id == id)
+            {
+                var korisnik = bazaPodataka.PopisKorisnika.Find(id);
+                if (korisnik == null || id == 0)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(korisnik);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
 
         [Authorize]
@@ -286,7 +340,7 @@ namespace QA.Controllers
 
                 if (sqlex.Number == 1451)
                 {
-                    error = "Sifra korisnika " + " je vanjski kljuc u nekoj od tablica!";
+                    error = "MySQL Error";
                 }
                 else
                 {

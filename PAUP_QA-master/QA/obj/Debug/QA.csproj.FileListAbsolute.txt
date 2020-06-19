@@ -295,4 +295,3 @@ C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.csproj.CoreCompi
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.csproj.CopyComplete
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.dll
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.pdb
-C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.csprojAssemblyReference.cache

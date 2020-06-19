@@ -35,7 +35,7 @@ namespace QA.Models
         [Required(ErrorMessage = "{0} nije odabrana!")]
         [Column("category_id")]
         [Display(Name = "Kategorija")]
-        [Range(1, 9999, ErrorMessage = "Kategorija ne postoji!")]
+       // [Range(1, 9999, ErrorMessage = "Kategorija ne postoji!")]
         [ForeignKey("kategorijaId")]
         public int id_kategorija { get; set; }
         [Display(Name = "Kategorija")]

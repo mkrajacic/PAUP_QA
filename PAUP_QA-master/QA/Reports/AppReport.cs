@@ -21,8 +21,7 @@ namespace QA.Reports
 			BaseFont bfontText = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1250, true);
 			BaseFont bfontFooter = BaseFont.CreateFont(BaseFont.TIMES_ITALIC, BaseFont.CP1250, false);
 
-			Font header = new Font(bfontHeader, 12, Font.NORMAL, BaseColor.DARK_GRAY);
-			Font headerBold = new Font(bfontText, 12, Font.BOLD, BaseColor.DARK_GRAY);
+			Font headerBold = new Font(bfontText, 16, Font.BOLD, BaseColor.DARK_GRAY);
 			Font naslov = new Font(bfontText, 12, Font.BOLDITALIC, BaseColor.DARK_GRAY);
 			Font tekst = new Font(bfontText, 12, Font.NORMAL, BaseColor.BLACK);
 
@@ -33,25 +32,11 @@ namespace QA.Reports
 					PdfWriter.GetInstance(pdfDokument, memo).CloseStream = false;
 					pdfDokument.Open();
 
-					Paragraph info = new Paragraph();
-					info.Add(new Chunk("Međimursko veleučilište u Čakovcu \n", headerBold));
-					info.Add(new Chunk("Bana Josipa jelačića 22a \n Čakovec", header));
-
-					PdfPTable tableheader;
-					tableheader = new PdfPTable(2);
-					tableheader.HorizontalAlignment = Element.ALIGN_LEFT;
-					tableheader.DefaultCell.Border = Rectangle.NO_BORDER;
-					tableheader.WidthPercentage = 100f;
-					float[] widhtsTableHeader = null;
-					widhtsTableHeader = new float[] { 1f, 3f };
-					tableheader.SetWidths(widhtsTableHeader);
-
-					PdfPCell cInfo = new PdfPCell(info);
-					cInfo.HorizontalAlignment = PdfPCell.ALIGN_RIGHT;
-					cInfo.Border = Rectangle.NO_BORDER;
-					tableheader.AddCell(cInfo);
-
-					pdfDokument.Add(tableheader);
+					Paragraph q = new Paragraph("QBox", headerBold);
+					q.Alignment = Element.ALIGN_CENTER;
+					q.SpacingBefore = 10;
+					q.SpacingAfter = 10;
+					pdfDokument.Add(q);
 
 					Paragraph p = new Paragraph("Popis pitanja", naslov);
 					p.Alignment = Element.ALIGN_CENTER;
@@ -59,17 +44,17 @@ namespace QA.Reports
 					p.SpacingAfter = 20;
 					pdfDokument.Add(p);
 
+
 					BaseColor colorheader = BaseColor.PINK;
 
 					PdfPTable t = new PdfPTable(6);
 					t.WidthPercentage = 100;
-					t.SetWidths(new float[] { 1, 4, 3, 2, 2, 1 });
+					t.SetWidths(new float[] { 1, 4, 3, 2, 3, 1 });
 
-					//zaglavlja
 					t.AddCell(vratiCeliju("R.br", tekst, colorheader, true));
 					t.AddCell(vratiCeliju("Pitanje", tekst, colorheader, true));
 					t.AddCell(vratiCeliju("Korisničko ime", tekst, colorheader, true));
-					t.AddCell(vratiCeliju("Datum objave", tekst, colorheader, true));
+					t.AddCell(vratiCeliju("Objavljeno", tekst, colorheader, true));
 					t.AddCell(vratiCeliju("Kategorija", tekst, colorheader, true));
 					t.AddCell(vratiCeliju("Odg.", tekst, colorheader, true));
 
@@ -79,7 +64,7 @@ namespace QA.Reports
 						t.AddCell(vratiCeliju(i.ToString() + ".", tekst, BaseColor.WHITE, false));
 						t.AddCell(vratiCeliju(pit.pitanjeTekst, tekst, BaseColor.WHITE, false));
 						t.AddCell(vratiCeliju(pit.korisnickoIme.korisnicko_ime, tekst, BaseColor.WHITE, false));
-						t.AddCell(vratiCeliju(pit.datumObjave.Date.ToString(), tekst, BaseColor.WHITE, false));
+						t.AddCell(vratiCeliju(pit.datumObjave.Day.ToString() + "." + pit.datumObjave.Month.ToString() + "." + pit.datumObjave.Year.ToString(), tekst, BaseColor.WHITE, false));
 						t.AddCell(vratiCeliju(pit.kategorijaId.kategorija, tekst, BaseColor.WHITE, false));
 						t.AddCell(vratiCeliju(podaci.Odgovori.Where(x=>x.pitanje_id==pit.id).Count().ToString(), tekst, BaseColor.WHITE, false));
 						i++;
@@ -130,14 +115,13 @@ namespace QA.Reports
 			BaseFont bfontText = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1250, true);
 			BaseFont bfontFooter = BaseFont.CreateFont(BaseFont.TIMES_ITALIC, BaseFont.CP1250, false);
 
-			Font header = new Font(bfontHeader, 12, Font.NORMAL, BaseColor.DARK_GRAY);
-			Font headerBold = new Font(bfontText, 12, Font.BOLD, BaseColor.DARK_GRAY);
+			Font headerBold = new Font(bfontText, 16, Font.BOLD, BaseColor.DARK_GRAY);
 			Font naslov = new Font(bfontText, 12, Font.BOLDITALIC, BaseColor.DARK_GRAY);
 			Font tekst = new Font(bfontText, 12, Font.NORMAL, BaseColor.BLACK);
 
 			MixModel model = new MixModel();
-			model.Pitanja = bazaPodataka.PopisPitanja.ToList().OrderByDescending(x => x.datumObjave).ThenByDescending(x => x.kategorijaId.kategorija);
-			model.Odgovori = bazaPodataka.PopisOdgovora.ToList().OrderByDescending(x => x.datumObjave).ThenByDescending(x => x.Pit.pitanjeTekst);
+			model.Pitanja = bazaPodataka.PopisPitanja.ToList().OrderByDescending(x => x.datumObjave).ThenBy(x => x.kategorijaId.kategorija);
+			model.Odgovori = bazaPodataka.PopisOdgovora.ToList().OrderByDescending(x => x.datumObjave).ThenBy(x => x.Pit.pitanjeTekst);
 
 			using (MemoryStream memo = new MemoryStream())
 			{
@@ -146,25 +130,11 @@ namespace QA.Reports
 					PdfWriter.GetInstance(pdfDokument, memo).CloseStream = false;
 					pdfDokument.Open();
 
-					Paragraph info = new Paragraph();
-					info.Add(new Chunk("Međimursko veleučilište u Čakovcu \n", headerBold));
-					info.Add(new Chunk("Bana Josipa jelačića 22a \n Čakovec", header));
-
-					PdfPTable tableheader;
-					tableheader = new PdfPTable(2);
-					tableheader.HorizontalAlignment = Element.ALIGN_LEFT;
-					tableheader.DefaultCell.Border = Rectangle.NO_BORDER;
-					tableheader.WidthPercentage = 100f;
-					float[] widhtsTableHeader = null;
-					widhtsTableHeader = new float[] { 1f, 3f };
-					tableheader.SetWidths(widhtsTableHeader);
-
-					PdfPCell cInfo = new PdfPCell(info);
-					cInfo.HorizontalAlignment = PdfPCell.ALIGN_RIGHT;
-					cInfo.Border = Rectangle.NO_BORDER;
-					tableheader.AddCell(cInfo);
-
-					pdfDokument.Add(tableheader);
+					Paragraph q = new Paragraph("QBox", headerBold);
+					q.Alignment = Element.ALIGN_CENTER;
+					q.SpacingBefore = 10;
+					q.SpacingAfter = 10;
+					pdfDokument.Add(q);
 
 					Paragraph p = new Paragraph("Popis korisnika", naslov);
 					p.Alignment = Element.ALIGN_CENTER;
@@ -172,13 +142,13 @@ namespace QA.Reports
 					p.SpacingAfter = 20;
 					pdfDokument.Add(p);
 
+
 					BaseColor colorheader = BaseColor.PINK;
 
 					PdfPTable t = new PdfPTable(5);
 					t.WidthPercentage = 100;
 					t.SetWidths(new float[] { 2, 4, 2, 2, 2 });
 
-					//zaglavlja
 					t.AddCell(vratiCeliju("R.br", tekst, colorheader, true));
 					t.AddCell(vratiCeliju("Korisničko ime", tekst, colorheader, true));
 					t.AddCell(vratiCeliju("Ovlast", tekst, colorheader, true));
@@ -240,14 +210,13 @@ namespace QA.Reports
 			BaseFont bfontText = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1250, true);
 			BaseFont bfontFooter = BaseFont.CreateFont(BaseFont.TIMES_ITALIC, BaseFont.CP1250, false);
 
-			Font header = new Font(bfontHeader, 12, Font.NORMAL, BaseColor.DARK_GRAY);
-			Font headerBold = new Font(bfontText, 12, Font.BOLD, BaseColor.DARK_GRAY);
+			Font headerBold = new Font(bfontText, 16, Font.BOLD, BaseColor.DARK_GRAY);
 			Font naslov = new Font(bfontText, 12, Font.BOLDITALIC, BaseColor.DARK_GRAY);
 			Font tekst = new Font(bfontText, 12, Font.NORMAL, BaseColor.BLACK);
 
 			MixModel model = new MixModel();
 			model.Pitanja = bazaPodataka.PopisPitanja.Where(x=>x.korisnicko_ime==korisnik.id).ToList().OrderByDescending(x=>x.datumObjave).ThenByDescending(x=>x.kategorijaId.kategorija);
-			model.Odgovori = bazaPodataka.PopisOdgovora.ToList().OrderByDescending(x => x.datumObjave).ThenByDescending(x => x.Pit.pitanjeTekst);
+			model.Odgovori = bazaPodataka.PopisOdgovora.ToList().OrderByDescending(x => x.datumObjave).ThenBy(x => x.Pit.pitanjeTekst);
 
 			using (MemoryStream memo = new MemoryStream())
 			{
@@ -256,25 +225,11 @@ namespace QA.Reports
 					PdfWriter.GetInstance(pdfDokument, memo).CloseStream = false;
 					pdfDokument.Open();
 
-					Paragraph info = new Paragraph();
-					info.Add(new Chunk("Međimursko veleučilište u Čakovcu \n", headerBold));
-					info.Add(new Chunk("Bana Josipa jelačića 22a \n Čakovec", header));
-
-					PdfPTable tableheader;
-					tableheader = new PdfPTable(2);
-					tableheader.HorizontalAlignment = Element.ALIGN_LEFT;
-					tableheader.DefaultCell.Border = Rectangle.NO_BORDER;
-					tableheader.WidthPercentage = 100f;
-					float[] widhtsTableHeader = null;
-					widhtsTableHeader = new float[] { 1f, 3f };
-					tableheader.SetWidths(widhtsTableHeader);
-
-					PdfPCell cInfo = new PdfPCell(info);
-					cInfo.HorizontalAlignment = PdfPCell.ALIGN_RIGHT;
-					cInfo.Border = Rectangle.NO_BORDER;
-					tableheader.AddCell(cInfo);
-
-					pdfDokument.Add(tableheader);
+					Paragraph q = new Paragraph("QBox", headerBold);
+					q.Alignment = Element.ALIGN_CENTER;
+					q.SpacingBefore = 10;
+					q.SpacingAfter = 10;
+					pdfDokument.Add(q);
 
 					Paragraph p = new Paragraph(korisnik.korisnicko_ime, naslov);
 					p.Alignment = Element.ALIGN_CENTER;
@@ -288,10 +243,9 @@ namespace QA.Reports
 					t.WidthPercentage = 100;
 					t.SetWidths(new float[] { 2, 4, 2, 2 });
 
-					//zaglavlja
 					t.AddCell(vratiCeliju("R.br", tekst, colorheader, true));
 					t.AddCell(vratiCeliju("Pitanje", tekst, colorheader, true));
-					t.AddCell(vratiCeliju("Datum objave", tekst, colorheader, true));
+					t.AddCell(vratiCeliju("Objavljeno", tekst, colorheader, true));
 					t.AddCell(vratiCeliju("Odgovora", tekst, colorheader, true));
 
 					int i = 1;
@@ -299,7 +253,7 @@ namespace QA.Reports
 					{
 						t.AddCell(vratiCeliju(i.ToString() + ".", tekst, BaseColor.WHITE, false));
 						t.AddCell(vratiCeliju(pit.pitanjeTekst, tekst, BaseColor.WHITE, false));
-						t.AddCell(vratiCeliju(pit.datumObjave.ToString(), tekst, BaseColor.WHITE, false));
+						t.AddCell(vratiCeliju(pit.datumObjave.Day.ToString() + "." + pit.datumObjave.Month.ToString() + "." + pit.datumObjave.Year.ToString(), tekst, BaseColor.WHITE, false));
 						t.AddCell(vratiCeliju(model.Odgovori.Where(x => x.pitanje_id == pit.id).Count().ToString(), tekst, BaseColor.WHITE, false));
 						i++;
 					}
@@ -348,14 +302,13 @@ namespace QA.Reports
 			BaseFont bfontText = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1250, true);
 			BaseFont bfontFooter = BaseFont.CreateFont(BaseFont.TIMES_ITALIC, BaseFont.CP1250, false);
 
-			Font header = new Font(bfontHeader, 12, Font.NORMAL, BaseColor.DARK_GRAY);
-			Font headerBold = new Font(bfontText, 12, Font.BOLD, BaseColor.DARK_GRAY);
+			Font headerBold = new Font(bfontText, 16, Font.BOLD, BaseColor.DARK_GRAY);
 			Font naslov = new Font(bfontText, 12, Font.BOLDITALIC, BaseColor.DARK_GRAY);
 			Font tekst = new Font(bfontText, 12, Font.NORMAL, BaseColor.BLACK);
 
 			MixModel model = new MixModel();
 			model.Pitanja = bazaPodataka.PopisPitanja.ToList();
-			model.Odgovori = bazaPodataka.PopisOdgovora.Where(x=>x.korisnicko_ime==korisnik.id).ToList();
+			model.Odgovori = bazaPodataka.PopisOdgovora.Where(x=>x.korisnicko_ime==korisnik.id).ToList().OrderByDescending(x=>x.datumObjave).ThenBy(x=>x.najdraze);
 
 			using (MemoryStream memo = new MemoryStream())
 			{
@@ -364,25 +317,11 @@ namespace QA.Reports
 					PdfWriter.GetInstance(pdfDokument, memo).CloseStream = false;
 					pdfDokument.Open();
 
-					Paragraph info = new Paragraph();
-					info.Add(new Chunk("Međimursko veleučilište u Čakovcu \n", headerBold));
-					info.Add(new Chunk("Bana Josipa jelačića 22a \n Čakovec", header));
-
-					PdfPTable tableheader;
-					tableheader = new PdfPTable(2);
-					tableheader.HorizontalAlignment = Element.ALIGN_LEFT;
-					tableheader.DefaultCell.Border = Rectangle.NO_BORDER;
-					tableheader.WidthPercentage = 100f;
-					float[] widhtsTableHeader = null;
-					widhtsTableHeader = new float[] { 1f, 3f };
-					tableheader.SetWidths(widhtsTableHeader);
-
-					PdfPCell cInfo = new PdfPCell(info);
-					cInfo.HorizontalAlignment = PdfPCell.ALIGN_RIGHT;
-					cInfo.Border = Rectangle.NO_BORDER;
-					tableheader.AddCell(cInfo);
-
-					pdfDokument.Add(tableheader);
+					Paragraph q = new Paragraph("QBox", headerBold);
+					q.Alignment = Element.ALIGN_CENTER;
+					q.SpacingBefore = 10;
+					q.SpacingAfter = 10;
+					pdfDokument.Add(q);
 
 					Paragraph p = new Paragraph(korisnik.korisnicko_ime, naslov);
 					p.Alignment = Element.ALIGN_CENTER;
@@ -392,16 +331,15 @@ namespace QA.Reports
 
 					BaseColor colorheader = BaseColor.PINK;
 
-					PdfPTable t = new PdfPTable(4);
+					PdfPTable t = new PdfPTable(5);
 					t.WidthPercentage = 100;
-					t.SetWidths(new float[] { 2, 4, 4, 2 });
+					t.SetWidths(new float[] { 2, 4, 4, 2, 2 });
 
-					//zaglavlja
 					t.AddCell(vratiCeliju("R.br", tekst, colorheader, true));
 					t.AddCell(vratiCeliju("Pitanje", tekst, colorheader, true));
 					t.AddCell(vratiCeliju("Odgovor", tekst, colorheader, true));
-					t.AddCell(vratiCeliju("Datum objave", tekst, colorheader, true));
-					//t.AddCell(vratiCeliju("Najdraži", tekst, colorheader, true));
+					t.AddCell(vratiCeliju("Objavljeno", tekst, colorheader, true));
+					t.AddCell(vratiCeliju("Najdraži", tekst, colorheader, true));
 
 					int i = 1;
 					foreach (var odg in model.Odgovori)
@@ -409,8 +347,8 @@ namespace QA.Reports
 						t.AddCell(vratiCeliju(i.ToString() + ".", tekst, BaseColor.WHITE, false));
 						t.AddCell(vratiCeliju(odg.Pit.pitanjeTekst, tekst, BaseColor.WHITE, false));
 						t.AddCell(vratiCeliju(odg.odgovor, tekst, BaseColor.WHITE, false));
-						t.AddCell(vratiCeliju(odg.datumObjave.ToString(), tekst, BaseColor.WHITE, false));
-						//t.AddCell(vratiCeliju(odg.najdraze ? "DA" : "NE", tekst, BaseColor.WHITE, false));
+						t.AddCell(vratiCeliju(odg.datumObjave.Day.ToString() + "." + odg.datumObjave.Month.ToString() + "." + odg.datumObjave.Year.ToString(), tekst, BaseColor.WHITE, false));
+						t.AddCell(vratiCeliju(odg.najdraze ? "DA" : "NE", tekst, BaseColor.WHITE, false));
 						i++;
 					}
 
@@ -456,7 +394,7 @@ namespace QA.Reports
 		{
 			PdfPCell c1 = new PdfPCell(new Phrase(labela, font));
 			c1.BackgroundColor = boja;
-			c1.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+			c1.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
 			c1.Padding = 5;
 			c1.NoWrap = wrap;
 

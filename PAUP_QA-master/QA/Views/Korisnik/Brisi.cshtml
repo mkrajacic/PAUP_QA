@@ -1,4 +1,5 @@
-﻿@model QA.Models.Korisnik
+﻿@using QA.Misc
+@model QA.Models.Korisnik
 @{
     Layout = null;
     ViewBag.Title = "Brisanje korisnika";
@@ -24,7 +25,14 @@
 
     <section class="body">
         <section class="form-section">
-            <p>Jeste li sigurni da želite obrisati @Model.korisnicko_ime? Ovime ćete obrisati sva pitanja i odgovore korisnika @Model.korisnicko_ime!</p>
+            @if ((User as LogiraniKorisnik).Id == Model.id)
+            {
+                <p>Jeste li sigurni da želite obrisati svoj korisnički profil? Ovime ćete obrisati sva svoja pitanja i odgovore!</p>
+            }
+            else
+            {
+                <p>Jeste li sigurni da želite obrisati @Model.korisnicko_ime? Ovime ćete obrisati sva pitanja i odgovore korisnika @Model.korisnicko_ime!</p>
+            }
             @using (Html.BeginForm())
             {
 

@@ -2,8 +2,14 @@
 @using QA.Misc
 @model Pitanje
 @{
-    ViewBag.Title = "Dodaj pitanje";
-    Layout = null;
+        ViewBag.Title = "Dodaj pitanje";
+        Layout = null;
+
+        AjaxOptions ajaxOpt = new AjaxOptions()
+        {
+            HttpMethod = "POST",
+            OnBegin = "prozor"
+    };
 }
 
 <!DOCTYPE html>
@@ -15,17 +21,46 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
+    <div id="sakrij">
+    </div>
     <header>
         <nav>
             <ul>
+                @if (TempData["dosaoSa"] != null)
+                {
+                <li><a href='@TempData["dosaoSa"]'>Povratak</a></li>
+                }
+                else
+                {
                 <li>@Html.ActionLink("Natrag na pitanja", "Index", "App")</li>
+                }
             </ul>
         </nav>
     </header>
     <section class="body">
         <section class="form-section">
+            <div id="poruka">
+                <div id="poruka_zaglavlje">
+                    @if (TempData["dosaoSa"] == null)
+                    {
+                        <a href='@Url.Action("Index", "App")'>
+                            <span id="zatvori">&times;</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href='@TempData["dosaoSa"]'>
+                            <span id="zatvori">&times;</span>
+                        </a>
+                    }
+                </div>
+                <div id="poruka_tekst"></div>
+            </div>
             <h1>@ViewBag.Title</h1>
-            @using (Html.BeginForm("DodajPitanje", "App", FormMethod.Post, new { @class = "login-form" }))
+            @using (Ajax.BeginForm("DodajPitanje", "App", ajaxOpt, new
+            {
+                @class = "login-form"
+            }))
             {
                 @Html.AntiForgeryToken()
                 @Html.LabelFor(m => m.pitanjeTekst)
@@ -37,7 +72,7 @@
                 @Html.HiddenFor(m => m.datumObjave, new { Value = DateTime.Now.ToString("dd'/'MM'/'yyyy HH: mm:ss") })
                 @Html.HiddenFor(m => m.korisnicko_ime, new { Value = ((User as LogiraniKorisnik).Id) })
                 <p>Ne možete pronaći kategoriju? @Html.ActionLink("Dodajte novu kategoriju", "DodajKategoriju", "App")</p>
-                <button name="dodajPit" type="submit">
+                <button id="dodajPit" name="dodajPit" type="submit">
                     Dodaj
                 </button>
             }
@@ -45,6 +80,19 @@
     </section>
 </body>
 </html>
+<script type="text/javascript">
+    function prozor() {
+            var poruka = document.getElementById("poruka");
+        document.getElementById("poruka_tekst").innerHTML = "<span id='kvacica'>&#x2714;</span> <br> Pitanje uspješno dodano!";
+        poruka.classList.add("fadein");
+        poruka.style.zIndex = 3;
+        var sakrij = document.getElementById("sakrij");
+        sakrij.setAttribute("class", "sakrij");
+        var tipka = document.getElementById("dodajPit");
+        tipka.disabled = "disabled";
+    }
+
+</script>
 
 @Styles.Render("/Content/style.css")
 @Scripts.Render("~/bundles/jquery")

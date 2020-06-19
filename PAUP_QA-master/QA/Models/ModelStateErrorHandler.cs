@@ -8,15 +8,7 @@ namespace QA.Models
 {
     public static class ModelStateErrorHandler
     {
-        /// <summary>
-        /// Returns a Key/Value pair with all the errors in the model
-        /// according to the data annotation properties.
-        /// </summary>
-        /// <param name="errDictionary"></param>
-        /// <returns>
-        /// Key: Name of the property
-        /// Value: The error message returned from data annotation
-        /// </returns>
+        /*model za troubleshooting u slucaju kada modelstate nije valid i ne prikazuje razlog zasto*/
         public static Dictionary<string, string> GetModelErrors(this ModelStateDictionary errDictionary)
         {
             var errors = new Dictionary<string, string>();

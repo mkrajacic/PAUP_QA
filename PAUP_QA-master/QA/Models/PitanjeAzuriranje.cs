@@ -20,7 +20,7 @@ namespace QA.Models
         [Required(ErrorMessage = "{0} nije odabrana!")]
         public string Kategorija { get; set; }
         [Required(ErrorMessage = "{0} nije odabrana!")]
-        [Range(1, 9999, ErrorMessage = "Kategorija ne postoji!")]
+        //[Range(1, 9999, ErrorMessage = "Kategorija ne postoji!")]
         [Display(Name = "Kategorija")]
         public int KategorijaId { get; set; }
     }

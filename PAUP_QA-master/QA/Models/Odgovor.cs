@@ -40,6 +40,6 @@ namespace QA.Models
         [Display(Name = "Pitanje")]
         public virtual Pitanje Pit { get; set; }
         [Column("is_favorite")]
-        public bool? najdraze { get; set; }
+        public bool najdraze { get; set; }
     }
 }

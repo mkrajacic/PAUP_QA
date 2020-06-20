@@ -4,6 +4,12 @@
 @{
     ViewBag.Title = "Registracija";
     Layout = null;
+    AjaxOptions ajaxOpt = new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        OnSuccess = "prozor",
+        OnFailure = "prozorFail"
+    };
 }
 
 <!DOCTYPE html>
@@ -15,18 +21,43 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
+    <div id="sakrij">
+    </div>
     <header>
         <nav>
             <ul>
-                <li>@Html.ActionLink("Natrag na pitanja", "Index", "App")</li>
-                <li>@Html.ActionLink("Prijava", "Prijava", "Korisnik")</li>
+                @if (TempData["dosaoSa"] != null)
+                {
+                    <li><a href='@TempData["dosaoSa"]'>Povratak</a></li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Natrag na pitanja", "Index", "App")</li>
+                }
             </ul>
         </nav>
     </header>
     <section class="body">
         <section class="form-section">
+            <div id="poruka">
+                <div id="poruka_zaglavlje">
+                    @if (TempData["dosaoSa"] == null)
+                    {
+                        <a href='@Url.Action("Index", "App")'>
+                            <span id="zatvori">&times;</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href='@TempData["dosaoSa"]'>
+                            <span id="zatvori">&times;</span>
+                        </a>
+                    }
+                </div>
+                <div id="poruka_tekst"></div>
+            </div>
             <h1>@ViewBag.Title</h1>
-            @using (Html.BeginForm("Registracija", "Korisnik", FormMethod.Post, new { @class = "login-form" }))
+            @using (Ajax.BeginForm("Registracija", "Korisnik", ajaxOpt, new { @class = "login-form", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.LabelFor(m => m.korisnicko_ime)
@@ -39,10 +70,11 @@
                 @Html.EditorFor(m => m.LozinkaUnos2, new { htmlAttributes = new { @placeholder = "Ponovite lozinku..." } })
                 @Html.ValidationMessageFor(m => m.LozinkaUnos2, "", new { @class = "validacija" })<br />
                 @Html.HiddenFor(m => m.ovlast_sifra, new { Value = OvlastiKorisnik.Registriran })
-                <!---Html.LabelFor(m => m.image)
-        <input type="file" name="image" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />-->
+                @Html.HiddenFor(m => m.upis_ovlast, new { Value = "Registriran" })
+                @Html.Label("Profilna slika")<br />
+                <input type="file" name="file" id="file" accept=".png,.jpg,.jpeg,.gif,.tif" />
                 <p>Već imate profil? @Html.ActionLink("Prijava", "Prijava", "Korisnik")</p>
-                <button name="registracija" type="submit">
+                <button name="registracija" type="submit" id="registracija">
                     Registracija
                 </button>
             }
@@ -50,6 +82,30 @@
     </section>
 </body>
 </html>
+<script type="text/javascript">
+    function prozor() {
+            var poruka = document.getElementById("poruka");
+        document.getElementById("poruka_tekst").innerHTML = "<span id='kvacica'>&#x2714;</span> <br> Registracija uspješna!";
+        poruka.classList.add("fadein");
+        poruka.style.zIndex = 3;
+        var sakrij = document.getElementById("sakrij");
+        sakrij.setAttribute("class", "sakrij");
+        var tipka = document.getElementById("registracija");
+        tipka.disabled = "disabled";
+    }
+
+    function prozorFail() {
+        var poruka = document.getElementById("poruka");
+        document.getElementById("poruka_tekst").innerHTML = "<span id='x-brisi'>&times;</span> <br> Korisničko ime već postoji!";
+        poruka.classList.add("fadein");
+        poruka.style.zIndex = 3;
+        var sakrij = document.getElementById("sakrij");
+        sakrij.setAttribute("class", "sakrij");
+        var tipka = document.getElementById("registracija");
+        tipka.disabled = "disabled";
+    }
+
+</script>
 
 @Styles.Render("/Content/style.css")
 @Scripts.Render("~/bundles/jquery")

@@ -22,12 +22,10 @@ namespace QA.Models
         public string lozinka { get; set; }
         public string salt { get; set; }
 
-       /* [Column(TypeName ="image")]
-        [Display(Name = "image")]
-        public byte[] image { get; set; }*/
+        [Column("image")]
+        public string PutanjaSlike { get; set; }
         [Column("user_code")]
         [Display(Name = "Ovlast")]
-        [Required(ErrorMessage = "{0} je obavezno polje!")]
         [ForeignKey("Ovlast")]
         public string ovlast_sifra { get; set; }
         [Display(Name = "Ovlast")]
@@ -46,6 +44,9 @@ namespace QA.Models
         [NotMapped]
         [Compare("LozinkaUnos", ErrorMessage = "Lozinke moraju biti jednake")]
         public string LozinkaUnos2 { get; set; }
-
+        [NotMapped]
+        [Required(ErrorMessage = "{0} nije odabrana!")]
+        [Display(Name = "Ovlast")]
+        public string upis_ovlast { get; set; }
     }
 }

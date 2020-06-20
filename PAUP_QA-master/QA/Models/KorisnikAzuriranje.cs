@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -17,9 +18,12 @@ namespace QA.Models
         public string KorisnickoIme { get; set; }
 
         [Display(Name = "Ovlast")]
-        [Required(ErrorMessage = "{0} je obavezno polje!")]
         public string Ovlast { get; set; }
         [Required]
         public string KorisnickoImeStaro { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "{0} nije odabrana!")]
+        [Display(Name = "Ovlast")]
+        public string UpisOvlast { get; set; }
     }
 }

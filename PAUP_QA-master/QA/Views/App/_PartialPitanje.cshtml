@@ -7,6 +7,18 @@
     {
         ViewBag.Korisnik = ((User as LogiraniKorisnik).Id);
     }
+
+    AjaxOptions ajaxOpt = new AjaxOptions()
+    {
+        HttpMethod = "GET",
+        OnBegin = "oznaceno"
+    };
+
+    AjaxOptions ajaxOpt2 = new AjaxOptions()
+    {
+        HttpMethod = "GET",
+        OnBegin = "odznaceno"
+    };
 }
 
 
@@ -106,11 +118,11 @@
                                     <h2>@kor.korisnicko_ime</h2>
                                 }
                             }
+                            <img src="@Url.Content(kor.PutanjaSlike)" class="user">
 
                         }
                     }
                 }
-                <img src="~/img/user.png" class="user">
                 @foreach (var pit in Model.Pitanja)
                 {
                     if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
@@ -148,118 +160,133 @@
                         }
                     </p>
                 }
-                <div class="answers">
-                    @if (ViewBag.Broj == 0)
+            <div class="answers">
+                <div id="uspjehOd" class="alert alert-info" role="alert">
+                    <div class="zaglavlje">
+                        <span class="zatvori-o" id="info-close">&times;</span>
+                    </div>
+                    Odgovor je uspješno odznačen!
+                </div>
+                @if (ViewBag.Broj == 0)
+                {
+                    <p class="no-answers">Nema odgovora.</p>
+                }
+                else
+                {
+                    foreach (var odg in Model.Odgovori)
                     {
-                        <p class="no-answers">Nema odgovora.</p>
-                    }
-                    else
-                    {
-                        foreach (var odg in Model.Odgovori)
+                        foreach (var pit in Model.Pitanja)
                         {
-                            foreach (var pit in Model.Pitanja)
+                            if (odg.pitanje_id == pit.id && odg.najdraze == true)
                             {
-                                if (odg.pitanje_id == pit.id && odg.najdraze == true)
+            <div class="answer odabran">
+                <img src="@Url.Content(odg.korisnickoIme.PutanjaSlike)" class="user-min">
+                <p>@odg.odgovor</p>
+                @odg.datumObjave.Day.@odg.datumObjave.Month.@odg.datumObjave.Year
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <p>
+                        @Html.ActionLink((string)odg.korisnickoIme.korisnicko_ime, "DetaljiKorisnik", "Korisnik", new { id = odg.korisnickoIme.id }, new { @style = "color:#fff;", @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = odg.korisnickoIme.id }) })
+                    </p>
+                    <div class="answer-buttons-box">
+                        @if (odg.korisnicko_ime == ((User as LogiraniKorisnik).Id) || (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
+                        {
+                            <button class="update-answ">@Html.ActionLink("Ažuriraj", "AzurirajOdgovor", new { odg_id = odg.id, user_id = (User as LogiraniKorisnik).Id })</button>
+                            <button class="delete-answ">@Html.ActionLink("Izbriši", "BrisiOdgovor", new { odg_id = odg.id, user_id = (User as LogiraniKorisnik).Id })</button>
+                        }
+
+                        @if ((User as LogiraniKorisnik).Id == pit.korisnicko_ime || (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
+                        {
+                            <span>
+                                @using (Ajax.BeginForm("OdznaciOdgovor", "App", new { id = odg.id }, ajaxOpt2))
                                 {
-                                    <div class="answer odabran">
-                                        <p>@odg.odgovor</p>
-                                        @odg.datumObjave.Day.@odg.datumObjave.Month.@odg.datumObjave.Year
-                                        @if (User.Identity.IsAuthenticated)
-                                        {
-                                            <p>
-                                                @Html.ActionLink((string)odg.korisnickoIme.korisnicko_ime, "DetaljiKorisnik", "Korisnik", new { id = odg.korisnickoIme.id }, new { @style = "color:#fff;", @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = odg.korisnickoIme.id }) })
-                                            </p>
-                                            <div class="answer-buttons-box">
-                                                @if (odg.korisnicko_ime == ((User as LogiraniKorisnik).Id) || (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
-                                                {
-                                                    <button class="update-answ">@Html.ActionLink("Ažuriraj", "AzurirajOdgovor", new { odg_id = odg.id, user_id = (User as LogiraniKorisnik).Id })</button>
-                                                    <button class="delete-answ">@Html.ActionLink("Izbriši", "BrisiOdgovor", new { odg_id = odg.id, user_id = (User as LogiraniKorisnik).Id })</button>
-                                                }
-
-                                                @if ((User as LogiraniKorisnik).Id == pit.korisnicko_ime || (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
-                                                {
-                                                    <span>
-                                                        @using (Html.BeginForm("OdznaciOdgovor", "App", new { id = odg.id }, FormMethod.Get))
-                                                        {
-                                                            @Html.AntiForgeryToken()
-                                                            <button class="best" type="submit" name="odznaci">
-                                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                                Odznači
-                                                            </button>
-                                                        }
-                                                    </span>
-                                                }
-                                            </div>
-
-                                        }
-                                        else
-                                        {
-                                            <p>
-                                                @odg.korisnickoIme.korisnicko_ime
-                                            </p>
-                                        }
-
-                                    </div>
+                                    @Html.AntiForgeryToken()
+                                    <button class="best" type="submit" id="odznaci">
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        Odznači
+                                    </button>
                                 }
-                                else if (odg.pitanje_id == pit.id)
+                            </span>
+                        }
+                    </div>
+
+                }
+                else
+                {
+                    <p>
+                        @odg.korisnickoIme.korisnicko_ime
+                    </p>
+                }
+
+            </div>
+                            }
+                            else if (odg.pitanje_id == pit.id)
+                            {
+
+            <div class="answer">
+                <div id="uspjehOz" class="alert alert-success" role="alert">
+                    <div class="zaglavlje">
+                        <span class="zatvori-o" id="success-close">&times;</span>
+                    </div>
+                    Odgovor je uspješno označen!
+                </div>
+
+                <img src="@Url.Content(odg.korisnickoIme.PutanjaSlike)" class="user-min">
+                <p>@odg.odgovor</p>
+                @odg.datumObjave.Day.@odg.datumObjave.Month.@odg.datumObjave.Year
+                @if ((User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)) || (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).Id == pit.korisnicko_ime))
+                {
+                    <p>
+                        @Html.ActionLink((string)odg.korisnickoIme.korisnicko_ime, "DetaljiKorisnik", "Korisnik", new { id = odg.korisnickoIme.id }, new { @style = "color:#303133;", @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = odg.korisnickoIme.id }) })
+                    </p>
+                    <div class="answer-buttons-box">
+                        @if (odg.korisnicko_ime == ((User as LogiraniKorisnik).Id) || (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
+                        {
+                            <button class="update-answ">@Html.ActionLink("Ažuriraj", "AzurirajOdgovor", new { odg_id = odg.id, user_id = (User as LogiraniKorisnik).Id })</button>
+                            <button class="delete-answ">@Html.ActionLink("Izbriši", "BrisiOdgovor", new { odg_id = odg.id, user_id = (User as LogiraniKorisnik).Id })</button>
+                        }
+
+                        @if ((User as LogiraniKorisnik).Id == pit.korisnicko_ime || (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
+                        {
+                            <span>
+                                @using (Ajax.BeginForm("OdaberiOdgovor", "App", new { id = odg.id }, ajaxOpt))
                                 {
-
-                                    <div class="answer">
-                                        <p>@odg.odgovor</p>
-                                        @odg.datumObjave.Day.@odg.datumObjave.Month.@odg.datumObjave.Year @*u @odg.datumObjave.Hour.ToString("00.##"):@odg.datumObjave.Minute.ToString("00.##")*@
-                                        @if ((User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)) || (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).Id == pit.korisnicko_ime))
-                                        {
-                                            <p>
-                                                @Html.ActionLink((string)odg.korisnickoIme.korisnicko_ime, "DetaljiKorisnik", "Korisnik", new { id = odg.korisnickoIme.id }, new { @style = "color:#303133;", @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = odg.korisnickoIme.id }) })
-                                            </p>
-                                            <div class="answer-buttons-box">
-                                                @if (odg.korisnicko_ime == ((User as LogiraniKorisnik).Id) || (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
-                                                {
-                                                    <button class="update-answ">@Html.ActionLink("Ažuriraj", "AzurirajOdgovor", new { odg_id = odg.id, user_id = (User as LogiraniKorisnik).Id })</button>
-                                                    <button class="delete-answ">@Html.ActionLink("Izbriši", "BrisiOdgovor", new { odg_id = odg.id, user_id = (User as LogiraniKorisnik).Id })</button>
-                                                }
-
-                                                @if ((User as LogiraniKorisnik).Id == pit.korisnicko_ime || (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
-                                                {
-                                                    <span>
-                                                        @using (Html.BeginForm("OdaberiOdgovor", "App", new { id = odg.id }, FormMethod.Get))
-                                                        {
-                                                            @Html.AntiForgeryToken()
-                                                            <button class="best" type="submit" name="oznaci">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                Najdraži
-                                                            </button>
-                                                        }
-                                                    </span>
-                                                }
-                                            </div>
-                                        }
-                                        else if (User.Identity.IsAuthenticated)
-                                        {
-                                            <p>
-                                                @Html.ActionLink((string)odg.korisnickoIme.korisnicko_ime, "DetaljiKorisnik", "Korisnik", new { id = odg.korisnickoIme.id }, new { @style = "color:#303133;", @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = odg.korisnickoIme.id }) })
-                                            </p>
-                                            if (odg.korisnicko_ime == ((User as LogiraniKorisnik).Id))
-                                            {
-                                                <div class="answer-buttons-box">
-                                                    <button class="update-answ">@Html.ActionLink("Ažuriraj", "AzurirajOdgovor", new { odg_id = odg.id, user_id = (User as LogiraniKorisnik).Id })</button>
-                                                    <button class="delete-answ">@Html.ActionLink("Izbriši", "BrisiOdgovor", new { odg_id = odg.id, user_id = (User as LogiraniKorisnik).Id })</button>
-                                                </div>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <p>
-                                                @odg.korisnickoIme.korisnicko_ime
-                                            </p>
-                                        }
-
-                                    </div>
+                                    @Html.AntiForgeryToken()
+                                    <button id="oznaci" class="best" type="submit">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        Najdraži
+                                    </button>
                                 }
+                            </span>
+                        }
+                    </div>
+                }
+                else if (User.Identity.IsAuthenticated)
+                {
+                    <p>
+                        @Html.ActionLink((string)odg.korisnickoIme.korisnicko_ime, "DetaljiKorisnik", "Korisnik", new { id = odg.korisnickoIme.id }, new { @style = "color:#303133;", @id = "korisnikDetalji", @data_url = Url.Action("DetaljiKorisnik", "Korisnik", new { id = odg.korisnickoIme.id }) })
+                    </p>
+                    if (odg.korisnicko_ime == ((User as LogiraniKorisnik).Id))
+                    {
+                        <div class="answer-buttons-box">
+                            <button class="update-answ">@Html.ActionLink("Ažuriraj", "AzurirajOdgovor", new { odg_id = odg.id, user_id = (User as LogiraniKorisnik).Id })</button>
+                            <button class="delete-answ">@Html.ActionLink("Izbriši", "BrisiOdgovor", new { odg_id = odg.id, user_id = (User as LogiraniKorisnik).Id })</button>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>
+                        @odg.korisnickoIme.korisnicko_ime
+                    </p>
+                }
+
+            </div>
                             }
                         }
                     }
-                </div>
+                }
+            </div>
             </div>
         </div>
         <div class="answer-form">
@@ -270,6 +297,33 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function oznaceno() {
+        var tipka = document.getElementById("oznaci");
+        tipka.disabled = "disabled";
+        var tipke = document.getElementsByClassName("best");
+
+        for (var x = 0; x <= tipke.length; x++) {
+            tipke[x].disabled = "disabled";
+        }
+        document.getElementById("uspjehOz").style.display = "block";
+        var x = document.getElementById("success-close");
+        x.addEventListener("click", function () {
+            location.reload();
+        });
+    }
+
+    function odznaceno() {
+        var tipka = document.getElementById("odznaci");
+        tipka.disabled = "disabled";
+        document.getElementById("uspjehOd").style.display = "block";
+        var x = document.getElementById("info-close");
+        x.addEventListener("click", function () {
+            location.reload();
+        });
+    }
+
+</script>
 
 @Styles.Render("/Content/style.css")
 @Scripts.Render("~/bundles/jquery")

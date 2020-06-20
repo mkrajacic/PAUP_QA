@@ -194,6 +194,8 @@ C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\obj\Debug\QA.csproj
 C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\obj\Debug\QA.dll
 C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\obj\Debug\QA.pdb
 C:\Users\Megumin\Downloads\universita\paup\PAUP_QA-master\QA\obj\Debug\QA.csprojAssemblyReference.cache
+C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\EntityFramework.xml
+C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Newtonsoft.Json.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\QA.dll.config
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\QA.dll
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\QA.pdb
@@ -270,7 +272,6 @@ C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\System.Web.WebPages.Razor
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Ubiety.Dns.Core.dll
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Ubiety.Logging.Core.dll
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\WebGrease.dll
-C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\EntityFramework.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\EntityFramework.SqlServer.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Google.Protobuf.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\itextsharp.xml
@@ -286,7 +287,6 @@ C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\System.Web.Razor.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\System.Web.WebPages.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\System.Web.WebPages.Razor.xml
-C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Newtonsoft.Json.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Ubiety.Dns.Core.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Ubiety.Logging.Core.xml
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\bin\Antlr3.Runtime.pdb
@@ -295,3 +295,4 @@ C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.csproj.CoreCompi
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.csproj.CopyComplete
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.dll
 C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.pdb
+C:\Users\Megumin\Desktop\PAUP_QA\PAUP_QA-master\QA\obj\Debug\QA.csprojAssemblyReference.cache

@@ -62,7 +62,7 @@
                             <div class="answ-info">
 
 
-                                <img src="~/img/user.png" class="user">
+                                <img src="@Url.Content(Model.PutanjaSlike)" class="user">
                                 @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
                                 {
                             <div class="buttons-box">

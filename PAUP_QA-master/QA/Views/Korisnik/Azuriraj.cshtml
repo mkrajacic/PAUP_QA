@@ -3,6 +3,12 @@
 @{
     ViewBag.Title = "Ažuriranje profila";
     Layout = null;
+    AjaxOptions ajaxOpt = new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        OnSuccess = "prozor",
+        OnFailure = "prozorFail"
+    };
 }
 
 <!DOCTYPE html>
@@ -14,18 +20,44 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
+    <div id="sakrij">
+    </div>
     <header>
         <nav>
             <ul>
-                <li>@Html.ActionLink("Natrag na korisnike", "Index", "Korisnik")</li>
+                @if (TempData["dosaoSa"] != null)
+                {
+                    <li><a href='@TempData["dosaoSa"]'>Povratak</a></li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Natrag na korisnike", "Index", "Korisnik")</li>
+                }
             </ul>
         </nav>
     </header>
     <section class="body">
         <section class="form-section">
+            <div id="poruka">
+                <div id="poruka_zaglavlje">
+                    @if (TempData["dosaoSa"] == null)
+                    {
+                        <a href='@Url.Action("Index", "App")'>
+                            <span id="zatvori">&times;</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href='@TempData["dosaoSa"]'>
+                            <span id="zatvori">&times;</span>
+                        </a>
+                    }
+                </div>
+                <div id="poruka_tekst"></div>
+            </div>
             <h1>@ViewBag.Title</h1>
 
-            @using (Html.BeginForm("Azuriraj", "Korisnik", FormMethod.Post, new { @class = "login-form" }))
+            @using (Ajax.BeginForm("Azuriraj", "Korisnik", ajaxOpt, new { @class = "login-form", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.LabelFor(m => m.KorisnickoIme, "Novo korisničko ime")
@@ -34,18 +66,18 @@
                 @Html.HiddenFor(m => m.KorisnickoImeStaro)
                 if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
                 {
-                    @Html.LabelFor(m => m.Ovlast)<br />
-                    @Html.DropDownListFor(model => model.Ovlast, new SelectList(ViewBag.Ovlasti, "Sifra", "Naziv", ""), "Odaberite ovlast")
-                    @Html.ValidationMessageFor(m => m.Ovlast, "", new { @class = "validacija" })<br />
+                    @Html.LabelFor(m => m.UpisOvlast)<br />
+                    @Html.DropDownListFor(m => m.UpisOvlast, new SelectList(ViewBag.Ovlasti), "Odaberite ovlast")
+                    @Html.ValidationMessageFor(m => m.UpisOvlast, "", new { @class = "validacija" })<br />
                 }
                 else
                 {
-                    @Html.HiddenFor(m => m.Ovlast, new { Value = OvlastiKorisnik.Registriran })
+                    @Html.HiddenFor(m => m.UpisOvlast, new { Value = "Registriran" })
                 }
-                <!---Html.LabelFor(m => m.image)
-        <input type="file" name="image" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />-->
+                @Html.Label("Profilna slika")<br />
+                <input type="file" name="file" id="file" accept=".png,.jpg,.jpeg,.gif,.tif" />
                 <p> @Html.ActionLink("Promjena lozinke", "ResetLozinke", new { id = Model.Id, user_id = (User as LogiraniKorisnik).Id }, null)</p>
-                <button name="azurirajKor" type="submit">
+                <button name="azurirajKor" type="submit" id="azurirajKor">
                     Ažuriraj
                 </button>
             }
@@ -53,6 +85,30 @@
     </section>
 </body>
 </html>
+<script type="text/javascript">
+    function prozor() {
+            var poruka = document.getElementById("poruka");
+        document.getElementById("poruka_tekst").innerHTML = "<span id='kvacica-azuriraj'>&#x2714;</span> <br> Korisnik uspješno ažuriran!";
+        poruka.classList.add("fadein");
+        poruka.style.zIndex = 3;
+        var sakrij = document.getElementById("sakrij");
+        sakrij.setAttribute("class", "sakrij");
+        var tipka = document.getElementById("azurirajKor");
+        tipka.disabled = "disabled";
+    }
+
+    function prozorFail() {
+        var poruka = document.getElementById("poruka");
+        document.getElementById("poruka_tekst").innerHTML = "<span id='x-brisi'>&times;</span> <br> Korisničko ime već postoji!";
+        poruka.classList.add("fadein");
+        poruka.style.zIndex = 3;
+        var sakrij = document.getElementById("sakrij");
+        sakrij.setAttribute("class", "sakrij");
+        var tipka = document.getElementById("azurirajKor");
+        tipka.disabled = "disabled";
+    }
+
+</script>
 @Styles.Render("/Content/style.css")
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")

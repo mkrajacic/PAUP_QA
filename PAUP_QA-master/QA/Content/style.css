@@ -347,6 +347,13 @@ label {
     margin: 10px 30px;
 }
 
+.user-min {
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin: 10px 10px;
+}
+
 .buttons-box {
     display: flex;
     width: 60%;
@@ -757,7 +764,28 @@ textarea:focus {
     color: #f6f6f6;
 }
 
+#uspjehOz {
+    display:none;
+}
+#uspjehOd {
+    display:none;
+}
+
+.zatvori-o {
+    float: right;
+    font-size: 26px;
+    top: -4px;
+    position: relative;
+    cursor:pointer;
+}
+
 /*bootstrap*/
+
+.alert {
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
 
 .alert-danger {
     color: #a94442;
@@ -765,10 +793,16 @@ textarea:focus {
     border-color: #ebccd1;
 }
 
-.alert {
-    padding: 15px;
-    border: 1px solid transparent;
-    border-radius: 4px;
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+}
+
+.alert-info {
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color: #31708f;
 }
 
 .btn-danger {
@@ -799,7 +833,7 @@ textarea:focus {
     border-radius: 4px;
 }
 
-#obrisiPit,#obrisiOdg,#obrisiKat {
+#obrisiPit,#obrisiOdg,#obrisiKat,#obrisiKor {
     color: #fff;
     background-color: #d9534f;
     border-color: #d43f3a;

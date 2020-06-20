@@ -114,6 +114,8 @@ namespace QA.Controllers
             model.Odgovori = bazaPodataka.PopisOdgovora.ToList().OrderByDescending(x=>x.najdraze).ThenByDescending(x=>x.datumObjave);
             model.Korisnici = bazaPodataka.PopisKorisnika.ToList();
 
+            model.Korisnici.Where(x => x.PutanjaSlike == null || x.PutanjaSlike.Length == 0).ForEach(x => x.PutanjaSlike = "~/img/user.png");
+
             if (model.Pitanja == null)
             {
                 return HttpNotFound();

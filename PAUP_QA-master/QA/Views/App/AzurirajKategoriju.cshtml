@@ -8,7 +8,8 @@
     AjaxOptions ajaxOpt = new AjaxOptions()
     {
         HttpMethod = "POST",
-        OnBegin = "prozor"
+        OnSuccess = "prozor",
+        OnFailure = "prozorFail"
     };
 }
 
@@ -18,24 +19,29 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
     <title>@ViewBag.Title</title>
 </head>
 <body>
     <div id="sakrij">
     </div>
     <header>
-        <nav>
-            <ul>
-                @if (TempData["dosaoSa"] != null)
-                {
-                    <li><a href='@TempData["dosaoSa"]'>Povratak</a></li>
-                }
-                else
-                {
-                    <li>@Html.ActionLink("Natrag na pitanja", "Index", "App")</li>
-                }
-            </ul>
-        </nav>
+        <div class="hamburger-menu">
+            <div class="bar"></div>
+        </div>
+        <div class="mobile-nav hide">
+                <ul>
+                    @if (TempData["dosaoSa"] != null)
+                    {
+                        <li><a href='@TempData["dosaoSa"]'>Povratak</a></li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Natrag na pitanja", "Index", "App")</li>
+                    }
+                </ul>
+            </div>
     </header>
     <section class="body">
         <section class="form-section">
@@ -84,6 +90,26 @@
         var tipka = document.getElementById("azurirajKat");
         tipka.disabled = "disabled";
     }
+
+    function prozorFail() {
+        var poruka = document.getElementById("poruka");
+        document.getElementById("poruka_tekst").style.lineHeight = "48px";
+        document.getElementById("poruka_tekst").innerHTML = "<span id='x-brisi'>&times;</span> <br> Kategorija već postoji!";
+        poruka.classList.add("fadein");
+        poruka.style.zIndex = 3;
+        var sakrij = document.getElementById("sakrij");
+        sakrij.setAttribute("class", "sakrij");
+        var tipka = document.getElementById("azurirajKat");
+        tipka.disabled = "disabled";
+    }
+
+        (function () {
+            $('.hamburger-menu').on('click', function () {
+                $('.bar').toggleClass('animate');
+                var mobileNav = $('.mobile-nav');
+                mobileNav.toggleClass('hide show');
+            })
+        })();
 
 </script>
 

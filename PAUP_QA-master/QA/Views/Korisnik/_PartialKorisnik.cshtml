@@ -8,46 +8,9 @@
             <div class="bg show">
                 <div class="question-block show">
                     <div class="header">
-                        @*@if (ViewBag.Ref != null && (!ViewBag.Ref.Contains("OtvoriPitanje")))
-        {*@
-                        @*@if ((TempData["dosaoSa"] != null) && (TempData["natrag"] == null) && (TempData["natrag2"] == null))
-        {
-            //<a class="close" href="@ViewBag.Ref">.</a>
-            <a class="close" href='@TempData["dosaoSa"]'>.</a>
-        }
-        else if ((TempData["dosaoSa"] != null) && (TempData["natrag"] != null) && (TempData["natrag2"] == null))
-        {
-            <a class="close" href='@TempData["natrag"]'>.</a>
-        }
-        else if ((TempData["dosaoSa"] != null) && (TempData["natrag"] != null) && (TempData["natrag2"] != null))
-        {
-            <a class="close" href='@TempData["natrag2"]'>.</a>
-        }
-        else if ((TempData["dosaoSa"] == null) && (TempData["natrag"] != null) && (TempData["natrag2"] != null))
-        {
-            <a class="close" href='@TempData["natrag2"]'>.</a>
-        }
-        else
-        {
-            @Html.ActionLink(".", "Index", "Korisnik", new { @class = "close" })
-        }*@
-                        @if ((TempData["dosaoSaKor"] != null) && (TempData["pit"] == null))
-                        {
-                            <a class="close" href='@TempData["dosaoSaKor"]'>.</a>
-                        }
-                        else if ((TempData["pit"] != null))
-                        {
-                            <a class="close" href='@TempData["pit"]'>.</a>
-                        }
-                        else if ((TempData["dosaoSaKor"] != null) && (TempData["pit"] != null) && (TempData["triKor"] != null))
-                        {
-                            <a class="close" href='@TempData["triKor"]'>.</a>
-                        }
-                        else
-                        {
-                            @Html.ActionLink(".", "Index", "Korisnik", new { @class = "close" })
-                        }
-                        <!--<a href="#" class="close"></a>-->
+
+                        @Html.ActionLink(".", "Index", "App",null, new { @class = "close" })
+
                         @if (Model.ovlast_sifra == "AD")
                         {
                             <h1 style="color:#e74c3c">@Model.korisnicko_ime</h1>
@@ -69,11 +32,11 @@
                                 <button class="update">@Html.ActionLink("Ažuriraj", "Azuriraj", new { id = Model.id, user_id = (User as LogiraniKorisnik).Id })</button>
                                 <button class="delete">@Html.ActionLink("Izbriši", "Brisi", new { id = Model.id, user_id = (User as LogiraniKorisnik).Id })</button><br />
                                 </div>
-                                <div class="buttons-box" style="margin-top:10px;">
-                                <button class="best" style="width:110px;">
+                                <div class="buttons-box" style="margin-top:10px; margin-left: 10px;">
+                                <button class="best" style="width:130px; height:30px; font-size:11px;">
                                     @Html.ActionLink("PDF pitanja", "KorisnikIspisPit", "App", new { id = Model.id },null)
                                 </button><br />
-                                <button class="best" style="width:110px;">
+                                <button class="best" style="width:130px; height:30px; font-size:11px;">
                                     @Html.ActionLink("PDF odgovora", "KorisnikIspisOdg", "App", new { id = Model.id },null)
                                 </button>
                             </div>
@@ -85,10 +48,10 @@
                                 <button class="delete">@Html.ActionLink("Izbriši", "Brisi", new { id = Model.id, user_id = (User as LogiraniKorisnik).Id })</button><br />
                                 </div>
                                 <div class="buttons-box" style="margin-top:10px;">
-                                <button class="best" style="width:110px;">
+                                <button class="best" style="width:130px; height:30px; font-size:11px;">
                                     @Html.ActionLink("PDF pitanja", "KorisnikIspisPit","App", new { id = Model.id },null)
                             </button><br />
-                            <button class="best" style="width:110px;">
+                            <button class="best" style="width:130px; height:30px; font-size:11px;">
                                 @Html.ActionLink("PDF odgovora", "KorisnikIspisOdg","App", new { id = Model.id },null)
                             </button>
                             </div>
@@ -96,18 +59,18 @@
                                 else if (User.Identity.IsAuthenticated)
                                 {
                             <div class="buttons-box">
-                                <button class="best" style="width:110px;">
+                                <button class="best" style="width:130px; height:30px; font-size:11px;">
                                     @Html.ActionLink("PDF pitanja", "KorisnikIspisPit", "App", new { id = Model.id }, null)
                                 </button><br />
-                                         <button class="best" style="width:110px;">
+                                         <button class="best" style="width:130px; height:30px; font-size:11px;">
                                              @Html.ActionLink("PDF odgovora", "KorisnikIspisOdg", "App", new { id = Model.id }, null)
                                          </button>
                             </div>
                                 }
 </div>
                             <div class="answ-container">
-                                <p class="num-of-answ">Ovlast: <span>@Model.ovlast_sifra</span></p>
-                                <p class="num-of-answ">
+                                <p class="num-of-answ details">Ovlast: <span>@Model.ovlast_sifra</span></p>
+                                <p class="num-of-answ details">
                                     Broj pitanja:
                                     @if (ViewBag.Broj > 0)
                                     {

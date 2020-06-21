@@ -6,7 +6,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationMessageFor(m => m.odgovor, "", new { @style = "color:red; font-size:14px;" })<br />
-    @Html.TextAreaFor(m => m.odgovor, new { @placeholder = "Upiši odgovor..." })
+    @Html.TextAreaFor(m => m.odgovor, new { @placeholder = "Upiši odgovor..." ,@class="odgText" })
     @Html.HiddenFor(m => m.datumObjave, new { Value = DateTime.Now.ToString("dd'/'MM'/'yyyy HH: mm:ss") })
     @Html.HiddenFor(m => m.najdraze, new { Value = false })
     @Html.HiddenFor(m => m.korisnicko_ime, new { Value = ViewBag.Korisnik })

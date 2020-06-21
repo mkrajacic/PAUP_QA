@@ -17,13 +17,17 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <title>@ViewBag.Title</title>
 </head>
 <body>
     <div id="sakrij">
     </div>
     <header>
-        <nav>
+        <div class="hamburger-menu">
+            <div class="bar"></div>
+        </div>
+        <div class="mobile-nav hide">
             <ul>
                 @if (TempData["dosaoSa"] != null)
                 {
@@ -34,7 +38,7 @@
                     <li>@Html.ActionLink("Natrag na korisnike", "Index", "Korisnik")</li>
                 }
             </ul>
-        </nav>
+            </div>
     </header>
     <section class="body">
         <section class="form-section">
@@ -88,7 +92,7 @@
 <script type="text/javascript">
     function prozor() {
             var poruka = document.getElementById("poruka");
-        document.getElementById("poruka_tekst").innerHTML = "<span id='kvacica-azuriraj'>&#x2714;</span> <br> Korisnik uspješno ažuriran!";
+        document.getElementById("poruka_tekst").innerHTML = "<span id='kvacica-azuriraj'>&#x2714;</span> <br> Profil uspješno ažuriran!";
         poruka.classList.add("fadein");
         poruka.style.zIndex = 3;
         var sakrij = document.getElementById("sakrij");
@@ -107,6 +111,14 @@
         var tipka = document.getElementById("azurirajKor");
         tipka.disabled = "disabled";
     }
+
+    (function () {
+        $('.hamburger-menu').on('click', function () {
+            $('.bar').toggleClass('animate');
+            var mobileNav = $('.mobile-nav');
+            mobileNav.toggleClass('hide show');
+        })
+    })();
 
 </script>
 @Styles.Render("/Content/style.css")

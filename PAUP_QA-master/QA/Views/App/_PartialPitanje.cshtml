@@ -11,13 +11,14 @@
     AjaxOptions ajaxOpt = new AjaxOptions()
     {
         HttpMethod = "GET",
-        OnBegin = "oznaceno"
+        OnSuccess = "oznaceno",
+        OnFailure = "oznacenoFail"
     };
 
     AjaxOptions ajaxOpt2 = new AjaxOptions()
     {
         HttpMethod = "GET",
-        OnBegin = "odznaceno"
+        OnSuccess = "odznaceno"
     };
 }
 
@@ -34,47 +35,10 @@
 <div class="bg show">
     <div class="question-block show">
         <div class="header">
-            @*@if ((ViewBag.Ref != null) && (!ViewBag.Ref.Contains("DetaljiKorisnik")))
-                {
-                    <a class="close" href="@ViewBag.Ref">.</a>
-                }
-                else
-                {
-                    @Html.ActionLink(".", "Index", "App", new { @class = "close" })
-                }*@
-            @*@if ((TempData["dosaoSa"] != null) && (TempData["natrag"] == null) && (TempData["natrag2"] == null))
-                {
-                    //<a class="close" href="@ViewBag.Ref">.</a>
-                    <a class="close" href='@TempData["dosaoSa"]'>.</a>
-                }
-                else if ((TempData["dosaoSa"] != null) && (TempData["natrag"] != null) && (TempData["natrag2"] == null))
-                {
-                    <a class="close" href='@TempData["natrag"]'>.</a>
-                }
-                else if ((TempData["dosaoSa"] != null) && (TempData["natrag"] != null) && (TempData["natrag2"] != null))
-                {
-                    <a class="close" href='@TempData["natrag2"]'>.</a>
-                }
-                else if ((TempData["dosaoSa"] == null) && (TempData["natrag"] != null) && (TempData["natrag2"] != null))
-                {
-                    <a class="close" href='@TempData["natrag2"]'>.</a>
-                }*@
-            @if ((TempData["dosaoSa"] != null) && (TempData["kor"] == null))
-            {
-                <a class="close" href='@TempData["dosaoSa"]'>.</a>
-            }
-            else if ((TempData["kor"] != null))
-            {
-                <a class="close" href='@TempData["kor"]'>.</a>
-            }
-            else if ((TempData["dosaoSaKor"] != null) && (TempData["pit"] != null) && (TempData["triPit"] != null))
-            {
-                <a class="close" href='@TempData["triPit"]'>.</a>
-            }
-            else
-            {
-                @Html.ActionLink(".", "Index", "Korisnik", new { @class = "close" })
-            }
+            
+                @Html.ActionLink(".", "Index", "App", new { @class = "close" })
+
+
             @foreach (var pit in Model.Pitanja)
             {
                 <h1>
@@ -145,10 +109,10 @@
             <div class="answ-container">
                 @foreach (var pit in Model.Pitanja)
                 {
-                    <p class="num-of-answ">
+                    <p class="num-of-answ details">
                         Postavljeno: @pit.datumObjave.Day.@pit.datumObjave.Month.@pit.datumObjave.Year
                     </p>
-                    <p class="num-of-answ">
+                    <p class="num-of-answ details">
                         Broj odgovora:
                         @if (ViewBag.Broj > 0)
                         {
@@ -203,7 +167,6 @@
                                     @Html.AntiForgeryToken()
                                     <button class="best" type="submit" id="odznaci">
                                         <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        Odznači
                                     </button>
                                 }
                             </span>
@@ -231,6 +194,13 @@
                     Odgovor je uspješno označen!
                 </div>
 
+                <div id="neuspjehOz" class="alert alert-danger" role="alert">
+                    <div class="zaglavlje">
+                        <span class="zatvori-o" id="fail-close">&times;</span>
+                    </div>
+                    Samo jedan odgovor može biti označen!
+                </div>
+
                 <img src="@Url.Content(odg.korisnickoIme.PutanjaSlike)" class="user-min">
                 <p>@odg.odgovor</p>
                 @odg.datumObjave.Day.@odg.datumObjave.Month.@odg.datumObjave.Year
@@ -254,7 +224,6 @@
                                     @Html.AntiForgeryToken()
                                     <button id="oznaci" class="best" type="submit">
                                         <i class="fa fa-star" aria-hidden="true"></i>
-                                        Najdraži
                                     </button>
                                 }
                             </span>
@@ -299,13 +268,6 @@
 </div>
 <script type="text/javascript">
     function oznaceno() {
-        var tipka = document.getElementById("oznaci");
-        tipka.disabled = "disabled";
-        var tipke = document.getElementsByClassName("best");
-
-        for (var x = 0; x <= tipke.length; x++) {
-            tipke[x].disabled = "disabled";
-        }
         document.getElementById("uspjehOz").style.display = "block";
         var x = document.getElementById("success-close");
         x.addEventListener("click", function () {
@@ -313,9 +275,15 @@
         });
     }
 
+    function oznacenoFail() {
+        document.getElementById("neuspjehOz").style.display = "block";
+        var x = document.getElementById("fail-close");
+        x.addEventListener("click", function () {
+            location.reload();
+        });
+    }
+
     function odznaceno() {
-        var tipka = document.getElementById("odznaci");
-        tipka.disabled = "disabled";
         document.getElementById("uspjehOd").style.display = "block";
         var x = document.getElementById("info-close");
         x.addEventListener("click", function () {

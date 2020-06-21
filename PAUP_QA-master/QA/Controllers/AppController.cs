@@ -85,29 +85,7 @@ namespace QA.Controllers
             }
             if (HttpContext.Request.UrlReferrer != null)
             {
-                var dosaoSa = HttpContext.Request.UrlReferrer.ToString();
-                //ViewBag.Ref = dosaoSa;
-
-                if (dosaoSa.Contains("DetaljiKorisnik"))
-                {
-                    //if(TempData["natrag"]!=null)
-                    //{
-                    //    TempData["natrag2"] = dosaoSa;
-                    //}
-                    //else
-                    //{
-                    //    TempData["natrag"] = dosaoSa;
-                    //}
-                    if ((TempData["pit"] != null) && (TempData["dosaoSaKor"] != null))
-                    {
-                        TempData["triPit"] = TempData["dosaoSa"];
-                    }
-                    TempData["kor"] = dosaoSa;
-                }
-                else
-                {
-                    TempData["dosaoSa"] = dosaoSa;
-                }
+                ViewBag.Return = HttpContext.Request.UrlReferrer.ToString();
             }
             var model = new MixModel();
             model.Pitanja = bazaPodataka.PopisPitanja.ToList().Where(x => x.id == id);
@@ -218,11 +196,15 @@ namespace QA.Controllers
                 if (kategorijaIdPostoji)
                 {
                     ModelState.AddModelError("id", "Kategorija već postoji!");
+                    Response.StatusCode = 400;
+                    return View(model);
                 }
                 var kategorijaPostoji = bazaPodataka.PopisKategorija.Any(x => x.kategorija.ToUpper() == model.kategorija.ToUpper());
                 if (kategorijaPostoji)
                 {
                     ModelState.AddModelError("kategorija", "Kategorija sa istim nazivom već postoji!");
+                    Response.StatusCode = 400;
+                    return View(model);
                 }
             }
 
@@ -314,20 +296,27 @@ namespace QA.Controllers
             }
             var ostali_odgovori = bazaPodataka.PopisOdgovora.Where(x => x.pitanje_id == pit.id);
 
-            if (!(ostali_odgovori.Any(x => x.najdraze == true)))
+            if ((ostali_odgovori.Any(x => x.najdraze == true)))
             {
-                model.najdraze = true;
+                ModelState.AddModelError("najdraze", "Već postoji odabran odgovor!");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             else
             {
-                ModelState.AddModelError("najdraze", "Već postoji odabran odgovor!");
+                model.najdraze = true;
             }
+
             if (ModelState.IsValid)
             {
                 bazaPodataka.PopisOdgovora.AddOrUpdate(model);
                 bazaPodataka.SaveChanges();
+                return RedirectToAction("OtvoriPitanje", new { id = model.Pit.id });
             }
-            return RedirectToAction("OtvoriPitanje", new { id = model.Pit.id });
+            else
+            {
+                var errors = ModelState.GetModelErrors();
+                return Json(new { errors });
+            }
         }
         [Authorize]
         [HttpGet]
@@ -626,6 +615,15 @@ namespace QA.Controllers
         public ActionResult AzurirajKategoriju(KategorijaAzuriranje model)
         {
             var kategorija = bazaPodataka.PopisKategorija.Find(model.Id);
+
+            var kategorijaPostoji = bazaPodataka.PopisKategorija.Any(x => x.kategorija.ToUpper() == model.Kategorija.ToUpper());
+
+            if(kategorijaPostoji)
+            {
+                ModelState.AddModelError("kategorija", "Kategorija sa istim nazivom već postoji!");
+                Response.StatusCode = 400;
+                return View(model);
+            }
 
             if (ModelState.IsValid)
             {

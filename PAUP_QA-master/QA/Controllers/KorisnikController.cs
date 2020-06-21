@@ -39,31 +39,7 @@ namespace QA.Controllers
 
             if (HttpContext.Request.UrlReferrer != null)
             {
-                var dosaoSa = HttpContext.Request.UrlReferrer.ToString();
-
-                //ViewBag.Ref = dosaoSa;
-
-                if (dosaoSa.Contains("OtvoriPitanje"))
-                {
-                    //if(TempData["natrag"]!=null)
-                    //{
-                    //    TempData["natrag3"] = TempData["natrag"];
-                    //    TempData["natrag"] = dosaoSa;
-                    //}
-                    //else
-                    //{
-                    //    TempData["natrag"] = dosaoSa;
-                    //}
-                    if ((TempData["pit"] != null) && (TempData["dosaoSaKor"] != null))
-                    {
-                        TempData["triKor"] = TempData["dosaoSa"];
-                    }
-                    TempData["pit"] = dosaoSa;
-                }
-                else
-                {
-                    TempData["dosaoSaKor"] = dosaoSa;
-                }
+                ViewBag.Return = HttpContext.Request.UrlReferrer.ToString();
             }
             var pitanja = bazaPodataka.PopisPitanja.Where(x => x.korisnicko_ime == id).ToList().OrderByDescending(x=>x.datumObjave);
             ViewBag.Pitanja = pitanja;

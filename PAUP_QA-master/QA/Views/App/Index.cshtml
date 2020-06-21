@@ -17,7 +17,7 @@
         @using (Ajax.BeginForm("Pretrazivanje", "App", ajaxOpt))
         {
             @Html.TextBox("pitanjeTekst", null, new { @class = "search-input", @placeholder = "Što želite saznati?" })
-            @Html.DropDownList("kategorija", new SelectList(Model.Kategorije.Select(x => x.kategorija)), "Sve kategorije",new {@class="category-select" })
+            @Html.DropDownList("kategorija", new SelectList(Model.Kategorije.Select(x => x.kategorija)), "Sve kategorije", new { @class = "category-select" })
             <button type="submit" class="search-btn">Traži...</button>
         }
     </div>
@@ -52,7 +52,7 @@
     </div>
 </div>
 
-    @Styles.Render("/Content/style.css")
+@Styles.Render("/Content/style.css")
 <script type="text/javascript">
     function LoadingRow() {
         $("#questionList").empty();

@@ -596,14 +596,14 @@ textarea:focus {
     }
 
     .search-box {
-        width: 60%;
+        width: 50%;
         margin-left: 35px;
     }
 
     .category-select {
         margin-left: 15%;
         margin-top: -1px;
-        width:180px;
+        width:30%;
     }
 
     nav {
@@ -616,7 +616,11 @@ textarea:focus {
     }
 
     .search-input {
-        width: 65%;
+        width: 75%;
+    }
+
+    .search-btn {
+        margin-left:-16px;
     }
 
     .question-container {
@@ -1232,9 +1236,12 @@ textarea:focus {
         }
 
         .search-box {
-            width: 50%;
+            width: 40%;
         }
 
+        .search-btn {
+            margin-left:36%;
+        }
 
         .question-container {
             width: 90%;
@@ -1280,6 +1287,8 @@ textarea:focus {
             height: 40px;
             line-height: 40px;
         }
+
+        .category-select {margin-left:26%;}
 
         /*  QUESTION BLOCK */
         .question-block {

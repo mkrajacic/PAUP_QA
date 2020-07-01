@@ -8,8 +8,14 @@
             <div class="bg show">
                 <div class="question-block show">
                     <div class="header">
-
-                        @Html.ActionLink(".", "Index", "App",null, new { @class = "close" })
+                        @if (ViewBag.Return.Contains("Korisnik") && (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
+                        {
+                            @Html.ActionLink(".", "Index", "Korisnik", null, new { @class = "close" })
+                        }
+                        else
+                        {
+                        @Html.ActionLink(".", "Index", "App", null, new { @class = "close" })
+                        }
 
                         @if (Model.ovlast_sifra == "AD")
                         {

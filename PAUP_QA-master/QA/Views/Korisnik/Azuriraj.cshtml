@@ -31,11 +31,18 @@
             <ul>
                 @if (TempData["dosaoSa"] != null)
                 {
-                    <li><a href='@TempData["dosaoSa"]'>Povratak</a></li>
+                    if (TempData["dosaoSa"].ToString().Contains("ResetLozinke"))
+                    {
+                        <li>@Html.ActionLink("Povratak", "Index", "App")</li>
+                    }
+                    else
+                    {
+                        <li><a href='@TempData["dosaoSa"]'>Povratak</a></li>
+                    }
                 }
                 else
                 {
-                    <li>@Html.ActionLink("Natrag na korisnike", "Index", "Korisnik")</li>
+                    <li>@Html.ActionLink("Početak", "Index", "Home")</li>
                 }
             </ul>
             </div>

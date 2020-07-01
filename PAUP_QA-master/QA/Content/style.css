@@ -1464,6 +1464,10 @@ textarea:focus {
 
     @media (min-width: 1024px) and (max-width: 1450px) {
         /*  QUESTION BLOCK */
+        .category-select {
+            margin-left:9%;
+        }
+
         .question-block {
             width: 90%;
             height: 93vh;

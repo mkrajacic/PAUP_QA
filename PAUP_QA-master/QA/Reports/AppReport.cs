@@ -231,7 +231,7 @@ namespace QA.Reports
 					q.SpacingAfter = 10;
 					pdfDokument.Add(q);
 
-					Paragraph p = new Paragraph(korisnik.korisnicko_ime, naslov);
+					Paragraph p = new Paragraph("Popis pitanja korisnika '" + korisnik.korisnicko_ime + "'", naslov);
 					p.Alignment = Element.ALIGN_CENTER;
 					p.SpacingBefore = 20;
 					p.SpacingAfter = 20;
@@ -323,7 +323,7 @@ namespace QA.Reports
 					q.SpacingAfter = 10;
 					pdfDokument.Add(q);
 
-					Paragraph p = new Paragraph(korisnik.korisnicko_ime, naslov);
+					Paragraph p = new Paragraph("Popis odgovora korisnika '" + korisnik.korisnicko_ime + "'", naslov);
 					p.Alignment = Element.ALIGN_CENTER;
 					p.SpacingBefore = 20;
 					p.SpacingAfter = 20;

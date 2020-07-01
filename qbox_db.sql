@@ -46,7 +46,7 @@ CREATE TABLE question_answers(
 
 insert into user_level values ("AD","Administrator");
 insert into user_level values ("RK","Registriran");
-insert into users(name,password,salt,user_code) values ("admin","GEAgPfJmCGtHsET8lZCgipfuk3g=","1000:mLWVNRugI1WMZcZEsHqxuKKF8aAG/zJa","AD");
+insert into users(name,password,salt,image,user_code) values ("admin","GEAgPfJmCGtHsET8lZCgipfuk3g=","1000:mLWVNRugI1WMZcZEsHqxuKKF8aAG/zJa","~/img/unnamed.png","AD");
 insert into users(name,password,salt,user_code) values ("korisnik","WmU9kMF4QmoqNXKuR4O7dqr9DyM=","1000:hmLDP+rp1z1P9Z7poEZ9iP/fpmJYjrJl","RK");
 insert into users(name,password,salt,user_code) values ("maverick","iKqSB17PPUHfAt2hUslEAF/Vlic=","1000:lcwsL49yLEoLuDk8DqwkUkBGWXsyQyN9","RK");
 insert into users(name,password,salt,user_code) values ("Billingsgate","eV4mCjGcr0Ysy0iMYKI8tbiDyY0=","1000:jIUn/HLUMPMVeUUlOe0G5q11N321rBru","RK");

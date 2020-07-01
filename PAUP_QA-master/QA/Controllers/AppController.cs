@@ -600,6 +600,7 @@ namespace QA.Controllers
             {
                 KategorijaAzuriranje model = new KategorijaAzuriranje();
                 model.Kategorija = kategorija.kategorija;
+                model.Id = kat_id;
                 ViewBag.Id = kat_id;
                 return View(model);
             }
@@ -627,6 +628,7 @@ namespace QA.Controllers
 
             if (ModelState.IsValid)
             {
+                kategorija.id = model.Id;
                 kategorija.kategorija = model.Kategorija;
                 bazaPodataka.Entry(kategorija).State = EntityState.Modified;
                 bazaPodataka.Configuration.ValidateOnSaveEnabled = false;

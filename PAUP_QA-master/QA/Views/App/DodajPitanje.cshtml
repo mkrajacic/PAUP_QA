@@ -60,9 +60,18 @@
                     }
                     else
                     {
+                        if (TempData["dosaoSa"].ToString().Contains("DodajKategoriju"))
+                        {
+                <a href='@Url.Action("Index", "App")'>
+                    <span id="zatvori">&times;</span>
+                </a>
+                        }
+                        else
+                        {
                         <a href='@TempData["dosaoSa"]'>
                             <span id="zatvori">&times;</span>
                         </a>
+                        }
                     }
                 </div>
                 <div id="poruka_tekst"></div>

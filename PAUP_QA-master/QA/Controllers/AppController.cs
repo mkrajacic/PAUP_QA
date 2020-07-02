@@ -296,14 +296,18 @@ namespace QA.Controllers
             }
             var ostali_odgovori = bazaPodataka.PopisOdgovora.Where(x => x.pitanje_id == pit.id);
 
-            if ((ostali_odgovori.Any(x => x.najdraze == true)))
+            if (!(model.najdraze))
             {
-                ModelState.AddModelError("najdraze", "Već postoji odabran odgovor!");
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            else
-            {
-                model.najdraze = true;
+
+                if ((ostali_odgovori.Any(x => x.najdraze == true)))
+                {
+                    ModelState.AddModelError("najdraze", "Već postoji odabran odgovor!");
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                else
+                {
+                    model.najdraze = true;
+                }
             }
 
             if (ModelState.IsValid)

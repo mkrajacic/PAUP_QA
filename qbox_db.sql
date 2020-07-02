@@ -125,7 +125,7 @@ insert into question_answers (user_id,question_id,answer,datetime_created,is_fav
 insert into question_categories (category_name) values ("Sport");  
   insert into question_categories (category_name) values ("Filmovi");     
   insert into question_categories (category_name) values ("Video igre");   
-  insert into question_categories (category_name) values ("Reket za stolni tenis");   
+  insert into question_categories (category_name) values ("Reketi");   
   insert into question_categories (category_name) values ("Hrana");   
 
 
